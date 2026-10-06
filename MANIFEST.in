@@ -1,0 +1,3 @@
+recursive-include src/nsb_rt/include *.i
+recursive-include src/nsb_rt/cpp *.hpp *.cpp
+graft usercode_examples

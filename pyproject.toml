@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "numba-swig-bridge-rt"
+dynamic = ["version"]
+description = "Public Numba runtime for generated SWIG bridges"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["numba>=0.65.1,<0.66"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+nsb_rt = ["include/*.i", "cpp/*.hpp", "cpp/*.cpp"]
+
+[tool.setuptools.data-files]
+"share/numba-swig-bridge-rt/usercode_examples" = ["usercode_examples/README.md"]
+"share/numba-swig-bridge-rt/usercode_examples/example1" = ["usercode_examples/example1/*"]
+"share/numba-swig-bridge-rt/usercode_examples/example2" = ["usercode_examples/example2/*"]
+"share/numba-swig-bridge-rt/usercode_examples/example3" = ["usercode_examples/example3/*"]
+"share/numba-swig-bridge-rt/usercode_examples/example4" = ["usercode_examples/example4/*"]
+"share/numba-swig-bridge-rt/usercode_examples/example5" = ["usercode_examples/example5/*"]
+"share/numba-swig-bridge-rt/usercode_examples/example6" = ["usercode_examples/example6/*"]
+"share/numba-swig-bridge-rt/usercode_examples/example7" = ["usercode_examples/example7/*"]
+"share/numba-swig-bridge-rt/usercode_examples/example8" = ["usercode_examples/example8/*"]
+"share/numba-swig-bridge-rt/usercode_examples/example9" = ["usercode_examples/example9/*"]
+"share/numba-swig-bridge-rt/usercode_examples/example10" = ["usercode_examples/example10/*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "nsb_rt._version.__version__"}
