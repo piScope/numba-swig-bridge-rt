@@ -1,0 +1,19 @@
+bridge_id = "nsb_sample1"
+source_root = "."
+output_dir = "nsb_artifacts"
+registration_module = "nsb_sample1_registration"
+director_helper_module = "nsb_sample1_director_bindings"
+state_backend = "nsb_sample1"
+state_module = "nsb_sample1_state_bindings"
+
+[[interfaces]]
+interface = "objects.i"
+python_module = "nsb_sample1_objects"
+include_dirs = ["."]
+swig_options = []
+
+[[interfaces]]
+interface = "directors.i"
+python_module = "nsb_sample1_directors"
+include_dirs = ["."]
+swig_options = []

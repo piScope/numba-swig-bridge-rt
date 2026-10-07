@@ -1,7 +1,7 @@
 # Inherited methods and C++ casts
 
 [`inherited_method.py`](inherited_method.py) uses
-[`sample 3`](../../../../sample_libraries/3_inheritance/README.md). All demonstrated
+[`sample 3`](../../sample_libraries/3_inheritance/README.md). All demonstrated
 calls now work inside `@njit`:
 
 ```python
@@ -42,5 +42,5 @@ same bridge.
 After installation, run from the repository root:
 
 ```bash
-python package/numba-swig-bridge-rt/usercode_examples/example3/inherited_method.py
+python usercode_examples/example3/inherited_method.py
 ```

@@ -1,0 +1,18 @@
+{
+  "schema_version": 2,
+  "kind": "generated_nsb_director_recipe",
+  "directors": [
+    {
+      "cxx_type": "nsb_sample7::Accumulator",
+      "factory": "create_nsb_director_nsb_sample7_Accumulator",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample7::Accumulator::Accumulate(double) const",
+          "symbol": "nsb_sample7__Accumulator__Accumulate_double__const",
+          "abstract": true
+        }
+      ]
+    }
+  ]
+}
