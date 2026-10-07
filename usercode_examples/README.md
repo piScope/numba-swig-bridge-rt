@@ -1,12 +1,20 @@
 # User-code examples
 
 Each directory contains Python usage examples for the corresponding numbered
-C++ library in [`sample_libraries/`](../../../sample_libraries/).
+C++ library in the repository's [`sample_libraries/`](../../../sample_libraries/)
+companion distributions.
 
-Run `python scripts/validate_installed.py` from the repository root to build
-its installed-sample validation set in a fresh environment and execute its
-listed examples outside the checkout. The command also checks installed
-resources and casts.
+The samples are optional and are not installed with the runtime. From the
+repository root, install them before running examples:
+
+```bash
+python -m pip install ./sample_libraries/*/
+```
+
+Run the examples after installing the runtime and the corresponding sample
+package. The runtime release check uses
+`scripts/validate_runtime_consumer.py` to execute sample-1 examples in a clean
+consumer environment.
 
 - [`example1/`](example1/README.md) uses `nsb_sample1`: ordinary C++ methods,
   compiled director callbacks, and persistent nested director state across two
