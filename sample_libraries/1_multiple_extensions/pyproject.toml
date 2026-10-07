@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=75", "wheel", "cmake>=3.24", "swig>=4.5.0", "numba-swig-bridge-rt==0.13.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "numba-swig-bridge-sample1"
+version = "0.1.0"
+description = "A C++ library with two SWIG bindings and compiled Numba directors"
+requires-python = ">=3.11"
+dependencies = ["numba-swig-bridge-rt==0.13.0"]
+
+[tool.setuptools]
+py-modules = ["nsb_sample1"]

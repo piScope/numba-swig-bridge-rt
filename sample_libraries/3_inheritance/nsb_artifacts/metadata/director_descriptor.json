@@ -1,0 +1,16 @@
+{
+  "schema_version": 2,
+  "kind": "numba_swig_director_descriptor",
+  "bridge_id": "nsb_sample3",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample3_inheritance",
+        "swig_module": "nsb_sample3_inheritance",
+        "interface": "inheritance.i"
+      }
+    ]
+  },
+  "directors": [],
+  "state_backend": "nsb_sample3"
+}

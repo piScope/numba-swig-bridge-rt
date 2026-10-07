@@ -1,0 +1,854 @@
+{
+  "schema_version": 4,
+  "conversions": [
+    {
+      "derived": "nsb_sample3::Alternate",
+      "base": "nsb_sample3::Base",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_Alternate_0_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_Alternate_0_down",
+      "flags": "nsb_cast_nsb_sample3_Alternate_0_flags"
+    },
+    {
+      "derived": "nsb_sample3::Ambiguous",
+      "base": "nsb_sample3::Alternate",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_Ambiguous_1_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_Ambiguous_1_down",
+      "flags": "nsb_cast_nsb_sample3_Ambiguous_1_flags"
+    },
+    {
+      "derived": "nsb_sample3::Ambiguous",
+      "base": "nsb_sample3::Base",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_Ambiguous_2_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_Ambiguous_2_down",
+      "flags": "nsb_cast_nsb_sample3_Ambiguous_2_flags"
+    },
+    {
+      "derived": "nsb_sample3::Ambiguous",
+      "base": "nsb_sample3::Derived",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_Ambiguous_3_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_Ambiguous_3_down",
+      "flags": "nsb_cast_nsb_sample3_Ambiguous_3_flags"
+    },
+    {
+      "derived": "nsb_sample3::Derived",
+      "base": "nsb_sample3::Base",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_Derived_4_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_Derived_4_down",
+      "flags": "nsb_cast_nsb_sample3_Derived_4_flags"
+    },
+    {
+      "derived": "nsb_sample3::GrandDerived",
+      "base": "nsb_sample3::Derived",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_GrandDerived_5_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_GrandDerived_5_down",
+      "flags": "nsb_cast_nsb_sample3_GrandDerived_5_flags"
+    },
+    {
+      "derived": "nsb_sample3::GrandDerived",
+      "base": "nsb_sample3::Base",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_GrandDerived_6_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_GrandDerived_6_down",
+      "flags": "nsb_cast_nsb_sample3_GrandDerived_6_flags"
+    },
+    {
+      "derived": "nsb_sample3::Hiding",
+      "base": "nsb_sample3::Derived",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_Hiding_7_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_Hiding_7_down",
+      "flags": "nsb_cast_nsb_sample3_Hiding_7_flags"
+    },
+    {
+      "derived": "nsb_sample3::Hiding",
+      "base": "nsb_sample3::Base",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_Hiding_8_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_Hiding_8_down",
+      "flags": "nsb_cast_nsb_sample3_Hiding_8_flags"
+    },
+    {
+      "derived": "nsb_sample3::Multiple",
+      "base": "nsb_sample3::Derived",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_Multiple_9_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_Multiple_9_down",
+      "flags": "nsb_cast_nsb_sample3_Multiple_9_flags"
+    },
+    {
+      "derived": "nsb_sample3::Multiple",
+      "base": "nsb_sample3::Base",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_Multiple_10_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_Multiple_10_down",
+      "flags": "nsb_cast_nsb_sample3_Multiple_10_flags"
+    },
+    {
+      "derived": "nsb_sample3::Multiple",
+      "base": "nsb_sample3::Side",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_Multiple_11_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_Multiple_11_down",
+      "flags": "nsb_cast_nsb_sample3_Multiple_11_flags"
+    },
+    {
+      "derived": "nsb_sample3::PlainDerived",
+      "base": "nsb_sample3::Plain",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_PlainDerived_12_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_PlainDerived_12_down",
+      "flags": "nsb_cast_nsb_sample3_PlainDerived_12_flags"
+    },
+    {
+      "derived": "nsb_sample3::VirtualDerived",
+      "base": "nsb_sample3::Base",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "upcast": "nsb_cast_nsb_sample3_VirtualDerived_13_up",
+      "dynamic_cast": "nsb_cast_nsb_sample3_VirtualDerived_13_down",
+      "flags": "nsb_cast_nsb_sample3_VirtualDerived_13_flags"
+    }
+  ],
+  "kind": "numba_swig_ordinary_bridge_descriptor",
+  "bridge_id": "nsb_sample3",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample3_inheritance",
+        "swig_module": "nsb_sample3_inheritance",
+        "interface": "inheritance.i"
+      }
+    ]
+  },
+  "classes": [
+    {
+      "cxx_type": "nsb_sample3::Alternate",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "Alternate",
+      "symbol": "nsb_sample3_Alternate",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_Alternate",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_Alternate",
+      "methods": [],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::Alternate::Alternate(int)",
+          "symbol": "nsb_nsb_sample3_Alternate_construct_0",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_Alternate_destroy",
+      "public_bases": [
+        "nsb_sample3::Base"
+      ],
+      "declared_method_names": [],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample3::Ambiguous",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "Ambiguous",
+      "symbol": "nsb_sample3_Ambiguous",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_Ambiguous",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_Ambiguous",
+      "methods": [],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::Ambiguous::Ambiguous(int)",
+          "symbol": "nsb_nsb_sample3_Ambiguous_construct_0",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_Ambiguous_destroy",
+      "public_bases": [
+        "nsb_sample3::Derived",
+        "nsb_sample3::Alternate"
+      ],
+      "declared_method_names": [],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample3::Base",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "Base",
+      "symbol": "nsb_sample3_Base",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_Base",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_Base",
+      "methods": [
+        {
+          "identity": "nsb_sample3::Base::BaseMethod() const",
+          "symbol": "nsb_nsb_sample3_Base_0_BaseMethod",
+          "cxx_name": "BaseMethod",
+          "python_name": "BaseMethod",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample3::Base::VirtualMethod() const",
+          "symbol": "nsb_nsb_sample3_Base_1_VirtualMethod",
+          "cxx_name": "VirtualMethod",
+          "python_name": "VirtualMethod",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::Base::Base(int)",
+          "symbol": "nsb_nsb_sample3_Base_construct_0",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_Base_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "BaseMethod",
+        "VirtualMethod"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample3::Consumer",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "Consumer",
+      "symbol": "nsb_sample3_Consumer",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_Consumer",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_Consumer",
+      "methods": [
+        {
+          "identity": "nsb_sample3::Consumer::Read(const nsb_sample3::Base&) const",
+          "symbol": "nsb_nsb_sample3_Consumer_0_Read",
+          "cxx_name": "Read",
+          "python_name": "Read",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "const nsb_sample3::Base&",
+              "kind": "object",
+              "cxx_type": "nsb_sample3::Base",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "const nsb_sample3::Base&",
+              "kind": "object",
+              "cxx_type": "nsb_sample3::Base",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::Consumer::Consumer()",
+          "symbol": "nsb_nsb_sample3_Consumer_construct_0",
+          "parameters": []
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_Consumer_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Read"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample3::Derived",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "Derived",
+      "symbol": "nsb_sample3_Derived",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_Derived",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_Derived",
+      "methods": [
+        {
+          "identity": "nsb_sample3::Derived::DerivedMethod() const",
+          "symbol": "nsb_nsb_sample3_Derived_0_DerivedMethod",
+          "cxx_name": "DerivedMethod",
+          "python_name": "DerivedMethod",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample3::Derived::AsBase() const",
+          "symbol": "nsb_nsb_sample3_Derived_1_AsBase",
+          "cxx_name": "AsBase",
+          "python_name": "AsBase",
+          "const": true,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample3::Base",
+            "passing": "reference",
+            "const": true,
+            "c_abi_type": "const void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "const nsb_sample3::Base&",
+            "borrowed_return": true,
+            "nullable": false
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample3::Derived::VirtualMethod() const",
+          "symbol": "nsb_nsb_sample3_Derived_2_VirtualMethod",
+          "cxx_name": "VirtualMethod",
+          "python_name": "VirtualMethod",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::Derived::Derived(int)",
+          "symbol": "nsb_nsb_sample3_Derived_construct_0",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_Derived_destroy",
+      "public_bases": [
+        "nsb_sample3::Base"
+      ],
+      "declared_method_names": [
+        "AsBase",
+        "DerivedMethod",
+        "VirtualMethod"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample3::GrandDerived",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "GrandDerived",
+      "symbol": "nsb_sample3_GrandDerived",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_GrandDerived",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_GrandDerived",
+      "methods": [],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::GrandDerived::GrandDerived(int)",
+          "symbol": "nsb_nsb_sample3_GrandDerived_construct_0",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_GrandDerived_destroy",
+      "public_bases": [
+        "nsb_sample3::Derived"
+      ],
+      "declared_method_names": [],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample3::Hiding",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "Hiding",
+      "symbol": "nsb_sample3_Hiding",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_Hiding",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_Hiding",
+      "methods": [
+        {
+          "identity": "nsb_sample3::Hiding::BaseMethod(int) const",
+          "symbol": "nsb_nsb_sample3_Hiding_0_BaseMethod",
+          "cxx_name": "BaseMethod",
+          "python_name": "BaseMethod",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [
+            {
+              "name": "extra",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "extra",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::Hiding::Hiding(int)",
+          "symbol": "nsb_nsb_sample3_Hiding_construct_0",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_Hiding_destroy",
+      "public_bases": [
+        "nsb_sample3::Derived"
+      ],
+      "declared_method_names": [
+        "BaseMethod"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample3::Multiple",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "Multiple",
+      "symbol": "nsb_sample3_Multiple",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_Multiple",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_Multiple",
+      "methods": [
+        {
+          "identity": "nsb_sample3::Multiple::BaseIsOffset() const",
+          "symbol": "nsb_nsb_sample3_Multiple_0_BaseIsOffset",
+          "cxx_name": "BaseIsOffset",
+          "python_name": "BaseIsOffset",
+          "const": true,
+          "return": {
+            "kind": "bool",
+            "cxx_type": "bool",
+            "c_abi_type": "bool",
+            "numba_type": "types.boolean",
+            "llvm_type": "bool",
+            "result_c_abi_type": "int",
+            "result_llvm_type": "int32",
+            "declared_cxx_type": "bool"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::Multiple::Multiple(int)",
+          "symbol": "nsb_nsb_sample3_Multiple_construct_0",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_Multiple_destroy",
+      "public_bases": [
+        "nsb_sample3::Side",
+        "nsb_sample3::Derived"
+      ],
+      "declared_method_names": [
+        "BaseIsOffset"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample3::Plain",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "Plain",
+      "symbol": "nsb_sample3_Plain",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_Plain",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_Plain",
+      "methods": [
+        {
+          "identity": "nsb_sample3::Plain::PlainMethod() const",
+          "symbol": "nsb_nsb_sample3_Plain_0_PlainMethod",
+          "cxx_name": "PlainMethod",
+          "python_name": "PlainMethod",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::Plain::Plain()",
+          "symbol": "nsb_nsb_sample3_Plain_construct_0",
+          "parameters": []
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_Plain_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "PlainMethod"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample3::PlainDerived",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "PlainDerived",
+      "symbol": "nsb_sample3_PlainDerived",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_PlainDerived",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_PlainDerived",
+      "methods": [],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::PlainDerived::PlainDerived()",
+          "symbol": "nsb_nsb_sample3_PlainDerived_construct_0",
+          "parameters": []
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_PlainDerived_destroy",
+      "public_bases": [
+        "nsb_sample3::Plain"
+      ],
+      "declared_method_names": [],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample3::Private",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "Private",
+      "symbol": "nsb_sample3_Private",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_Private",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_Private",
+      "methods": [
+        {
+          "identity": "nsb_sample3::Private::OwnMethod() const",
+          "symbol": "nsb_nsb_sample3_Private_0_OwnMethod",
+          "cxx_name": "OwnMethod",
+          "python_name": "OwnMethod",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::Private::Private(int)",
+          "symbol": "nsb_nsb_sample3_Private_construct_0",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_Private_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "OwnMethod"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample3::Side",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "Side",
+      "symbol": "nsb_sample3_Side",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_Side",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_Side",
+      "methods": [
+        {
+          "identity": "nsb_sample3::Side::SideMethod() const",
+          "symbol": "nsb_nsb_sample3_Side_0_SideMethod",
+          "cxx_name": "SideMethod",
+          "python_name": "SideMethod",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::Side::Side()",
+          "symbol": "nsb_nsb_sample3_Side_construct_0",
+          "parameters": []
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_Side_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "SideMethod"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample3::VirtualDerived",
+      "owner_module": "nsb_sample3_inheritance",
+      "function_address_helper": "nsb_function_address_nsb_sample3_inheritance",
+      "source_interface": "inheritance.i",
+      "python_proxy": "VirtualDerived",
+      "symbol": "nsb_sample3_VirtualDerived",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample3_VirtualDerived",
+      "owned_proxy_helper": "nsb_owned_nsb_sample3_VirtualDerived",
+      "methods": [],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample3::VirtualDerived::VirtualDerived(int)",
+          "symbol": "nsb_nsb_sample3_VirtualDerived_construct_0",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample3_VirtualDerived_destroy",
+      "public_bases": [
+        "nsb_sample3::Base"
+      ],
+      "declared_method_names": [],
+      "skipped_methods": []
+    }
+  ]
+}

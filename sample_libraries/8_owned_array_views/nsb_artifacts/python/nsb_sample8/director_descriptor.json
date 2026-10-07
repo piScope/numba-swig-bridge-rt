@@ -1,0 +1,16 @@
+{
+  "schema_version": 2,
+  "kind": "numba_swig_director_descriptor",
+  "bridge_id": "nsb_sample8",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample8_storage",
+        "swig_module": "nsb_sample8_storage",
+        "interface": "storage.i"
+      }
+    ]
+  },
+  "directors": [],
+  "state_backend": "nsb_sample8"
+}

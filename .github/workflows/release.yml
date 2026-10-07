@@ -1,0 +1,18 @@
+name: Release to PyPI
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    uses: ./.github/workflows/build-release.yml
+    with:
+      publish: ${{ github.event_name == 'push' }}
+      repository-url: https://upload.pypi.org/legacy/
+    secrets:
+      upload-token: ${{ secrets.PYPI_TOKEN }}

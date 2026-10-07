@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "kind": "numba_swig_director_descriptor",
+  "bridge_id": "nsb_sample7",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample7_directors",
+        "swig_module": "nsb_sample7_directors",
+        "interface": "directors.i"
+      }
+    ]
+  },
+  "directors": [
+    {
+      "cxx_type": "nsb_sample7::Accumulator",
+      "owner_module": "nsb_sample7_directors",
+      "source_interface": "directors.i",
+      "python_facade": "nsb_Accumulator",
+      "python_proxy": "Accumulator",
+      "selection": "explicit",
+      "methods": [
+        {
+          "identity": "nsb_sample7::Accumulator::Accumulate(double) const",
+          "symbol": "nsb_sample7__Accumulator__Accumulate_double__const",
+          "cxx_name": "Accumulate",
+          "signature": "double nsb_sample7::Accumulator::Accumulate(double) const",
+          "abstract": true,
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "cxx_type": "double",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "skipped_virtuals": [],
+      "constructors": [
+        {
+          "parameters": []
+        }
+      ],
+      "skipped_constructors": []
+    }
+  ],
+  "state_backend": "nsb_sample7"
+}

@@ -1,0 +1,1359 @@
+{
+  "schema_version": 4,
+  "conversions": [],
+  "kind": "numba_swig_ordinary_bridge_descriptor",
+  "bridge_id": "nsb_sample10",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample10_directors",
+        "swig_module": "nsb_sample10_directors",
+        "interface": "directors.i"
+      }
+    ]
+  },
+  "classes": [
+    {
+      "cxx_type": "nsb_sample10::Callback",
+      "owner_module": "nsb_sample10_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample10_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Callback",
+      "symbol": "nsb_sample10_Callback",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample10_Callback",
+      "owned_proxy_helper": "nsb_owned_nsb_sample10_Callback",
+      "methods": [
+        {
+          "identity": "nsb_sample10::Callback::Apply(const nsb_sample10::Data&, nsb_sample10::Data&)",
+          "symbol": "nsb_nsb_sample10_Callback_0_Apply",
+          "cxx_name": "Apply",
+          "python_name": "Apply",
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "source",
+              "declared_cxx_type": "const nsb_sample10::Data&",
+              "kind": "object",
+              "cxx_type": "nsb_sample10::Data",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            },
+            {
+              "name": "target",
+              "declared_cxx_type": "nsb_sample10::Data&",
+              "kind": "object",
+              "cxx_type": "nsb_sample10::Data",
+              "passing": "reference",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "source",
+              "declared_cxx_type": "const nsb_sample10::Data&",
+              "kind": "object",
+              "cxx_type": "nsb_sample10::Data",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 0
+            },
+            {
+              "name": "target",
+              "declared_cxx_type": "nsb_sample10::Data&",
+              "kind": "object",
+              "cxx_type": "nsb_sample10::Data",
+              "passing": "reference",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 1
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample10_Callback_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Apply"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample10::Container",
+      "owner_module": "nsb_sample10_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample10_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Container",
+      "symbol": "nsb_sample10_Container",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample10_Container",
+      "owned_proxy_helper": "nsb_owned_nsb_sample10_Container",
+      "methods": [
+        {
+          "identity": "nsb_sample10::Container::ConstView() const",
+          "symbol": "nsb_nsb_sample10_Container_0_ConstView",
+          "cxx_name": "ConstView",
+          "python_name": "ConstView",
+          "const": true,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Container",
+            "passing": "reference",
+            "const": true,
+            "c_abi_type": "const void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "const nsb_sample10::Container&",
+            "borrowed_return": true,
+            "nullable": false
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample10::Container::ReadCount() const",
+          "symbol": "nsb_nsb_sample10_Container_1_ReadCount",
+          "cxx_name": "ReadCount",
+          "python_name": "ReadCount",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "member nsb_sample10::Container::pointer:get",
+          "symbol": "nsb_nsb_sample10_Container_member_get_pointer",
+          "cxx_name": "pointer",
+          "python_name": "__nsb_member_get_pointer",
+          "const": true,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Data",
+            "passing": "pointer",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "borrowed_return": true,
+            "nullable": true,
+            "preserve_const": true
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Container::null_pointer:get",
+          "symbol": "nsb_nsb_sample10_Container_member_get_null_pointer",
+          "cxx_name": "null_pointer",
+          "python_name": "__nsb_member_get_null_pointer",
+          "const": true,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Data",
+            "passing": "pointer",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "borrowed_return": true,
+            "nullable": true,
+            "preserve_const": true
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Container::const_pointee:get",
+          "symbol": "nsb_nsb_sample10_Container_member_get_const_pointee",
+          "cxx_name": "const_pointee",
+          "python_name": "__nsb_member_get_const_pointee",
+          "const": true,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Data",
+            "passing": "pointer",
+            "const": true,
+            "c_abi_type": "const void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "borrowed_return": true,
+            "nullable": true,
+            "preserve_const": true
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Container::const_slot:get",
+          "symbol": "nsb_nsb_sample10_Container_member_get_const_slot",
+          "cxx_name": "const_slot",
+          "python_name": "__nsb_member_get_const_slot",
+          "const": true,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Data",
+            "passing": "pointer",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "borrowed_return": true,
+            "nullable": true,
+            "preserve_const": true
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Container::both_const:get",
+          "symbol": "nsb_nsb_sample10_Container_member_get_both_const",
+          "cxx_name": "both_const",
+          "python_name": "__nsb_member_get_both_const",
+          "const": true,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Data",
+            "passing": "pointer",
+            "const": true,
+            "c_abi_type": "const void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "borrowed_return": true,
+            "nullable": true,
+            "preserve_const": true
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Container::opaque:get",
+          "symbol": "nsb_nsb_sample10_Container_member_get_opaque",
+          "cxx_name": "opaque",
+          "python_name": "__nsb_member_get_opaque",
+          "const": true,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Opaque",
+            "passing": "pointer",
+            "const": true,
+            "c_abi_type": "const void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "borrowed_return": true,
+            "nullable": true,
+            "preserve_const": true
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        }
+      ],
+      "members": [
+        {
+          "cxx_name": "pointer",
+          "python_name": "pointer",
+          "swig_type": "p.nsb_sample10::Data",
+          "cxx_type": "nsb_sample10::Data*",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null,
+          "writable": false,
+          "type": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Data",
+            "passing": "pointer",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "borrowed_return": true,
+            "nullable": true,
+            "preserve_const": true
+          },
+          "get": "__nsb_member_get_pointer"
+        },
+        {
+          "cxx_name": "null_pointer",
+          "python_name": "null_pointer",
+          "swig_type": "p.nsb_sample10::Data",
+          "cxx_type": "nsb_sample10::Data*",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null,
+          "writable": false,
+          "type": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Data",
+            "passing": "pointer",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "borrowed_return": true,
+            "nullable": true,
+            "preserve_const": true
+          },
+          "get": "__nsb_member_get_null_pointer"
+        },
+        {
+          "cxx_name": "const_pointee",
+          "python_name": "const_pointee",
+          "swig_type": "p.q(const).nsb_sample10::Data",
+          "cxx_type": "const nsb_sample10::Data*",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null,
+          "writable": false,
+          "type": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Data",
+            "passing": "pointer",
+            "const": true,
+            "c_abi_type": "const void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "borrowed_return": true,
+            "nullable": true,
+            "preserve_const": true
+          },
+          "get": "__nsb_member_get_const_pointee"
+        },
+        {
+          "cxx_name": "const_slot",
+          "python_name": "const_slot",
+          "swig_type": "q(const).p.nsb_sample10::Data",
+          "cxx_type": "const nsb_sample10::Data*",
+          "mode": null,
+          "immutable": true,
+          "unsupported_reason": null,
+          "writable": false,
+          "type": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Data",
+            "passing": "pointer",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "borrowed_return": true,
+            "nullable": true,
+            "preserve_const": true
+          },
+          "get": "__nsb_member_get_const_slot"
+        },
+        {
+          "cxx_name": "both_const",
+          "python_name": "both_const",
+          "swig_type": "q(const).p.q(const).nsb_sample10::Data",
+          "cxx_type": "const const nsb_sample10::Data*",
+          "mode": null,
+          "immutable": true,
+          "unsupported_reason": null,
+          "writable": false,
+          "type": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Data",
+            "passing": "pointer",
+            "const": true,
+            "c_abi_type": "const void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "borrowed_return": true,
+            "nullable": true,
+            "preserve_const": true
+          },
+          "get": "__nsb_member_get_both_const"
+        },
+        {
+          "cxx_name": "opaque",
+          "python_name": "opaque",
+          "swig_type": "p.q(const).nsb_sample10::Opaque",
+          "cxx_type": "const nsb_sample10::Opaque*",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null,
+          "writable": false,
+          "type": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Opaque",
+            "passing": "pointer",
+            "const": true,
+            "c_abi_type": "const void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "borrowed_return": true,
+            "nullable": true,
+            "preserve_const": true
+          },
+          "get": "__nsb_member_get_opaque"
+        }
+      ],
+      "skipped_members": [
+        {
+          "name": "unsupported",
+          "type": "nsb_sample10::Unbridged*",
+          "reason": "member nsb_sample10::Container::unsupported: requires a scalar, enum, or pointer to a bridged class"
+        }
+      ],
+      "constructors": [
+        {
+          "signature": "nsb_sample10::Container::Container()",
+          "symbol": "nsb_nsb_sample10_Container_construct_0",
+          "parameters": []
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample10_Container_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "ConstView",
+        "ReadCount"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample10::Data",
+      "owner_module": "nsb_sample10_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample10_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Data",
+      "symbol": "nsb_sample10_Data",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample10_Data",
+      "owned_proxy_helper": "nsb_owned_nsb_sample10_Data",
+      "methods": [
+        {
+          "identity": "nsb_sample10::Data::Total() const",
+          "symbol": "nsb_nsb_sample10_Data_0_Total",
+          "cxx_name": "Total",
+          "python_name": "Total",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample10::Data::Increment()",
+          "symbol": "nsb_nsb_sample10_Data_1_Increment",
+          "cxx_name": "Increment",
+          "python_name": "Increment",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample10::Data::TakeMutable(nsb_sample10::Data&)",
+          "symbol": "nsb_nsb_sample10_Data_2_TakeMutable",
+          "cxx_name": "TakeMutable",
+          "python_name": "TakeMutable",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [
+            {
+              "name": "other",
+              "declared_cxx_type": "nsb_sample10::Data&",
+              "kind": "object",
+              "cxx_type": "nsb_sample10::Data",
+              "passing": "reference",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "other",
+              "declared_cxx_type": "nsb_sample10::Data&",
+              "kind": "object",
+              "cxx_type": "nsb_sample10::Data",
+              "passing": "reference",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample10::Data::ConstView() const",
+          "symbol": "nsb_nsb_sample10_Data_3_ConstView",
+          "cxx_name": "ConstView",
+          "python_name": "ConstView",
+          "const": true,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Data",
+            "passing": "reference",
+            "const": true,
+            "c_abi_type": "const void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "const nsb_sample10::Data&",
+            "borrowed_return": true,
+            "nullable": false
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::count:get",
+          "symbol": "nsb_nsb_sample10_Data_member_get_count",
+          "cxx_name": "count",
+          "python_name": "__nsb_member_get_count",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::count:set",
+          "symbol": "nsb_nsb_sample10_Data_member_set_count",
+          "cxx_name": "count",
+          "python_name": "__nsb_member_set_count",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void"
+          },
+          "parameters": [
+            {
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "abi_parameters": [
+            {
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null,
+          "member_access": "set",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::wide:get",
+          "symbol": "nsb_nsb_sample10_Data_member_get_wide",
+          "cxx_name": "wide",
+          "python_name": "__nsb_member_get_wide",
+          "const": true,
+          "return": {
+            "kind": "int64",
+            "cxx_type": "std::int64_t",
+            "c_abi_type": "std::int64_t",
+            "numba_type": "types.int64",
+            "llvm_type": "int64"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::wide:set",
+          "symbol": "nsb_nsb_sample10_Data_member_set_wide",
+          "cxx_name": "wide",
+          "python_name": "__nsb_member_set_wide",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void"
+          },
+          "parameters": [
+            {
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "abi_parameters": [
+            {
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null,
+          "member_access": "set",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::single:get",
+          "symbol": "nsb_nsb_sample10_Data_member_get_single",
+          "cxx_name": "single",
+          "python_name": "__nsb_member_get_single",
+          "const": true,
+          "return": {
+            "kind": "float",
+            "cxx_type": "float",
+            "c_abi_type": "float",
+            "numba_type": "types.float32",
+            "llvm_type": "float"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::single:set",
+          "symbol": "nsb_nsb_sample10_Data_member_set_single",
+          "cxx_name": "single",
+          "python_name": "__nsb_member_set_single",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void"
+          },
+          "parameters": [
+            {
+              "kind": "float",
+              "cxx_type": "float",
+              "c_abi_type": "float",
+              "numba_type": "types.float32",
+              "llvm_type": "float",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "abi_parameters": [
+            {
+              "kind": "float",
+              "cxx_type": "float",
+              "c_abi_type": "float",
+              "numba_type": "types.float32",
+              "llvm_type": "float",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null,
+          "member_access": "set",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::weight:get",
+          "symbol": "nsb_nsb_sample10_Data_member_get_weight",
+          "cxx_name": "weight",
+          "python_name": "__nsb_member_get_weight",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::weight:set",
+          "symbol": "nsb_nsb_sample10_Data_member_set_weight",
+          "cxx_name": "weight",
+          "python_name": "__nsb_member_set_weight",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void"
+          },
+          "parameters": [
+            {
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "abi_parameters": [
+            {
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null,
+          "member_access": "set",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::enabled:get",
+          "symbol": "nsb_nsb_sample10_Data_member_get_enabled",
+          "cxx_name": "enabled",
+          "python_name": "__nsb_member_get_enabled",
+          "const": true,
+          "return": {
+            "kind": "bool",
+            "cxx_type": "bool",
+            "c_abi_type": "bool",
+            "numba_type": "types.boolean",
+            "llvm_type": "bool"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::enabled:set",
+          "symbol": "nsb_nsb_sample10_Data_member_set_enabled",
+          "cxx_name": "enabled",
+          "python_name": "__nsb_member_set_enabled",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void"
+          },
+          "parameters": [
+            {
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "abi_parameters": [
+            {
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null,
+          "member_access": "set",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::mode:get",
+          "symbol": "nsb_nsb_sample10_Data_member_get_mode",
+          "cxx_name": "mode",
+          "python_name": "__nsb_member_get_mode",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "enum_cxx_type": "nsb_sample10::Data::Mode"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": "nsb_sample10::Data::Mode"
+        },
+        {
+          "identity": "member nsb_sample10::Data::mode:set",
+          "symbol": "nsb_nsb_sample10_Data_member_set_mode",
+          "cxx_name": "mode",
+          "python_name": "__nsb_member_set_mode",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void"
+          },
+          "parameters": [
+            {
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "enum_cxx_type": "nsb_sample10::Data::Mode",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "abi_parameters": [
+            {
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "enum_cxx_type": "nsb_sample10::Data::Mode",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null,
+          "member_access": "set",
+          "member_enum": "nsb_sample10::Data::Mode"
+        },
+        {
+          "identity": "member nsb_sample10::Data::fixed:get",
+          "symbol": "nsb_nsb_sample10_Data_member_get_fixed",
+          "cxx_name": "fixed",
+          "python_name": "__nsb_member_get_fixed",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::immutable:get",
+          "symbol": "nsb_nsb_sample10_Data_member_get_immutable",
+          "cxx_name": "immutable",
+          "python_name": "__nsb_member_get_immutable",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::restricted:get",
+          "symbol": "nsb_nsb_sample10_Data_member_get_restricted",
+          "cxx_name": "restricted",
+          "python_name": "__nsb_member_get_restricted",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::original:get",
+          "symbol": "nsb_nsb_sample10_Data_member_get_original",
+          "cxx_name": "original",
+          "python_name": "__nsb_member_get_original",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null,
+          "member_access": "get",
+          "member_enum": null
+        },
+        {
+          "identity": "member nsb_sample10::Data::original:set",
+          "symbol": "nsb_nsb_sample10_Data_member_set_original",
+          "cxx_name": "original",
+          "python_name": "__nsb_member_set_original",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void"
+          },
+          "parameters": [
+            {
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "abi_parameters": [
+            {
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "name": "value",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null,
+          "member_access": "set",
+          "member_enum": null
+        }
+      ],
+      "members": [
+        {
+          "cxx_name": "count",
+          "python_name": "count",
+          "swig_type": "int",
+          "cxx_type": "int",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null,
+          "writable": true,
+          "type": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32"
+          },
+          "get": "__nsb_member_get_count",
+          "set": "__nsb_member_set_count"
+        },
+        {
+          "cxx_name": "wide",
+          "python_name": "wide",
+          "swig_type": "std::int64_t",
+          "cxx_type": "std::int64_t",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null,
+          "writable": true,
+          "type": {
+            "kind": "int64",
+            "cxx_type": "std::int64_t",
+            "c_abi_type": "std::int64_t",
+            "numba_type": "types.int64",
+            "llvm_type": "int64"
+          },
+          "get": "__nsb_member_get_wide",
+          "set": "__nsb_member_set_wide"
+        },
+        {
+          "cxx_name": "single",
+          "python_name": "single",
+          "swig_type": "float",
+          "cxx_type": "float",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null,
+          "writable": true,
+          "type": {
+            "kind": "float",
+            "cxx_type": "float",
+            "c_abi_type": "float",
+            "numba_type": "types.float32",
+            "llvm_type": "float"
+          },
+          "get": "__nsb_member_get_single",
+          "set": "__nsb_member_set_single"
+        },
+        {
+          "cxx_name": "weight",
+          "python_name": "weight",
+          "swig_type": "nsb_sample10::Data::real_t",
+          "cxx_type": "nsb_sample10::Data::real_t",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null,
+          "writable": true,
+          "type": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double"
+          },
+          "get": "__nsb_member_get_weight",
+          "set": "__nsb_member_set_weight"
+        },
+        {
+          "cxx_name": "enabled",
+          "python_name": "enabled",
+          "swig_type": "bool",
+          "cxx_type": "bool",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null,
+          "writable": true,
+          "type": {
+            "kind": "bool",
+            "cxx_type": "bool",
+            "c_abi_type": "bool",
+            "numba_type": "types.boolean",
+            "llvm_type": "bool"
+          },
+          "get": "__nsb_member_get_enabled",
+          "set": "__nsb_member_set_enabled"
+        },
+        {
+          "cxx_name": "mode",
+          "python_name": "mode",
+          "swig_type": "nsb_sample10::Data::Mode",
+          "cxx_type": "nsb_sample10::Data::Mode",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null,
+          "writable": true,
+          "type": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "enum_cxx_type": "nsb_sample10::Data::Mode"
+          },
+          "get": "__nsb_member_get_mode",
+          "set": "__nsb_member_set_mode"
+        },
+        {
+          "cxx_name": "fixed",
+          "python_name": "fixed",
+          "swig_type": "q(const).int",
+          "cxx_type": "const int",
+          "mode": null,
+          "immutable": true,
+          "unsupported_reason": null,
+          "writable": false,
+          "type": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32"
+          },
+          "get": "__nsb_member_get_fixed"
+        },
+        {
+          "cxx_name": "immutable",
+          "python_name": "immutable",
+          "swig_type": "int",
+          "cxx_type": "int",
+          "mode": null,
+          "immutable": true,
+          "unsupported_reason": null,
+          "writable": false,
+          "type": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32"
+          },
+          "get": "__nsb_member_get_immutable"
+        },
+        {
+          "cxx_name": "restricted",
+          "python_name": "restricted",
+          "swig_type": "int",
+          "cxx_type": "int",
+          "mode": "readonly",
+          "immutable": false,
+          "unsupported_reason": null,
+          "writable": false,
+          "type": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32"
+          },
+          "get": "__nsb_member_get_restricted"
+        },
+        {
+          "cxx_name": "original",
+          "python_name": "renamed",
+          "swig_type": "int",
+          "cxx_type": "int",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null,
+          "writable": true,
+          "type": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32"
+          },
+          "get": "__nsb_member_get_original",
+          "set": "__nsb_member_set_original"
+        }
+      ],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample10::Data::Data()",
+          "symbol": "nsb_nsb_sample10_Data_construct_0",
+          "parameters": []
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample10_Data_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "ConstView",
+        "Increment",
+        "TakeMutable",
+        "Total"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample10::Opaque",
+      "owner_module": "nsb_sample10_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample10_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Opaque",
+      "symbol": "nsb_sample10_Opaque",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample10_Opaque",
+      "owned_proxy_helper": "nsb_owned_nsb_sample10_Opaque",
+      "methods": [
+        {
+          "identity": "nsb_sample10::Opaque::Read() const",
+          "symbol": "nsb_nsb_sample10_Opaque_0_Read",
+          "cxx_name": "Read",
+          "python_name": "Read",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample10::Opaque::Write(int)",
+          "symbol": "nsb_nsb_sample10_Opaque_1_Write",
+          "cxx_name": "Write",
+          "python_name": "Write",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [
+            {
+              "name": "count",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "count",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample10::Opaque::Self() const",
+          "symbol": "nsb_nsb_sample10_Opaque_2_Self",
+          "cxx_name": "Self",
+          "python_name": "Self",
+          "const": true,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample10::Opaque",
+            "passing": "reference",
+            "const": true,
+            "c_abi_type": "const void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "const nsb_sample10::Opaque&",
+            "borrowed_return": true,
+            "nullable": false
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample10::Opaque::Opaque()",
+          "symbol": "nsb_nsb_sample10_Opaque_construct_0",
+          "parameters": []
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample10_Opaque_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Read",
+        "Self",
+        "Write"
+      ],
+      "skipped_methods": []
+    }
+  ]
+}

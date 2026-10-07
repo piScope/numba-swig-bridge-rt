@@ -1,0 +1,406 @@
+{
+  "schema_version": 2,
+  "kind": "swig_bridge_inventory",
+  "sources": [
+    {
+      "module": "nsb_sample8_storage",
+      "swig_module": "nsb_sample8_storage",
+      "interface": "storage.i"
+    }
+  ],
+  "classes": [
+    {
+      "cxx_type": "nsb_sample8::DenseMatrix",
+      "owner_module": "nsb_sample8_storage",
+      "source_interface": "storage.i",
+      "python_proxy": "DenseMatrix",
+      "constructors": [
+        {
+          "cxx_name": "DenseMatrix",
+          "access": "public",
+          "parameters": [
+            {
+              "name": "data",
+              "swig_type": "p.double",
+              "cxx_type": "double*"
+            },
+            {
+              "name": "rows",
+              "swig_type": "int",
+              "cxx_type": "int"
+            },
+            {
+              "name": "cols",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "swig_declaration": "f(p.double,int,int).",
+          "signature": "nsb_sample8::DenseMatrix::DenseMatrix(double*, int, int)"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Height",
+          "python_name": "Height",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "int nsb_sample8::DenseMatrix::Height() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Width",
+          "python_name": "Width",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "int nsb_sample8::DenseMatrix::Width() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "GetData",
+          "python_name": "GetData",
+          "return_swig_type": "p.double",
+          "return_cxx_type": "double*",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().p.",
+          "signature": "double* nsb_sample8::DenseMatrix::GetData() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Get",
+          "python_name": "Get",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [
+            {
+              "name": "row",
+              "swig_type": "int",
+              "cxx_type": "int"
+            },
+            {
+              "name": "col",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(int,int).",
+          "signature": "double nsb_sample8::DenseMatrix::Get(int, int) const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Set",
+          "python_name": "Set",
+          "return_swig_type": "void",
+          "return_cxx_type": "void",
+          "parameters": [
+            {
+              "name": "row",
+              "swig_type": "int",
+              "cxx_type": "int"
+            },
+            {
+              "name": "col",
+              "swig_type": "int",
+              "cxx_type": "int"
+            },
+            {
+              "name": "value",
+              "swig_type": "double",
+              "cxx_type": "double"
+            }
+          ],
+          "const": false,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "f(int,int,double).",
+          "signature": "void nsb_sample8::DenseMatrix::Set(int, int, double)",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Sum",
+          "python_name": "Sum",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "double nsb_sample8::DenseMatrix::Sum() const",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "pointer_accessor": "_nsb_pointer"
+    },
+    {
+      "cxx_type": "nsb_sample8::Vector",
+      "owner_module": "nsb_sample8_storage",
+      "source_interface": "storage.i",
+      "python_proxy": "Vector",
+      "constructors": [
+        {
+          "cxx_name": "Vector",
+          "access": "public",
+          "parameters": [
+            {
+              "name": "data",
+              "swig_type": "p.double",
+              "cxx_type": "double*"
+            },
+            {
+              "name": "size",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "swig_declaration": "f(p.double,int).",
+          "signature": "nsb_sample8::Vector::Vector(double*, int)"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Size",
+          "python_name": "Size",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "int nsb_sample8::Vector::Size() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "GetData",
+          "python_name": "GetData",
+          "return_swig_type": "p.double",
+          "return_cxx_type": "double*",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().p.",
+          "signature": "double* nsb_sample8::Vector::GetData() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Sum",
+          "python_name": "Sum",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "double nsb_sample8::Vector::Sum() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Add",
+          "python_name": "Add",
+          "return_swig_type": "void",
+          "return_cxx_type": "void",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "double",
+              "cxx_type": "double"
+            }
+          ],
+          "const": false,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "f(double).",
+          "signature": "void nsb_sample8::Vector::Add(double)",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "pointer_accessor": "_nsb_pointer"
+    }
+  ],
+  "typedefs": [
+    {
+      "cxx_name": "int16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_fast16_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_fast8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_least16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int_least32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_least64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_least8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "intmax_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "intptr_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "uint16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_fast16_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_fast8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_least16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint_least32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_least64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_least8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uintmax_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uintptr_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    }
+  ],
+  "enums": []
+}
