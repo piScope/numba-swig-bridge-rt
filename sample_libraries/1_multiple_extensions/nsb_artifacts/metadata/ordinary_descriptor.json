@@ -1,0 +1,1467 @@
+{
+  "schema_version": 4,
+  "conversions": [],
+  "kind": "numba_swig_ordinary_bridge_descriptor",
+  "bridge_id": "nsb_sample1",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample1_directors",
+        "swig_module": "nsb_sample1_directors",
+        "interface": "directors.i"
+      },
+      {
+        "module": "nsb_sample1_objects",
+        "swig_module": "nsb_sample1_objects",
+        "interface": "objects.i"
+      }
+    ]
+  },
+  "classes": [
+    {
+      "cxx_type": "nsb_sample1::Arithmetic",
+      "owner_module": "nsb_sample1_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample1_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Arithmetic",
+      "symbol": "nsb_sample1_Arithmetic",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample1_Arithmetic",
+      "owned_proxy_helper": "nsb_owned_nsb_sample1_Arithmetic",
+      "methods": [
+        {
+          "identity": "nsb_sample1::Arithmetic::Transform(const nsb_sample1::Buffer&, nsb_sample1::Buffer&, nsb_sample1::Counter*, double, int, std::int64_t, bool) const",
+          "symbol": "nsb_nsb_sample1_Arithmetic_0_Transform",
+          "cxx_name": "Transform",
+          "python_name": "Transform",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "source",
+              "declared_cxx_type": "const nsb_sample1::Buffer&",
+              "kind": "object",
+              "cxx_type": "nsb_sample1::Buffer",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            },
+            {
+              "name": "destination",
+              "declared_cxx_type": "nsb_sample1::Buffer&",
+              "kind": "object",
+              "cxx_type": "nsb_sample1::Buffer",
+              "passing": "reference",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            },
+            {
+              "name": "counter",
+              "declared_cxx_type": "nsb_sample1::Counter*",
+              "kind": "object",
+              "cxx_type": "nsb_sample1::Counter",
+              "passing": "pointer",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            },
+            {
+              "name": "scale",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            },
+            {
+              "name": "bias",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "count",
+              "declared_cxx_type": "std::int64_t",
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64"
+            },
+            {
+              "name": "reverse",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "source",
+              "declared_cxx_type": "const nsb_sample1::Buffer&",
+              "kind": "object",
+              "cxx_type": "nsb_sample1::Buffer",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 0
+            },
+            {
+              "name": "destination",
+              "declared_cxx_type": "nsb_sample1::Buffer&",
+              "kind": "object",
+              "cxx_type": "nsb_sample1::Buffer",
+              "passing": "reference",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 1
+            },
+            {
+              "name": "counter",
+              "declared_cxx_type": "nsb_sample1::Counter*",
+              "kind": "object",
+              "cxx_type": "nsb_sample1::Counter",
+              "passing": "pointer",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 2
+            },
+            {
+              "name": "scale",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 3
+            },
+            {
+              "name": "bias",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 4
+            },
+            {
+              "name": "count",
+              "declared_cxx_type": "std::int64_t",
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64",
+              "argument_index": 5
+            },
+            {
+              "name": "reverse",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool",
+              "argument_index": 6
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample1::Arithmetic::Arithmetic()",
+          "symbol": "nsb_nsb_sample1_Arithmetic_construct_0",
+          "parameters": []
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample1_Arithmetic_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Transform"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample1::Auxiliary",
+      "owner_module": "nsb_sample1_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample1_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Auxiliary",
+      "symbol": "nsb_sample1_Auxiliary",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample1_Auxiliary",
+      "owned_proxy_helper": "nsb_owned_nsb_sample1_Auxiliary",
+      "methods": [
+        {
+          "identity": "nsb_sample1::Auxiliary::Adjust(double)",
+          "symbol": "nsb_nsb_sample1_Auxiliary_0_Adjust",
+          "cxx_name": "Adjust",
+          "python_name": "Adjust",
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample1_Auxiliary_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Adjust"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample1::Buffer",
+      "owner_module": "nsb_sample1_objects",
+      "function_address_helper": "nsb_function_address_nsb_sample1_objects",
+      "source_interface": "objects.i",
+      "python_proxy": "Buffer",
+      "symbol": "nsb_sample1_Buffer",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample1_Buffer",
+      "owned_proxy_helper": "nsb_owned_nsb_sample1_Buffer",
+      "methods": [
+        {
+          "identity": "nsb_sample1::Buffer::Size() const",
+          "symbol": "nsb_nsb_sample1_Buffer_0_Size",
+          "cxx_name": "Size",
+          "python_name": "Size",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample1::Buffer::Get(int) const",
+          "symbol": "nsb_nsb_sample1_Buffer_1_Get",
+          "cxx_name": "Get",
+          "python_name": "Get",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "index",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "index",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample1::Buffer::Set(int, double)",
+          "symbol": "nsb_nsb_sample1_Buffer_2_Set",
+          "cxx_name": "Set",
+          "python_name": "Set",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [
+            {
+              "name": "index",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "index",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            },
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 1
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample1::Buffer::Sum() const",
+          "symbol": "nsb_nsb_sample1_Buffer_3_Sum",
+          "cxx_name": "Sum",
+          "python_name": "Sum",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample1::Buffer::MaybeSelf(bool)",
+          "symbol": "nsb_nsb_sample1_Buffer_4_MaybeSelf",
+          "cxx_name": "MaybeSelf",
+          "python_name": "MaybeSelf",
+          "const": false,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample1::Buffer",
+            "passing": "pointer",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "nsb_sample1::Buffer*",
+            "borrowed_return": true,
+            "nullable": true
+          },
+          "parameters": [
+            {
+              "name": "present",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "present",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample1::Buffer::Buffer(int)",
+          "symbol": "nsb_nsb_sample1_Buffer_construct_0",
+          "parameters": [
+            {
+              "name": "size",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample1_Buffer_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Get",
+        "MaybeSelf",
+        "Set",
+        "Size",
+        "Sum"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample1::Counter",
+      "owner_module": "nsb_sample1_objects",
+      "function_address_helper": "nsb_function_address_nsb_sample1_objects",
+      "source_interface": "objects.i",
+      "python_proxy": "Counter",
+      "symbol": "nsb_sample1_Counter",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample1_Counter",
+      "owned_proxy_helper": "nsb_owned_nsb_sample1_Counter",
+      "methods": [
+        {
+          "identity": "nsb_sample1::Counter::Add(std::int64_t)",
+          "symbol": "nsb_nsb_sample1_Counter_0_Add",
+          "cxx_name": "Add",
+          "python_name": "Add",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [
+            {
+              "name": "amount",
+              "declared_cxx_type": "std::int64_t",
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "amount",
+              "declared_cxx_type": "std::int64_t",
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample1::Counter::Value() const",
+          "symbol": "nsb_nsb_sample1_Counter_1_Value",
+          "cxx_name": "Value",
+          "python_name": "Value",
+          "const": true,
+          "return": {
+            "kind": "int64",
+            "cxx_type": "std::int64_t",
+            "c_abi_type": "std::int64_t",
+            "numba_type": "types.int64",
+            "llvm_type": "int64",
+            "declared_cxx_type": "std::int64_t"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample1::Counter::AtLeast(std::int64_t) const",
+          "symbol": "nsb_nsb_sample1_Counter_2_AtLeast",
+          "cxx_name": "AtLeast",
+          "python_name": "AtLeast",
+          "const": true,
+          "return": {
+            "kind": "bool",
+            "cxx_type": "bool",
+            "c_abi_type": "bool",
+            "numba_type": "types.boolean",
+            "llvm_type": "bool",
+            "result_c_abi_type": "int",
+            "result_llvm_type": "int32",
+            "declared_cxx_type": "bool"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "std::int64_t",
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "std::int64_t",
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample1::Counter::Counter(std::int64_t)",
+          "symbol": "nsb_nsb_sample1_Counter_construct_0",
+          "parameters": [
+            {
+              "name": "initial",
+              "declared_cxx_type": "std::int64_t",
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64"
+            }
+          ]
+        },
+        {
+          "signature": "nsb_sample1::Counter::Counter()",
+          "symbol": "nsb_nsb_sample1_Counter_construct_1",
+          "parameters": []
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample1_Counter_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Add",
+        "AtLeast",
+        "Value"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample1::Evaluator",
+      "owner_module": "nsb_sample1_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample1_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Evaluator",
+      "symbol": "nsb_sample1_Evaluator",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample1_Evaluator",
+      "owned_proxy_helper": "nsb_owned_nsb_sample1_Evaluator",
+      "methods": [
+        {
+          "identity": "nsb_sample1::Evaluator::Bias(double)",
+          "symbol": "nsb_nsb_sample1_Evaluator_0_Bias",
+          "cxx_name": "Bias",
+          "python_name": "Bias",
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample1::Evaluator::Evaluate(const nsb_sample1::Buffer&, nsb_sample1::Buffer&, nsb_sample1::Counter*, double, int, std::int64_t, bool)",
+          "symbol": "nsb_nsb_sample1_Evaluator_1_Evaluate",
+          "cxx_name": "Evaluate",
+          "python_name": "Evaluate",
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "source",
+              "declared_cxx_type": "const nsb_sample1::Buffer&",
+              "kind": "object",
+              "cxx_type": "nsb_sample1::Buffer",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            },
+            {
+              "name": "destination",
+              "declared_cxx_type": "nsb_sample1::Buffer&",
+              "kind": "object",
+              "cxx_type": "nsb_sample1::Buffer",
+              "passing": "reference",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            },
+            {
+              "name": "counter",
+              "declared_cxx_type": "nsb_sample1::Counter*",
+              "kind": "object",
+              "cxx_type": "nsb_sample1::Counter",
+              "passing": "pointer",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            },
+            {
+              "name": "scale",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            },
+            {
+              "name": "bias",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "count",
+              "declared_cxx_type": "std::int64_t",
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64"
+            },
+            {
+              "name": "reverse",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "source",
+              "declared_cxx_type": "const nsb_sample1::Buffer&",
+              "kind": "object",
+              "cxx_type": "nsb_sample1::Buffer",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 0
+            },
+            {
+              "name": "destination",
+              "declared_cxx_type": "nsb_sample1::Buffer&",
+              "kind": "object",
+              "cxx_type": "nsb_sample1::Buffer",
+              "passing": "reference",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 1
+            },
+            {
+              "name": "counter",
+              "declared_cxx_type": "nsb_sample1::Counter*",
+              "kind": "object",
+              "cxx_type": "nsb_sample1::Counter",
+              "passing": "pointer",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 2
+            },
+            {
+              "name": "scale",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 3
+            },
+            {
+              "name": "bias",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 4
+            },
+            {
+              "name": "count",
+              "declared_cxx_type": "std::int64_t",
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64",
+              "argument_index": 5
+            },
+            {
+              "name": "reverse",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool",
+              "argument_index": 6
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample1::Evaluator::EvaluateValues(const double*, std::int64_t)",
+          "symbol": "nsb_nsb_sample1_Evaluator_2_EvaluateValues",
+          "cxx_name": "EvaluateValues",
+          "python_name": "EvaluateValues",
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "recipe": "borrowed-contiguous-array-1d-f64-input",
+              "parameter_indices": [
+                0,
+                1
+              ],
+              "pointer_parameter": "values",
+              "count_parameter": "count",
+              "kind": "array",
+              "numpy_dtype": "float64",
+              "numba_dtype": "types.float64",
+              "rank": 1,
+              "layout": "C",
+              "access": "input",
+              "memory": "host",
+              "retention": "forbidden",
+              "transfer": "zero-copy",
+              "cxx_pointer_type": "const double*",
+              "c_abi_pointer_type": "const double*",
+              "bool_copy": false,
+              "name": "values",
+              "argument_index": 0
+            }
+          ],
+          "abi_parameters": [
+            {
+              "kind": "array_data",
+              "array_argument": 0,
+              "cxx_type": "const double*",
+              "c_abi_type": "const double*",
+              "llvm_type": "voidptr",
+              "bool_copy": false
+            },
+            {
+              "kind": "array_count",
+              "array_argument": 0,
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "llvm_type": "int64"
+            }
+          ],
+          "lowering": {
+            "recipe": "borrowed-contiguous-array-1d-f64-input",
+            "parameter_indices": [
+              0,
+              1
+            ],
+            "pointer_parameter": "values",
+            "count_parameter": "count",
+            "kind": "array",
+            "numpy_dtype": "float64",
+            "numba_dtype": "types.float64",
+            "rank": 1,
+            "layout": "C",
+            "access": "input",
+            "memory": "host",
+            "retention": "forbidden",
+            "transfer": "zero-copy",
+            "cxx_pointer_type": "const double*",
+            "c_abi_pointer_type": "const double*",
+            "bool_copy": false
+          }
+        },
+        {
+          "identity": "nsb_sample1::Evaluator::Probe(double)",
+          "symbol": "nsb_nsb_sample1_Evaluator_3_Probe",
+          "cxx_name": "Probe",
+          "python_name": "Probe",
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample1::Evaluator::Probe(const double*, std::int64_t)",
+          "symbol": "nsb_nsb_sample1_Evaluator_4_Probe",
+          "cxx_name": "Probe",
+          "python_name": "Probe",
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "recipe": "borrowed-contiguous-array-1d-f64-input",
+              "parameter_indices": [
+                0,
+                1
+              ],
+              "pointer_parameter": "values",
+              "count_parameter": "count",
+              "kind": "array",
+              "numpy_dtype": "float64",
+              "numba_dtype": "types.float64",
+              "rank": 1,
+              "layout": "C",
+              "access": "input",
+              "memory": "host",
+              "retention": "forbidden",
+              "transfer": "zero-copy",
+              "cxx_pointer_type": "const double*",
+              "c_abi_pointer_type": "const double*",
+              "bool_copy": false,
+              "name": "values",
+              "argument_index": 0
+            }
+          ],
+          "abi_parameters": [
+            {
+              "kind": "array_data",
+              "array_argument": 0,
+              "cxx_type": "const double*",
+              "c_abi_type": "const double*",
+              "llvm_type": "voidptr",
+              "bool_copy": false
+            },
+            {
+              "kind": "array_count",
+              "array_argument": 0,
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "llvm_type": "int64"
+            }
+          ],
+          "lowering": {
+            "recipe": "borrowed-contiguous-array-1d-f64-input",
+            "parameter_indices": [
+              0,
+              1
+            ],
+            "pointer_parameter": "values",
+            "count_parameter": "count",
+            "kind": "array",
+            "numpy_dtype": "float64",
+            "numba_dtype": "types.float64",
+            "rank": 1,
+            "layout": "C",
+            "access": "input",
+            "memory": "host",
+            "retention": "forbidden",
+            "transfer": "zero-copy",
+            "cxx_pointer_type": "const double*",
+            "c_abi_pointer_type": "const double*",
+            "bool_copy": false
+          }
+        },
+        {
+          "identity": "nsb_sample1::Evaluator::Unselected(double) const",
+          "symbol": "nsb_nsb_sample1_Evaluator_5_Unselected",
+          "cxx_name": "Unselected",
+          "python_name": "Unselected",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample1_Evaluator_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Bias",
+        "Evaluate",
+        "EvaluateValues",
+        "Probe",
+        "Unselected"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample1::Inner",
+      "owner_module": "nsb_sample1_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample1_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Inner",
+      "symbol": "nsb_sample1_Inner",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample1_Inner",
+      "owned_proxy_helper": "nsb_owned_nsb_sample1_Inner",
+      "methods": [
+        {
+          "identity": "nsb_sample1::Inner::Apply(double)",
+          "symbol": "nsb_nsb_sample1_Inner_0_Apply",
+          "cxx_name": "Apply",
+          "python_name": "Apply",
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample1_Inner_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Apply"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample1::NonVirtualCallback",
+      "owner_module": "nsb_sample1_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample1_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "NonVirtualCallback",
+      "symbol": "nsb_sample1_NonVirtualCallback",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample1_NonVirtualCallback",
+      "owned_proxy_helper": "nsb_owned_nsb_sample1_NonVirtualCallback",
+      "methods": [
+        {
+          "identity": "nsb_sample1::NonVirtualCallback::Apply(double)",
+          "symbol": "nsb_nsb_sample1_NonVirtualCallback_0_Apply",
+          "cxx_name": "Apply",
+          "python_name": "Apply",
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample1_NonVirtualCallback_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Apply"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample1::Outer",
+      "owner_module": "nsb_sample1_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample1_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Outer",
+      "symbol": "nsb_sample1_Outer",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample1_Outer",
+      "owned_proxy_helper": "nsb_owned_nsb_sample1_Outer",
+      "methods": [
+        {
+          "identity": "nsb_sample1::Outer::Combine(double)",
+          "symbol": "nsb_nsb_sample1_Outer_0_Combine",
+          "cxx_name": "Combine",
+          "python_name": "Combine",
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample1_Outer_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Combine"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample1::ScalarReturns",
+      "owner_module": "nsb_sample1_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample1_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "ScalarReturns",
+      "symbol": "nsb_sample1_ScalarReturns",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample1_ScalarReturns",
+      "owned_proxy_helper": "nsb_owned_nsb_sample1_ScalarReturns",
+      "methods": [
+        {
+          "identity": "nsb_sample1::ScalarReturns::DoubleValue(double)",
+          "symbol": "nsb_nsb_sample1_ScalarReturns_0_DoubleValue",
+          "cxx_name": "DoubleValue",
+          "python_name": "DoubleValue",
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample1::ScalarReturns::IntValue(int)",
+          "symbol": "nsb_nsb_sample1_ScalarReturns_1_IntValue",
+          "cxx_name": "IntValue",
+          "python_name": "IntValue",
+          "const": false,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample1::ScalarReturns::Int64Value(std::int64_t)",
+          "symbol": "nsb_nsb_sample1_ScalarReturns_2_Int64Value",
+          "cxx_name": "Int64Value",
+          "python_name": "Int64Value",
+          "const": false,
+          "return": {
+            "kind": "int64",
+            "cxx_type": "std::int64_t",
+            "c_abi_type": "std::int64_t",
+            "numba_type": "types.int64",
+            "llvm_type": "int64",
+            "declared_cxx_type": "std::int64_t"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "std::int64_t",
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "std::int64_t",
+              "kind": "int64",
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample1::ScalarReturns::BoolValue(bool)",
+          "symbol": "nsb_nsb_sample1_ScalarReturns_3_BoolValue",
+          "cxx_name": "BoolValue",
+          "python_name": "BoolValue",
+          "const": false,
+          "return": {
+            "kind": "bool",
+            "cxx_type": "bool",
+            "c_abi_type": "bool",
+            "numba_type": "types.boolean",
+            "llvm_type": "bool",
+            "result_c_abi_type": "int",
+            "result_llvm_type": "int32",
+            "declared_cxx_type": "bool"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample1_ScalarReturns_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "BoolValue",
+        "DoubleValue",
+        "Int64Value",
+        "IntValue"
+      ],
+      "skipped_methods": []
+    }
+  ]
+}

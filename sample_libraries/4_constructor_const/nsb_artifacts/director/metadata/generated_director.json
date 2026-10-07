@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "kind": "generated_nsb_director_recipe",
+  "directors": [
+    {
+      "cxx_type": "nsb_sample4::Evaluator",
+      "factory": "create_nsb_director_nsb_sample4_Evaluator",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample4::Evaluator::Bias(double) const",
+          "symbol": "nsb_sample4__Evaluator__Bias_double__const",
+          "abstract": false
+        },
+        {
+          "identity": "nsb_sample4::Evaluator::Evaluate(double) const",
+          "symbol": "nsb_sample4__Evaluator__Evaluate_double__const",
+          "abstract": true
+        }
+      ]
+    },
+    {
+      "cxx_type": "nsb_sample4::FloatEvaluator",
+      "factory": "create_nsb_director_nsb_sample4_FloatEvaluator",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample4::FloatEvaluator::Apply(nsb_sample4::scalar_t) const",
+          "symbol": "nsb_sample4__FloatEvaluator__Apply_nsb_sample4__scalar_t__const",
+          "abstract": true
+        },
+        {
+          "identity": "nsb_sample4::FloatEvaluator::Scale(nsb_sample4::scalar_t) const",
+          "symbol": "nsb_sample4__FloatEvaluator__Scale_nsb_sample4__scalar_t__const",
+          "abstract": false
+        },
+        {
+          "identity": "nsb_sample4::FloatEvaluator::SumValues(const float*, std::int64_t) const",
+          "symbol": "nsb_sample4__FloatEvaluator__SumValues_const_float___std__int64_t__const",
+          "abstract": true
+        }
+      ]
+    }
+  ]
+}

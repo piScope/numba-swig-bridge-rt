@@ -1,0 +1,879 @@
+{
+  "schema_version": 4,
+  "conversions": [],
+  "kind": "numba_swig_ordinary_bridge_descriptor",
+  "bridge_id": "nsb_sample5",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample5_storage",
+        "swig_module": "nsb_sample5_storage",
+        "interface": "storage.i"
+      }
+    ]
+  },
+  "classes": [
+    {
+      "cxx_type": "nsb_sample5::BoolVector",
+      "owner_module": "nsb_sample5_storage",
+      "function_address_helper": "nsb_function_address_nsb_sample5_storage",
+      "source_interface": "storage.i",
+      "python_proxy": "BoolVector",
+      "symbol": "nsb_sample5_BoolVector",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample5_BoolVector",
+      "owned_proxy_helper": "nsb_owned_nsb_sample5_BoolVector",
+      "methods": [
+        {
+          "identity": "nsb_sample5::BoolVector::Size() const",
+          "symbol": "nsb_nsb_sample5_BoolVector_0_Size",
+          "cxx_name": "Size",
+          "python_name": "Size",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::BoolVector::GetData() const",
+          "symbol": "nsb_nsb_sample5_BoolVector_1_GetData",
+          "cxx_name": "GetData",
+          "python_name": "GetData",
+          "const": true,
+          "return": {
+            "kind": "scalar_pointer",
+            "cxx_type": "bool*",
+            "c_abi_type": "bool*",
+            "numpy_dtype": "bool",
+            "const": false,
+            "declared_cxx_type": "bool*"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::BoolVector::Get(int) const",
+          "symbol": "nsb_nsb_sample5_BoolVector_2_Get",
+          "cxx_name": "Get",
+          "python_name": "Get",
+          "const": true,
+          "return": {
+            "kind": "bool",
+            "cxx_type": "bool",
+            "c_abi_type": "bool",
+            "numba_type": "types.boolean",
+            "llvm_type": "bool",
+            "result_c_abi_type": "int",
+            "result_llvm_type": "int32",
+            "declared_cxx_type": "bool"
+          },
+          "parameters": [
+            {
+              "name": "i",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "i",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::BoolVector::GetDataArray()",
+          "symbol": "nsb_nsb_sample5_BoolVector_3_array_view",
+          "cxx_name": "GetDataArray",
+          "python_name": "GetDataArray",
+          "const": false,
+          "return": {
+            "kind": "array_view_1d",
+            "dtype": "bool",
+            "data": "GetData",
+            "size": "Size",
+            "mutable": "true"
+          },
+          "parameters": [],
+          "abi_parameters": []
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample5::BoolVector::BoolVector(int)",
+          "symbol": "nsb_nsb_sample5_BoolVector_construct_0",
+          "parameters": [
+            {
+              "name": "n",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample5_BoolVector_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Get",
+        "GetData",
+        "GetDataArray",
+        "Size"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample5::DenseMatrix",
+      "owner_module": "nsb_sample5_storage",
+      "function_address_helper": "nsb_function_address_nsb_sample5_storage",
+      "source_interface": "storage.i",
+      "python_proxy": "DenseMatrix",
+      "symbol": "nsb_sample5_DenseMatrix",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample5_DenseMatrix",
+      "owned_proxy_helper": "nsb_owned_nsb_sample5_DenseMatrix",
+      "methods": [
+        {
+          "identity": "nsb_sample5::DenseMatrix::Height() const",
+          "symbol": "nsb_nsb_sample5_DenseMatrix_0_Height",
+          "cxx_name": "Height",
+          "python_name": "Height",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::DenseMatrix::Width() const",
+          "symbol": "nsb_nsb_sample5_DenseMatrix_1_Width",
+          "cxx_name": "Width",
+          "python_name": "Width",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::DenseMatrix::GetData() const",
+          "symbol": "nsb_nsb_sample5_DenseMatrix_2_GetData",
+          "cxx_name": "GetData",
+          "python_name": "GetData",
+          "const": true,
+          "return": {
+            "kind": "scalar_pointer",
+            "cxx_type": "double*",
+            "c_abi_type": "double*",
+            "numpy_dtype": "float64",
+            "const": false,
+            "declared_cxx_type": "double*"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::DenseMatrix::GetDataArray()",
+          "symbol": "nsb_nsb_sample5_DenseMatrix_3_array_view",
+          "cxx_name": "GetDataArray",
+          "python_name": "GetDataArray",
+          "const": false,
+          "return": {
+            "kind": "array_view_2d",
+            "dtype": "float64",
+            "data": "GetData",
+            "rows": "Height",
+            "cols": "Width",
+            "layout": "F",
+            "mutable": "true"
+          },
+          "parameters": [],
+          "abi_parameters": []
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample5::DenseMatrix::DenseMatrix(int, int)",
+          "symbol": "nsb_nsb_sample5_DenseMatrix_construct_0",
+          "parameters": [
+            {
+              "name": "rows",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "cols",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample5_DenseMatrix_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "GetData",
+        "GetDataArray",
+        "Height",
+        "Width"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample5::DenseTensor",
+      "owner_module": "nsb_sample5_storage",
+      "function_address_helper": "nsb_function_address_nsb_sample5_storage",
+      "source_interface": "storage.i",
+      "python_proxy": "DenseTensor",
+      "symbol": "nsb_sample5_DenseTensor",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample5_DenseTensor",
+      "owned_proxy_helper": "nsb_owned_nsb_sample5_DenseTensor",
+      "methods": [
+        {
+          "identity": "nsb_sample5::DenseTensor::SizeI() const",
+          "symbol": "nsb_nsb_sample5_DenseTensor_0_SizeI",
+          "cxx_name": "SizeI",
+          "python_name": "SizeI",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::DenseTensor::SizeJ() const",
+          "symbol": "nsb_nsb_sample5_DenseTensor_1_SizeJ",
+          "cxx_name": "SizeJ",
+          "python_name": "SizeJ",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::DenseTensor::SizeK() const",
+          "symbol": "nsb_nsb_sample5_DenseTensor_2_SizeK",
+          "cxx_name": "SizeK",
+          "python_name": "SizeK",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::DenseTensor::Data()",
+          "symbol": "nsb_nsb_sample5_DenseTensor_3_Data",
+          "cxx_name": "Data",
+          "python_name": "Data",
+          "const": false,
+          "return": {
+            "kind": "scalar_pointer",
+            "cxx_type": "double*",
+            "c_abi_type": "double*",
+            "numpy_dtype": "float64",
+            "const": false,
+            "declared_cxx_type": "double*"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::DenseTensor::GetDataArray()",
+          "symbol": "nsb_nsb_sample5_DenseTensor_4_array_view",
+          "cxx_name": "GetDataArray",
+          "python_name": "GetDataArray",
+          "const": false,
+          "return": {
+            "kind": "array_view_3d",
+            "dtype": "float64",
+            "data": "Data",
+            "depth": "SizeK",
+            "rows": "SizeI",
+            "cols": "SizeJ",
+            "layout": "Kij",
+            "mutable": "true"
+          },
+          "parameters": [],
+          "abi_parameters": []
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample5::DenseTensor::DenseTensor(int, int, int)",
+          "symbol": "nsb_nsb_sample5_DenseTensor_construct_0",
+          "parameters": [
+            {
+              "name": "i",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "j",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "k",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample5_DenseTensor_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Data",
+        "GetDataArray",
+        "SizeI",
+        "SizeJ",
+        "SizeK"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample5::FloatVector",
+      "owner_module": "nsb_sample5_storage",
+      "function_address_helper": "nsb_function_address_nsb_sample5_storage",
+      "source_interface": "storage.i",
+      "python_proxy": "FloatVector",
+      "symbol": "nsb_sample5_FloatVector",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample5_FloatVector",
+      "owned_proxy_helper": "nsb_owned_nsb_sample5_FloatVector",
+      "methods": [
+        {
+          "identity": "nsb_sample5::FloatVector::Size() const",
+          "symbol": "nsb_nsb_sample5_FloatVector_0_Size",
+          "cxx_name": "Size",
+          "python_name": "Size",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::FloatVector::GetData() const",
+          "symbol": "nsb_nsb_sample5_FloatVector_1_GetData",
+          "cxx_name": "GetData",
+          "python_name": "GetData",
+          "const": true,
+          "return": {
+            "kind": "scalar_pointer",
+            "cxx_type": "float*",
+            "c_abi_type": "float*",
+            "numpy_dtype": "float32",
+            "const": false,
+            "declared_cxx_type": "float*"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::FloatVector::Get(int) const",
+          "symbol": "nsb_nsb_sample5_FloatVector_2_Get",
+          "cxx_name": "Get",
+          "python_name": "Get",
+          "const": true,
+          "return": {
+            "kind": "float",
+            "cxx_type": "float",
+            "c_abi_type": "float",
+            "numba_type": "types.float32",
+            "llvm_type": "float",
+            "declared_cxx_type": "float"
+          },
+          "parameters": [
+            {
+              "name": "i",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "i",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::FloatVector::GetDataArray()",
+          "symbol": "nsb_nsb_sample5_FloatVector_3_array_view",
+          "cxx_name": "GetDataArray",
+          "python_name": "GetDataArray",
+          "const": false,
+          "return": {
+            "kind": "array_view_1d",
+            "dtype": "float32",
+            "data": "GetData",
+            "size": "Size",
+            "mutable": "true"
+          },
+          "parameters": [],
+          "abi_parameters": []
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample5::FloatVector::FloatVector(int)",
+          "symbol": "nsb_nsb_sample5_FloatVector_construct_0",
+          "parameters": [
+            {
+              "name": "n",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample5_FloatVector_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Get",
+        "GetData",
+        "GetDataArray",
+        "Size"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample5::IntVector",
+      "owner_module": "nsb_sample5_storage",
+      "function_address_helper": "nsb_function_address_nsb_sample5_storage",
+      "source_interface": "storage.i",
+      "python_proxy": "IntVector",
+      "symbol": "nsb_sample5_IntVector",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample5_IntVector",
+      "owned_proxy_helper": "nsb_owned_nsb_sample5_IntVector",
+      "methods": [
+        {
+          "identity": "nsb_sample5::IntVector::Size() const",
+          "symbol": "nsb_nsb_sample5_IntVector_0_Size",
+          "cxx_name": "Size",
+          "python_name": "Size",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::IntVector::GetData() const",
+          "symbol": "nsb_nsb_sample5_IntVector_1_GetData",
+          "cxx_name": "GetData",
+          "python_name": "GetData",
+          "const": true,
+          "return": {
+            "kind": "scalar_pointer",
+            "cxx_type": "int*",
+            "c_abi_type": "int*",
+            "numpy_dtype": "int32",
+            "const": false,
+            "declared_cxx_type": "int*"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::IntVector::Get(int) const",
+          "symbol": "nsb_nsb_sample5_IntVector_2_Get",
+          "cxx_name": "Get",
+          "python_name": "Get",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [
+            {
+              "name": "i",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "i",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::IntVector::GetDataArray()",
+          "symbol": "nsb_nsb_sample5_IntVector_3_array_view",
+          "cxx_name": "GetDataArray",
+          "python_name": "GetDataArray",
+          "const": false,
+          "return": {
+            "kind": "array_view_1d",
+            "dtype": "int32",
+            "data": "GetData",
+            "size": "Size",
+            "mutable": "true"
+          },
+          "parameters": [],
+          "abi_parameters": []
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample5::IntVector::IntVector(int)",
+          "symbol": "nsb_nsb_sample5_IntVector_construct_0",
+          "parameters": [
+            {
+              "name": "n",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample5_IntVector_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Get",
+        "GetData",
+        "GetDataArray",
+        "Size"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample5::Vector",
+      "owner_module": "nsb_sample5_storage",
+      "function_address_helper": "nsb_function_address_nsb_sample5_storage",
+      "source_interface": "storage.i",
+      "python_proxy": "Vector",
+      "symbol": "nsb_sample5_Vector",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample5_Vector",
+      "owned_proxy_helper": "nsb_owned_nsb_sample5_Vector",
+      "methods": [
+        {
+          "identity": "nsb_sample5::Vector::Size() const",
+          "symbol": "nsb_nsb_sample5_Vector_0_Size",
+          "cxx_name": "Size",
+          "python_name": "Size",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::Vector::GetData() const",
+          "symbol": "nsb_nsb_sample5_Vector_1_GetData",
+          "cxx_name": "GetData",
+          "python_name": "GetData",
+          "const": true,
+          "return": {
+            "kind": "scalar_pointer",
+            "cxx_type": "double*",
+            "c_abi_type": "double*",
+            "numpy_dtype": "float64",
+            "const": false,
+            "declared_cxx_type": "double*"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::Vector::Get(int) const",
+          "symbol": "nsb_nsb_sample5_Vector_2_Get",
+          "cxx_name": "Get",
+          "python_name": "Get",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "i",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "i",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::Vector::Set(int, double)",
+          "symbol": "nsb_nsb_sample5_Vector_3_Set",
+          "cxx_name": "Set",
+          "python_name": "Set",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [
+            {
+              "name": "i",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "v",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "i",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            },
+            {
+              "name": "v",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 1
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample5::Vector::GetDataArray()",
+          "symbol": "nsb_nsb_sample5_Vector_4_array_view",
+          "cxx_name": "GetDataArray",
+          "python_name": "GetDataArray",
+          "const": false,
+          "return": {
+            "kind": "array_view_1d",
+            "dtype": "float64",
+            "data": "GetData",
+            "size": "Size",
+            "mutable": "true"
+          },
+          "parameters": [],
+          "abi_parameters": []
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample5::Vector::Vector(int)",
+          "symbol": "nsb_nsb_sample5_Vector_construct_0",
+          "parameters": [
+            {
+              "name": "n",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample5_Vector_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Get",
+        "GetData",
+        "GetDataArray",
+        "Set",
+        "Size"
+      ],
+      "skipped_methods": []
+    }
+  ]
+}

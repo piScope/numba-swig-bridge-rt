@@ -1,0 +1,9 @@
+bridge_id = "nsb_sample5"
+source_root = "."
+output_dir = "nsb_artifacts"
+registration_module = "nsb_sample5.registration"
+director_helper_module = "nsb_sample5_director_bindings"
+[[interfaces]]
+interface = "storage.i"
+python_module = "nsb_sample5_storage"
+include_dirs = ["."]

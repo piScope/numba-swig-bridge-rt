@@ -3,7 +3,7 @@
 Install sample library `4_constructor_const`, then run:
 
 ```bash
-python package/numba-swig-bridge-rt/usercode_examples/example4/constructor_const.py
+python usercode_examples/example4/constructor_const.py
 ```
 
 The decorated class inherits the SWIG `Evaluator` base and calls
@@ -26,7 +26,7 @@ the selected SWIG base; additional Python inheritance chains are deferred.
 
 ## Float32 support
 
-Run `package/numba-swig-bridge-rt/usercode_examples/example4/float32.py` from the repository root after
+Run `usercode_examples/example4/float32.py` from the repository root after
 installing the sample. `FloatEvaluator` demonstrates float constructor arguments,
 const float callbacks, float32 state, and a borrowed float32 input-array callback.
 `FloatOps` demonstrates ordinary scalar calls, exact float/double overload

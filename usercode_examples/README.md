@@ -1,7 +1,7 @@
 # User-code examples
 
 Each directory contains Python usage examples for the corresponding numbered
-C++ library in the repository's [`sample_libraries/`](../../../sample_libraries/)
+C++ library in the repository's [`sample_libraries/`](../sample_libraries/)
 companion distributions.
 
 The samples are optional and are not installed with the runtime. From the

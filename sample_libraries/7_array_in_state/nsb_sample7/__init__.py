@@ -1,0 +1,1 @@
+from nsb_sample7_directors import Accumulator, invoke_accumulate

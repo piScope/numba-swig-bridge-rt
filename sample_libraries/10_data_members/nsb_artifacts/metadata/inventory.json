@@ -1,0 +1,571 @@
+{
+  "schema_version": 2,
+  "kind": "swig_bridge_inventory",
+  "sources": [
+    {
+      "module": "nsb_sample10_directors",
+      "swig_module": "nsb_sample10_directors",
+      "interface": "directors.i"
+    }
+  ],
+  "classes": [
+    {
+      "cxx_type": "nsb_sample10::Callback",
+      "owner_module": "nsb_sample10_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Callback",
+      "constructors": [
+        {
+          "cxx_name": "Callback",
+          "access": "public",
+          "parameters": [],
+          "swig_declaration": "f().",
+          "signature": "nsb_sample10::Callback::Callback()"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Apply",
+          "python_name": "Apply",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [
+            {
+              "name": "source",
+              "swig_type": "r.q(const).nsb_sample10::Data",
+              "cxx_type": "const nsb_sample10::Data&"
+            },
+            {
+              "name": "target",
+              "swig_type": "r.nsb_sample10::Data",
+              "cxx_type": "nsb_sample10::Data&"
+            }
+          ],
+          "const": false,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": true,
+          "swig_declaration": "f(r.q(const).nsb_sample10::Data,r.nsb_sample10::Data).",
+          "signature": "double nsb_sample10::Callback::Apply(const nsb_sample10::Data&, nsb_sample10::Data&)",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "nsb_director_python_class": "nsb_Callback"
+    },
+    {
+      "cxx_type": "nsb_sample10::Container",
+      "owner_module": "nsb_sample10_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Container",
+      "constructors": [
+        {
+          "cxx_name": "Container",
+          "access": "public",
+          "parameters": [],
+          "swig_declaration": "f().",
+          "signature": "nsb_sample10::Container::Container()"
+        }
+      ],
+      "members": [
+        {
+          "cxx_name": "pointer",
+          "python_name": "pointer",
+          "swig_type": "p.nsb_sample10::Data",
+          "cxx_type": "nsb_sample10::Data*",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "null_pointer",
+          "python_name": "null_pointer",
+          "swig_type": "p.nsb_sample10::Data",
+          "cxx_type": "nsb_sample10::Data*",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "const_pointee",
+          "python_name": "const_pointee",
+          "swig_type": "p.q(const).nsb_sample10::Data",
+          "cxx_type": "const nsb_sample10::Data*",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "const_slot",
+          "python_name": "const_slot",
+          "swig_type": "q(const).p.nsb_sample10::Data",
+          "cxx_type": "const nsb_sample10::Data*",
+          "mode": null,
+          "immutable": true,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "both_const",
+          "python_name": "both_const",
+          "swig_type": "q(const).p.q(const).nsb_sample10::Data",
+          "cxx_type": "const const nsb_sample10::Data*",
+          "mode": null,
+          "immutable": true,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "opaque",
+          "python_name": "opaque",
+          "swig_type": "p.q(const).nsb_sample10::Opaque",
+          "cxx_type": "const nsb_sample10::Opaque*",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "unsupported",
+          "python_name": "unsupported",
+          "swig_type": "p.nsb_sample10::Unbridged",
+          "cxx_type": "nsb_sample10::Unbridged*",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null
+        }
+      ],
+      "methods": [
+        {
+          "cxx_name": "ConstView",
+          "python_name": "ConstView",
+          "return_swig_type": "r.q(const).nsb_sample10::Container",
+          "return_cxx_type": "const nsb_sample10::Container&",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().r.",
+          "signature": "const nsb_sample10::Container& nsb_sample10::Container::ConstView() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "ReadCount",
+          "python_name": "ReadCount",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "int nsb_sample10::Container::ReadCount() const",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "pointer_accessor": "_nsb_pointer"
+    },
+    {
+      "cxx_type": "nsb_sample10::Data",
+      "owner_module": "nsb_sample10_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Data",
+      "constructors": [
+        {
+          "cxx_name": "Data",
+          "access": "public",
+          "parameters": [],
+          "swig_declaration": "f().",
+          "signature": "nsb_sample10::Data::Data()"
+        }
+      ],
+      "members": [
+        {
+          "cxx_name": "count",
+          "python_name": "count",
+          "swig_type": "int",
+          "cxx_type": "int",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "wide",
+          "python_name": "wide",
+          "swig_type": "std::int64_t",
+          "cxx_type": "std::int64_t",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "single",
+          "python_name": "single",
+          "swig_type": "float",
+          "cxx_type": "float",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "weight",
+          "python_name": "weight",
+          "swig_type": "nsb_sample10::Data::real_t",
+          "cxx_type": "nsb_sample10::Data::real_t",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "enabled",
+          "python_name": "enabled",
+          "swig_type": "bool",
+          "cxx_type": "bool",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "mode",
+          "python_name": "mode",
+          "swig_type": "nsb_sample10::Data::Mode",
+          "cxx_type": "nsb_sample10::Data::Mode",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "fixed",
+          "python_name": "fixed",
+          "swig_type": "q(const).int",
+          "cxx_type": "const int",
+          "mode": null,
+          "immutable": true,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "immutable",
+          "python_name": "immutable",
+          "swig_type": "int",
+          "cxx_type": "int",
+          "mode": null,
+          "immutable": true,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "restricted",
+          "python_name": "restricted",
+          "swig_type": "int",
+          "cxx_type": "int",
+          "mode": "readonly",
+          "immutable": false,
+          "unsupported_reason": null
+        },
+        {
+          "cxx_name": "original",
+          "python_name": "renamed",
+          "swig_type": "int",
+          "cxx_type": "int",
+          "mode": null,
+          "immutable": false,
+          "unsupported_reason": null
+        }
+      ],
+      "methods": [
+        {
+          "cxx_name": "Total",
+          "python_name": "Total",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "double nsb_sample10::Data::Total() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Increment",
+          "python_name": "Increment",
+          "return_swig_type": "void",
+          "return_cxx_type": "void",
+          "parameters": [],
+          "const": false,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "f().",
+          "signature": "void nsb_sample10::Data::Increment()",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "TakeMutable",
+          "python_name": "TakeMutable",
+          "return_swig_type": "void",
+          "return_cxx_type": "void",
+          "parameters": [
+            {
+              "name": "other",
+              "swig_type": "r.nsb_sample10::Data",
+              "cxx_type": "nsb_sample10::Data&"
+            }
+          ],
+          "const": false,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "f(r.nsb_sample10::Data).",
+          "signature": "void nsb_sample10::Data::TakeMutable(nsb_sample10::Data&)",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "ConstView",
+          "python_name": "ConstView",
+          "return_swig_type": "r.q(const).nsb_sample10::Data",
+          "return_cxx_type": "const nsb_sample10::Data&",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().r.",
+          "signature": "const nsb_sample10::Data& nsb_sample10::Data::ConstView() const",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "pointer_accessor": "_nsb_pointer"
+    },
+    {
+      "cxx_type": "nsb_sample10::Opaque",
+      "owner_module": "nsb_sample10_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Opaque",
+      "constructors": [
+        {
+          "cxx_name": "Opaque",
+          "access": "public",
+          "parameters": [],
+          "swig_declaration": "f().",
+          "signature": "nsb_sample10::Opaque::Opaque()"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Read",
+          "python_name": "Read",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "int nsb_sample10::Opaque::Read() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Write",
+          "python_name": "Write",
+          "return_swig_type": "void",
+          "return_cxx_type": "void",
+          "parameters": [
+            {
+              "name": "count",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "const": false,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "f(int).",
+          "signature": "void nsb_sample10::Opaque::Write(int)",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Self",
+          "python_name": "Self",
+          "return_swig_type": "r.q(const).nsb_sample10::Opaque",
+          "return_cxx_type": "const nsb_sample10::Opaque&",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().r.",
+          "signature": "const nsb_sample10::Opaque& nsb_sample10::Opaque::Self() const",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "pointer_accessor": "_nsb_pointer"
+    }
+  ],
+  "typedefs": [
+    {
+      "cxx_name": "int16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_fast16_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_fast8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_least16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int_least32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_least64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_least8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "intmax_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "intptr_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "nsb_sample10::Data::real_t",
+      "target_swig_type": "double",
+      "target_cxx_type": "double"
+    },
+    {
+      "cxx_name": "uint16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_fast16_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_fast8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_least16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint_least32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_least64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_least8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uintmax_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uintptr_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    }
+  ],
+  "enums": [
+    "nsb_sample10::Data::Mode"
+  ]
+}
