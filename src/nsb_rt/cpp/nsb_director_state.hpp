@@ -6,6 +6,16 @@
 #include <memory>
 #include <vector>
 
+// These concrete classes belong to one downstream state extension. Directors
+// use the exported C functions below, never C++ symbols from another backend.
+// Local binding lets the compiler inline internal checks and slot readers.
+// SWIG and Windows toolchains retain their ordinary declaration syntax.
+#if !defined(SWIG) && !defined(_WIN32) && (defined(__clang__) || (defined(__GNUC__) && __GNUC__ >= 4))
+#define NUMBA_SWIG_BRIDGE_STATE_PRIVATE __attribute__((visibility("hidden")))
+#else
+#define NUMBA_SWIG_BRIDGE_STATE_PRIVATE
+#endif
+
 namespace nsb_director_state {
 
 enum class ObjectOwnership : int {
@@ -18,7 +28,7 @@ enum class ObjectOwnership : int {
 // Native state owns values, never the C++ objects addressed by object slots.
 // Each object assignment increments its generation so the Python proxy cache
 // can discard a stale borrowed proxy after a C++-side replacement.
-class StateBlock {
+class NUMBA_SWIG_BRIDGE_STATE_PRIVATE StateBlock {
 public:
     StateBlock(
         int double_slots,
@@ -85,7 +95,7 @@ private:
     ReleaseMemInfo release_meminfo_ = nullptr;
 };
 
-class StateHandle {
+class NUMBA_SWIG_BRIDGE_STATE_PRIVATE StateHandle {
 public:
     StateHandle(int double_slots, int int_slots, int int64_slots, int bool_slots, int object_slots, int float_slots = 0, int array_slots = 0, unsigned long long release_meminfo = 0);
 
@@ -141,3 +151,5 @@ extern "C" void nsb_director_state_lease_release(void* lease) noexcept;
 unsigned long long nsb_director_state_function_address(const char* name) noexcept;
 
 }  // namespace nsb_director_state
+
+#undef NUMBA_SWIG_BRIDGE_STATE_PRIVATE

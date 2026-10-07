@@ -87,3 +87,11 @@ artifacts. End users install that downstream package and this runtime; they do
 not need SWIG or the bridge generator. The generator is maintained separately
 from this public runtime repository and is only needed when developing a new
 bridge-enabled package.
+
+Downstream state extensions compile the runtime-supplied native header and
+sources. From 0.14.2, the private StateBlock/StateHandle classes use hidden
+visibility on supported non-Windows GCC/Clang toolchains so internal state reads
+can bind locally and inline. The exported C state functions and state ABI 6
+remain unchanged. Windows, unsupported compilers, and SWIG parsing use ordinary
+declarations. No downstream compiler flag is required; rebuild the downstream
+state extension with the updated runtime sources to acquire the optimization.
