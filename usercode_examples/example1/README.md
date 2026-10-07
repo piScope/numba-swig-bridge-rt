@@ -1,7 +1,7 @@
 # numba-swig-bridge use cases
 
 These examples use the C++ library in
-[`sample_libraries/1_multiple_extensions/`](../../../../sample_libraries/1_multiple_extensions/).
+[`sample_libraries/1_multiple_extensions/`](../../sample_libraries/1_multiple_extensions/).
 Its ordinary objects and director bases live in separately compiled SWIG
 extensions and share one bridge registration.
 
@@ -16,13 +16,13 @@ From the repository root, install the runtime and optional sample packages,
 then run all examples:
 
 ```bash
-python -m pip install ./package/numba-swig-bridge-rt
+python -m pip install ./.
 python -m pip install ./sample_libraries/*/
-./package/numba-swig-bridge-rt/usercode_examples/example1/run.sh
+./usercode_examples/example1/run.sh
 ```
 
 To run one example directly:
 
 ```bash
-python package/numba-swig-bridge-rt/usercode_examples/example1/ordinary_methods.py
+python usercode_examples/example1/ordinary_methods.py
 ```

@@ -1,11 +1,11 @@
 # C++ template arrays
 
-[`2_templates`](../../../../sample_libraries/2_templates/) exposes one C++ template
+[`2_templates`](../../sample_libraries/2_templates/) exposes one C++ template
 as `IntArray` (`Array<int>`) and `DoubleArray` (`Array<double>`). Run
 [`template_arrays.py`](template_arrays.py) after installing the sample:
 
 ```bash
-python package/numba-swig-bridge-rt/usercode_examples/example2/template_arrays.py
+python usercode_examples/example2/template_arrays.py
 ```
 
 The example creates the arrays in Python, then reads and writes them in
