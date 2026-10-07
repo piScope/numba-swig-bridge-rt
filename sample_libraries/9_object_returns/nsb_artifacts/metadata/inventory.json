@@ -1,0 +1,381 @@
+{
+  "schema_version": 2,
+  "kind": "swig_bridge_inventory",
+  "sources": [
+    {
+      "module": "nsb_sample9_api",
+      "swig_module": "nsb_sample9_api",
+      "interface": "directors.i"
+    }
+  ],
+  "classes": [
+    {
+      "cxx_type": "nsb_sample9::Child",
+      "owner_module": "nsb_sample9_api",
+      "source_interface": "directors.i",
+      "python_proxy": "Child",
+      "constructors": [
+        {
+          "cxx_name": "Child",
+          "access": "public",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "swig_declaration": "f(int).",
+          "signature": "nsb_sample9::Child::Child(int)"
+        },
+        {
+          "cxx_name": "Child",
+          "access": "public",
+          "parameters": [],
+          "swig_declaration": "f().",
+          "signature": "nsb_sample9::Child::Child()"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Value",
+          "python_name": "Value",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "int nsb_sample9::Child::Value() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "SetValue",
+          "python_name": "SetValue",
+          "return_swig_type": "void",
+          "return_cxx_type": "void",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "const": false,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "f(int).",
+          "signature": "void nsb_sample9::Child::SetValue(int)",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "pointer_accessor": "_nsb_pointer"
+    },
+    {
+      "cxx_type": "nsb_sample9::Parent",
+      "owner_module": "nsb_sample9_api",
+      "source_interface": "directors.i",
+      "python_proxy": "Parent",
+      "constructors": [
+        {
+          "cxx_name": "Parent",
+          "access": "public",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "swig_declaration": "f(int).",
+          "signature": "nsb_sample9::Parent::Parent(int)"
+        },
+        {
+          "cxx_name": "Parent",
+          "access": "public",
+          "parameters": [],
+          "swig_declaration": "f().",
+          "signature": "nsb_sample9::Parent::Parent()"
+        },
+        {
+          "cxx_name": "Parent",
+          "access": "public",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "p.int",
+              "cxx_type": "int*"
+            }
+          ],
+          "swig_declaration": "f(p.int).",
+          "signature": "nsb_sample9::Parent::Parent(int*)"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "GetChild",
+          "python_name": "GetChild",
+          "return_swig_type": "r.nsb_sample9::Child",
+          "return_cxx_type": "nsb_sample9::Child&",
+          "parameters": [],
+          "const": false,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "f().r.",
+          "signature": "nsb_sample9::Child& nsb_sample9::Parent::GetChild()",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "GetChild",
+          "python_name": "GetChild",
+          "return_swig_type": "r.q(const).nsb_sample9::Child",
+          "return_cxx_type": "const nsb_sample9::Child&",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().r.",
+          "signature": "const nsb_sample9::Child& nsb_sample9::Parent::GetChild() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "MaybeChild",
+          "python_name": "MaybeChild",
+          "return_swig_type": "p.nsb_sample9::Child",
+          "return_cxx_type": "nsb_sample9::Child*",
+          "parameters": [
+            {
+              "name": "present",
+              "swig_type": "bool",
+              "cxx_type": "bool"
+            }
+          ],
+          "const": false,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "f(bool).p.",
+          "signature": "nsb_sample9::Child* nsb_sample9::Parent::MaybeChild(bool)",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "pointer_accessor": "_nsb_pointer"
+    },
+    {
+      "cxx_type": "nsb_sample9::Provider",
+      "owner_module": "nsb_sample9_api",
+      "source_interface": "directors.i",
+      "python_proxy": "Provider",
+      "constructors": [
+        {
+          "cxx_name": "Provider",
+          "access": "public",
+          "parameters": [],
+          "swig_declaration": "f().",
+          "signature": "nsb_sample9::Provider::Provider()"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "GetChild",
+          "python_name": "GetChild",
+          "return_swig_type": "r.nsb_sample9::Child",
+          "return_cxx_type": "nsb_sample9::Child&",
+          "parameters": [],
+          "const": false,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": true,
+          "swig_declaration": "f().r.",
+          "signature": "nsb_sample9::Child& nsb_sample9::Provider::GetChild()",
+          "bridge_status": "requires_policy",
+          "nsb_director_override": "1"
+        },
+        {
+          "cxx_name": "MaybeChild",
+          "python_name": "MaybeChild",
+          "return_swig_type": "p.nsb_sample9::Child",
+          "return_cxx_type": "nsb_sample9::Child*",
+          "parameters": [
+            {
+              "name": "present",
+              "swig_type": "bool",
+              "cxx_type": "bool"
+            }
+          ],
+          "const": false,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": true,
+          "swig_declaration": "f(bool).p.",
+          "signature": "nsb_sample9::Child* nsb_sample9::Provider::MaybeChild(bool)",
+          "bridge_status": "requires_policy",
+          "nsb_director_override": "1"
+        }
+      ],
+      "public_bases": [],
+      "pointer_accessor": "_nsb_pointer",
+      "nsb_director_python_class": "nsb_Provider"
+    }
+  ],
+  "typedefs": [
+    {
+      "cxx_name": "int16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_fast16_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_fast8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_least16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int_least32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_least64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_least8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "intmax_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "intptr_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "uint16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_fast16_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_fast8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_least16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint_least32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_least64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_least8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uintmax_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uintptr_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    }
+  ],
+  "enums": []
+}

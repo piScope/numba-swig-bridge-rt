@@ -1,0 +1,86 @@
+{
+  "schema_version": 2,
+  "kind": "numba_swig_director_descriptor",
+  "bridge_id": "nsb_sample9",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample9_api",
+        "swig_module": "nsb_sample9_api",
+        "interface": "directors.i"
+      }
+    ]
+  },
+  "directors": [
+    {
+      "cxx_type": "nsb_sample9::Provider",
+      "owner_module": "nsb_sample9_api",
+      "source_interface": "directors.i",
+      "python_facade": "nsb_Provider",
+      "python_proxy": "Provider",
+      "selection": "explicit",
+      "methods": [
+        {
+          "identity": "nsb_sample9::Provider::GetChild()",
+          "symbol": "nsb_sample9__Provider__GetChild",
+          "cxx_name": "GetChild",
+          "signature": "nsb_sample9::Child& nsb_sample9::Provider::GetChild()",
+          "abstract": true,
+          "const": false,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample9::Child",
+            "passing": "reference",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "nsb_sample9::Child&",
+            "nullable": false
+          },
+          "parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample9::Provider::MaybeChild(bool)",
+          "symbol": "nsb_sample9__Provider__MaybeChild_bool",
+          "cxx_name": "MaybeChild",
+          "signature": "nsb_sample9::Child* nsb_sample9::Provider::MaybeChild(bool)",
+          "abstract": true,
+          "const": false,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample9::Child",
+            "passing": "pointer",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "nsb_sample9::Child*",
+            "nullable": true
+          },
+          "parameters": [
+            {
+              "name": "present",
+              "cxx_type": "bool",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool"
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "skipped_virtuals": [],
+      "constructors": [
+        {
+          "parameters": []
+        }
+      ],
+      "skipped_constructors": []
+    }
+  ],
+  "state_backend": "nsb_sample9"
+}

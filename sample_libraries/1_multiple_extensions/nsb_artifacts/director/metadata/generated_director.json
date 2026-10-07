@@ -1,0 +1,113 @@
+{
+  "schema_version": 2,
+  "kind": "generated_nsb_director_recipe",
+  "directors": [
+    {
+      "cxx_type": "nsb_sample1::Auxiliary",
+      "factory": "create_nsb_director_nsb_sample1_Auxiliary",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample1::Auxiliary::Adjust(double)",
+          "symbol": "nsb_sample1__Auxiliary__Adjust_double",
+          "abstract": true
+        }
+      ]
+    },
+    {
+      "cxx_type": "nsb_sample1::Evaluator",
+      "factory": "create_nsb_director_nsb_sample1_Evaluator",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample1::Evaluator::Bias(double)",
+          "symbol": "nsb_sample1__Evaluator__Bias_double",
+          "abstract": false
+        },
+        {
+          "identity": "nsb_sample1::Evaluator::Evaluate(const nsb_sample1::Buffer&, nsb_sample1::Buffer&, nsb_sample1::Counter*, double, int, std::int64_t, bool)",
+          "symbol": "nsb_sample1__Evaluator__Evaluate_const_nsb_sample1__Buffer___nsb_sample1__Buffer___nsb_sample1__Counter___double__int__std__int64_t__bool",
+          "abstract": true
+        },
+        {
+          "identity": "nsb_sample1::Evaluator::EvaluateValues(const double*, std::int64_t)",
+          "symbol": "nsb_sample1__Evaluator__EvaluateValues_const_double___std__int64_t",
+          "abstract": true
+        },
+        {
+          "identity": "nsb_sample1::Evaluator::Probe(const double*, std::int64_t)",
+          "symbol": "nsb_sample1__Evaluator__Probe_const_double___std__int64_t",
+          "abstract": false
+        },
+        {
+          "identity": "nsb_sample1::Evaluator::Probe(double)",
+          "symbol": "nsb_sample1__Evaluator__Probe_double",
+          "abstract": false
+        }
+      ]
+    },
+    {
+      "cxx_type": "nsb_sample1::Inner",
+      "factory": "create_nsb_director_nsb_sample1_Inner",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample1::Inner::Apply(double)",
+          "symbol": "nsb_sample1__Inner__Apply_double",
+          "abstract": true
+        }
+      ]
+    },
+    {
+      "cxx_type": "nsb_sample1::NonVirtualCallback",
+      "factory": "create_nsb_director_nsb_sample1_NonVirtualCallback",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample1::NonVirtualCallback::Apply(double)",
+          "symbol": "nsb_sample1__NonVirtualCallback__Apply_double",
+          "abstract": true
+        }
+      ]
+    },
+    {
+      "cxx_type": "nsb_sample1::Outer",
+      "factory": "create_nsb_director_nsb_sample1_Outer",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample1::Outer::Combine(double)",
+          "symbol": "nsb_sample1__Outer__Combine_double",
+          "abstract": true
+        }
+      ]
+    },
+    {
+      "cxx_type": "nsb_sample1::ScalarReturns",
+      "factory": "create_nsb_director_nsb_sample1_ScalarReturns",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample1::ScalarReturns::BoolValue(bool)",
+          "symbol": "nsb_sample1__ScalarReturns__BoolValue_bool",
+          "abstract": true
+        },
+        {
+          "identity": "nsb_sample1::ScalarReturns::DoubleValue(double)",
+          "symbol": "nsb_sample1__ScalarReturns__DoubleValue_double",
+          "abstract": true
+        },
+        {
+          "identity": "nsb_sample1::ScalarReturns::Int64Value(std::int64_t)",
+          "symbol": "nsb_sample1__ScalarReturns__Int64Value_std__int64_t",
+          "abstract": true
+        },
+        {
+          "identity": "nsb_sample1::ScalarReturns::IntValue(int)",
+          "symbol": "nsb_sample1__ScalarReturns__IntValue_int",
+          "abstract": true
+        }
+      ]
+    }
+  ]
+}

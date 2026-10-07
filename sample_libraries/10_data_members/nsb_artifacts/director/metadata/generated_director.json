@@ -1,0 +1,18 @@
+{
+  "schema_version": 2,
+  "kind": "generated_nsb_director_recipe",
+  "directors": [
+    {
+      "cxx_type": "nsb_sample10::Callback",
+      "factory": "create_nsb_director_nsb_sample10_Callback",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample10::Callback::Apply(const nsb_sample10::Data&, nsb_sample10::Data&)",
+          "symbol": "nsb_sample10__Callback__Apply_const_nsb_sample10__Data___nsb_sample10__Data",
+          "abstract": true
+        }
+      ]
+    }
+  ]
+}
