@@ -1,0 +1,18 @@
+name: Release to TestPyPI
+
+on:
+  push:
+    tags: ['test_*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    uses: ./.github/workflows/build-release.yml
+    with:
+      publish: ${{ github.event_name == 'push' }}
+      repository-url: https://test.pypi.org/legacy/
+    secrets:
+      upload-token: ${{ secrets.TEST_PYPI_API_NSB_RT_TOKEN }}
