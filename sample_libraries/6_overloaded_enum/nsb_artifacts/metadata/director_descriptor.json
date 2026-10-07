@@ -1,0 +1,322 @@
+{
+  "schema_version": 2,
+  "kind": "numba_swig_director_descriptor",
+  "bridge_id": "nsb_sample6",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample6_directors",
+        "swig_module": "nsb_sample6_directors",
+        "interface": "directors.i"
+      }
+    ]
+  },
+  "directors": [
+    {
+      "cxx_type": "nsb_sample6::Evaluator",
+      "owner_module": "nsb_sample6_directors",
+      "source_interface": "directors.i",
+      "python_facade": "nsb_Evaluator",
+      "python_proxy": "Evaluator",
+      "selection": "automatic",
+      "methods": [
+        {
+          "identity": "nsb_sample6::Evaluator::Bias(double) const",
+          "symbol": "nsb_sample6__Evaluator__Bias_double__const",
+          "cxx_name": "Bias",
+          "signature": "double nsb_sample6::Evaluator::Bias(double) const",
+          "abstract": false,
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "cxx_type": "double",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample6::Evaluator::Evaluate(double) const",
+          "symbol": "nsb_sample6__Evaluator__Evaluate_double__const",
+          "cxx_name": "Evaluate",
+          "signature": "double nsb_sample6::Evaluator::Evaluate(double) const",
+          "abstract": true,
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "cxx_type": "double",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample6::Evaluator::Record(double) const",
+          "symbol": "nsb_sample6__Evaluator__Record_double__const",
+          "cxx_name": "Record",
+          "signature": "void nsb_sample6::Evaluator::Record(double) const",
+          "abstract": false,
+          "const": true,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "cxx_type": "double",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "skipped_virtuals": [],
+      "constructors": [
+        {
+          "parameters": [
+            {
+              "name": "equations",
+              "cxx_type": "int",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "dimension",
+              "cxx_type": "int",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "mode",
+              "cxx_type": "nsb_sample6::Evaluator::Mode",
+              "declared_cxx_type": "nsb_sample6::Evaluator::Mode",
+              "kind": "enum",
+              "enum_cxx_type": "nsb_sample6::Evaluator::Mode",
+              "factory_cxx_type": "int"
+            }
+          ]
+        },
+        {
+          "parameters": [
+            {
+              "name": "scale",
+              "cxx_type": "double",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            },
+            {
+              "name": "mode",
+              "cxx_type": "nsb_sample6::Evaluator::Mode",
+              "declared_cxx_type": "nsb_sample6::Evaluator::Mode",
+              "kind": "enum",
+              "enum_cxx_type": "nsb_sample6::Evaluator::Mode",
+              "factory_cxx_type": "int"
+            }
+          ]
+        }
+      ],
+      "skipped_constructors": []
+    },
+    {
+      "cxx_type": "nsb_sample6::ProtectedConcrete",
+      "owner_module": "nsb_sample6_directors",
+      "source_interface": "directors.i",
+      "python_facade": "nsb_ProtectedConcrete",
+      "python_proxy": "ProtectedConcrete",
+      "selection": "automatic",
+      "methods": [
+        {
+          "identity": "nsb_sample6::ProtectedConcrete::Evaluate(double) const",
+          "symbol": "nsb_sample6__ProtectedConcrete__Evaluate_double__const",
+          "cxx_name": "Evaluate",
+          "signature": "double nsb_sample6::ProtectedConcrete::Evaluate(double) const",
+          "abstract": false,
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "cxx_type": "double",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "skipped_virtuals": [],
+      "constructors": [
+        {
+          "parameters": [
+            {
+              "name": "value",
+              "cxx_type": "int",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        },
+        {
+          "parameters": []
+        }
+      ],
+      "skipped_constructors": []
+    },
+    {
+      "cxx_type": "nsb_sample6::ProtectedEvaluator",
+      "owner_module": "nsb_sample6_directors",
+      "source_interface": "directors.i",
+      "python_facade": "nsb_ProtectedEvaluator",
+      "python_proxy": "ProtectedEvaluator",
+      "selection": "automatic",
+      "methods": [
+        {
+          "identity": "nsb_sample6::ProtectedEvaluator::Evaluate(double) const",
+          "symbol": "nsb_sample6__ProtectedEvaluator__Evaluate_double__const",
+          "cxx_name": "Evaluate",
+          "signature": "double nsb_sample6::ProtectedEvaluator::Evaluate(double) const",
+          "abstract": true,
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "cxx_type": "double",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "skipped_virtuals": [],
+      "constructors": [
+        {
+          "parameters": []
+        },
+        {
+          "parameters": [
+            {
+              "name": "count",
+              "cxx_type": "int",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "scale",
+              "cxx_type": "double",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            },
+            {
+              "name": "mode",
+              "cxx_type": "nsb_sample6::ProtectedEvaluator::Mode",
+              "declared_cxx_type": "nsb_sample6::ProtectedEvaluator::Mode",
+              "kind": "enum",
+              "enum_cxx_type": "nsb_sample6::ProtectedEvaluator::Mode",
+              "factory_cxx_type": "int"
+            },
+            {
+              "name": "enabled",
+              "cxx_type": "bool",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool"
+            },
+            {
+              "name": "offset",
+              "cxx_type": "std::int64_t",
+              "declared_cxx_type": "std::int64_t",
+              "kind": "int64",
+              "c_abi_type": "std::int64_t",
+              "numba_type": "types.int64",
+              "llvm_type": "int64"
+            }
+          ]
+        }
+      ],
+      "skipped_constructors": [
+        {
+          "signature": "nsb_sample6::ProtectedEvaluator::ProtectedEvaluator(const int*)",
+          "reason": "constructor nsb_sample6::ProtectedEvaluator has unsupported const scalar pointer 'const int*'"
+        }
+      ]
+    }
+  ],
+  "state_backend": "nsb_sample6"
+}

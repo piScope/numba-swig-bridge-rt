@@ -1,0 +1,520 @@
+{
+  "schema_version": 2,
+  "kind": "swig_bridge_inventory",
+  "sources": [
+    {
+      "module": "nsb_sample4_directors",
+      "swig_module": "nsb_sample4_directors",
+      "interface": "directors.i"
+    }
+  ],
+  "classes": [
+    {
+      "cxx_type": "nsb_sample4::Evaluator",
+      "owner_module": "nsb_sample4_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Evaluator",
+      "constructors": [
+        {
+          "cxx_name": "Evaluator",
+          "access": "public",
+          "parameters": [
+            {
+              "name": "equations",
+              "swig_type": "q(const).int",
+              "cxx_type": "const int"
+            },
+            {
+              "name": "dimension",
+              "swig_type": "q(const).int",
+              "cxx_type": "const int"
+            }
+          ],
+          "swig_declaration": "f(q(const).int,q(const).int).",
+          "signature": "nsb_sample4::Evaluator::Evaluator(const int, const int)"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Equations",
+          "python_name": "Equations",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "int nsb_sample4::Evaluator::Equations() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Dimension",
+          "python_name": "Dimension",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "int nsb_sample4::Evaluator::Dimension() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Evaluate",
+          "python_name": "Evaluate",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "double",
+              "cxx_type": "double"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": true,
+          "swig_declaration": "q(const).f(double).",
+          "signature": "double nsb_sample4::Evaluator::Evaluate(double) const",
+          "bridge_status": "requires_policy",
+          "nsb_director_override": "1"
+        },
+        {
+          "cxx_name": "Bias",
+          "python_name": "Bias",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "double",
+              "cxx_type": "double"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(double).",
+          "signature": "double nsb_sample4::Evaluator::Bias(double) const",
+          "bridge_status": "requires_policy",
+          "nsb_director_override": "1"
+        }
+      ],
+      "public_bases": [],
+      "nsb_director_python_class": "nsb_Evaluator"
+    },
+    {
+      "cxx_type": "nsb_sample4::FloatEvaluator",
+      "owner_module": "nsb_sample4_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "FloatEvaluator",
+      "constructors": [
+        {
+          "cxx_name": "FloatEvaluator",
+          "access": "public",
+          "parameters": [
+            {
+              "name": "gain",
+              "swig_type": "nsb_sample4::scalar_t",
+              "cxx_type": "nsb_sample4::scalar_t"
+            }
+          ],
+          "swig_declaration": "f(scalar_t).",
+          "signature": "nsb_sample4::FloatEvaluator::FloatEvaluator(nsb_sample4::scalar_t)"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Gain",
+          "python_name": "Gain",
+          "return_swig_type": "nsb_sample4::scalar_t",
+          "return_cxx_type": "nsb_sample4::scalar_t",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "nsb_sample4::scalar_t nsb_sample4::FloatEvaluator::Gain() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Apply",
+          "python_name": "Apply",
+          "return_swig_type": "nsb_sample4::scalar_t",
+          "return_cxx_type": "nsb_sample4::scalar_t",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "nsb_sample4::scalar_t",
+              "cxx_type": "nsb_sample4::scalar_t"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": true,
+          "swig_declaration": "q(const).f(nsb_sample4::scalar_t).",
+          "signature": "nsb_sample4::scalar_t nsb_sample4::FloatEvaluator::Apply(nsb_sample4::scalar_t) const",
+          "bridge_status": "requires_policy",
+          "nsb_director_override": "1"
+        },
+        {
+          "cxx_name": "SumValues",
+          "python_name": "SumValues",
+          "return_swig_type": "nsb_sample4::scalar_t",
+          "return_cxx_type": "nsb_sample4::scalar_t",
+          "parameters": [
+            {
+              "name": "values",
+              "swig_type": "p.q(const).float",
+              "cxx_type": "const float*"
+            },
+            {
+              "name": "count",
+              "swig_type": "std::int64_t",
+              "cxx_type": "std::int64_t"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": true,
+          "swig_declaration": "q(const).f(p.q(const).float,std::int64_t).",
+          "signature": "nsb_sample4::scalar_t nsb_sample4::FloatEvaluator::SumValues(const float*, std::int64_t) const",
+          "bridge_status": "requires_policy",
+          "numba_swig_bridge_lowering": "borrowed-contiguous-array-1d-f32-input|pointer=0;count=1",
+          "nsb_director_override": "1"
+        },
+        {
+          "cxx_name": "Scale",
+          "python_name": "Scale",
+          "return_swig_type": "nsb_sample4::scalar_t",
+          "return_cxx_type": "nsb_sample4::scalar_t",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "nsb_sample4::scalar_t",
+              "cxx_type": "nsb_sample4::scalar_t"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(nsb_sample4::scalar_t).",
+          "signature": "nsb_sample4::scalar_t nsb_sample4::FloatEvaluator::Scale(nsb_sample4::scalar_t) const",
+          "bridge_status": "requires_policy",
+          "nsb_director_override": "1"
+        }
+      ],
+      "public_bases": [],
+      "nsb_director_python_class": "nsb_FloatEvaluator"
+    },
+    {
+      "cxx_type": "nsb_sample4::FloatOps",
+      "owner_module": "nsb_sample4_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "FloatOps",
+      "constructors": [
+        {
+          "cxx_name": "FloatOps",
+          "access": "public",
+          "parameters": [],
+          "swig_declaration": "f().",
+          "signature": "nsb_sample4::FloatOps::FloatOps()"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "RoundTrip",
+          "python_name": "RoundTrip",
+          "return_swig_type": "nsb_sample4::scalar_t",
+          "return_cxx_type": "nsb_sample4::scalar_t",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "nsb_sample4::scalar_t",
+              "cxx_type": "nsb_sample4::scalar_t"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(nsb_sample4::scalar_t).",
+          "signature": "nsb_sample4::scalar_t nsb_sample4::FloatOps::RoundTrip(nsb_sample4::scalar_t) const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "DoubleRoundTrip",
+          "python_name": "DoubleRoundTrip",
+          "return_swig_type": "nsb_sample4::real64_t",
+          "return_cxx_type": "nsb_sample4::real64_t",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "nsb_sample4::real64_t",
+              "cxx_type": "nsb_sample4::real64_t"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(nsb_sample4::real64_t).",
+          "signature": "nsb_sample4::real64_t nsb_sample4::FloatOps::DoubleRoundTrip(nsb_sample4::real64_t) const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Precision",
+          "python_name": "Precision",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "float",
+              "cxx_type": "float"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(float).",
+          "signature": "int nsb_sample4::FloatOps::Precision(float) const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Precision",
+          "python_name": "Precision",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "double",
+              "cxx_type": "double"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(double).",
+          "signature": "int nsb_sample4::FloatOps::Precision(double) const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "SumValues",
+          "python_name": "SumValues",
+          "return_swig_type": "nsb_sample4::scalar_t",
+          "return_cxx_type": "nsb_sample4::scalar_t",
+          "parameters": [
+            {
+              "name": "values",
+              "swig_type": "p.q(const).nsb_sample4::scalar_t",
+              "cxx_type": "const nsb_sample4::scalar_t*"
+            },
+            {
+              "name": "count",
+              "swig_type": "std::int64_t",
+              "cxx_type": "std::int64_t"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(p.q(const).nsb_sample4::scalar_t,std::int64_t).",
+          "signature": "nsb_sample4::scalar_t nsb_sample4::FloatOps::SumValues(const nsb_sample4::scalar_t*, std::int64_t) const",
+          "bridge_status": "requires_policy",
+          "numba_swig_bridge_lowering": "borrowed-contiguous-array-1d-f32-input|pointer=0;count=1"
+        }
+      ],
+      "public_bases": [],
+      "pointer_accessor": "_nsb_pointer"
+    }
+  ],
+  "typedefs": [
+    {
+      "cxx_name": "int16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_fast16_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_fast8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_least16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int_least32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_least64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_least8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "intmax_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "intptr_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "nsb_sample4::real64_t",
+      "target_swig_type": "double",
+      "target_cxx_type": "double"
+    },
+    {
+      "cxx_name": "nsb_sample4::real_t",
+      "target_swig_type": "float",
+      "target_cxx_type": "float"
+    },
+    {
+      "cxx_name": "nsb_sample4::scalar_t",
+      "target_swig_type": "nsb_sample4::real_t",
+      "target_cxx_type": "nsb_sample4::real_t"
+    },
+    {
+      "cxx_name": "uint16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_fast16_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_fast8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_least16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint_least32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_least64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_least8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uintmax_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uintptr_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    }
+  ],
+  "enums": []
+}

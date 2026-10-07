@@ -1,0 +1,10 @@
+bridge_id = "nsb_sample2"
+source_root = "."
+output_dir = "nsb_artifacts"
+registration_module = "nsb_sample2.registration"
+director_helper_module = "nsb_sample2_director_bindings"
+
+[[interfaces]]
+interface = "arrays.i"
+python_module = "nsb_sample2_arrays"
+include_dirs = ["."]
