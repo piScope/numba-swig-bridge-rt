@@ -1,7 +1,11 @@
 """Resolve director object-field policy before compiling native callbacks."""
 
 from numba import types
+from types import SimpleNamespace
+
 from numba.core import compiler, ir, typed_passes
+from numba.core.rewrites.static_raise import RewriteConstRaises
+from numba.core.untyped_passes import RewriteDynamicRaises
 from numba.core.inline_closurecall import inline_closure_call
 from numba.core.errors import TypingError
 from numba.core.registry import cpu_target
@@ -73,6 +77,21 @@ def _inline_requested_helpers(function_ir):
     raise TypingError("state inference exceeded the inlined helper limit (possible recursion)")
 
 
+def _rewrite_exceptions(function_ir):
+    """Prepare raises for typing, including those inserted by helper inlining.
+
+    Follow Numba's static-before-dynamic ordering. A bare assertion raises an
+    exception class directly, so the static rewrite must precede the dynamic
+    pass, which expects an exception constructor call.
+    """
+    state = SimpleNamespace(func_ir=function_ir)
+    for label, block in list(function_ir.blocks.items()):
+        rewrite = RewriteConstRaises(state)
+        if rewrite.match(function_ir, block, None, None):
+            function_ir.blocks[label] = rewrite.apply()
+    RewriteDynamicRaises().run_pass(state)
+
+
 def infer_object_fields(binding, overrides, scalar_fields, object_fields, array_fields):
     """Inspect uncoerced typed SetAttr RHS values and iterate const constraints.
 
@@ -120,9 +139,10 @@ def infer_object_fields(binding, overrides, scalar_fields, object_fields, array_
                         "int": types.intc, "int64": types.int64,
                         "bool": types.boolean, "enum": types.intc}[kind]
                 arguments.append(argument)
-            function_ir = compiler.run_frontend(function)
-            _inline_requested_helpers(function_ir)
             try:
+                function_ir = compiler.run_frontend(function)
+                _inline_requested_helpers(function_ir)
+                _rewrite_exceptions(function_ir)
                 result = typed_passes.type_inference_stage(
                     context, cpu_target.target_context, function_ir,
                     (state, *arguments), None,
