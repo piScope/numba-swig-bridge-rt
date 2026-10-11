@@ -192,6 +192,15 @@ def unbox_owned_bridge_object(typ, obj, c):
     return NativeValue(c.context.get_constant_null(typ), is_error=cgutils.true_bit)
 
 
+@unbox(BorrowedReturnBridgeObjectType)
+def unbox_retained_borrow_bridge_object(typ, obj, c):
+    # This specialization carries a native owner handle as well as a pointer.
+    # A Python proxy uses the ordinary pointer specialization instead; it cannot
+    # supply this value. Compiled callers pass the native structure directly.
+    c.pyapi.err_set_string("PyExc_TypeError", "retained-borrow bridge arguments require a compiled caller")
+    return NativeValue(c.context.get_constant_null(typ), is_error=cgutils.true_bit)
+
+
 @dataclass(frozen=True)
 class BridgeMethod:
     bridge_id: str
