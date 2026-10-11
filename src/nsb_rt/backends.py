@@ -22,6 +22,7 @@ from ._version import STATE_ABI_VERSION
 STATE_ACCESSORS = (
     "float_at", "double_at", "int_at", "int64_at", "bool_at",
     "object_address_at", "object_meminfo_at", "set_object_native",
+    "set_object_borrowed",
     "array_data_at", "array_shape_at", "array_stride_at", "set_array_native",
 )
 LEASE_OPERATIONS = ("lease_address", "lease_is_alive", "lease_close", "lease_release")

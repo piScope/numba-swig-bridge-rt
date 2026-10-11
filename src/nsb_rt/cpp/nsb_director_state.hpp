@@ -1,6 +1,6 @@
 #pragma once
 
-#define NUMBA_SWIG_BRIDGE_STATE_ABI_VERSION 6
+#define NUMBA_SWIG_BRIDGE_STATE_ABI_VERSION 7
 
 #include <cstdint>
 #include <memory>
@@ -23,6 +23,7 @@ enum class ObjectOwnership : int {
     PythonAssigned = 1,
     CppOwned = 2,
     NativeOwned = 3,
+    Borrowed = 4,
 };
 
 // Native state owns values, never the C++ objects addressed by object slots.
@@ -56,6 +57,7 @@ public:
     void SetObjectFromPython(int slot, std::uintptr_t address);
     void ReplaceObjectFromCpp(int slot, std::uintptr_t address);
     void SetObjectFromNative(int slot, std::uintptr_t address, void* meminfo);
+    void SetObjectBorrowed(int slot, std::uintptr_t address);
     [[nodiscard]] bool ClearObjectIf(int slot, std::uintptr_t expected_address) noexcept;
     [[nodiscard]] std::uintptr_t ObjectAddress(int slot) const;
     [[nodiscard]] std::uintptr_t ObjectMemInfo(int slot) const;
@@ -116,6 +118,7 @@ public:
     void SetObjectFromPython(int slot, unsigned long long address);
     void ReplaceObjectFromCpp(int slot, unsigned long long address);
     void SetObjectFromNative(int slot, unsigned long long address, unsigned long long meminfo);
+    void SetObjectBorrowed(int slot, unsigned long long address);
     [[nodiscard]] unsigned long long ObjectAddress(int slot) const;
     [[nodiscard]] unsigned long long ObjectGeneration(int slot) const;
     [[nodiscard]] int ObjectOwnershipCode(int slot) const;
@@ -140,6 +143,7 @@ extern "C" int nsb_director_state_bool_at(void* opaque_state, int slot) noexcept
 extern "C" std::uintptr_t nsb_director_state_object_address_at(void* opaque_state, int slot) noexcept;
 extern "C" std::uintptr_t nsb_director_state_object_meminfo_at(void* opaque_state, int slot) noexcept;
 extern "C" int nsb_director_state_set_object_native(void* opaque_state, int slot, std::uintptr_t address, void* meminfo) noexcept;
+extern "C" int nsb_director_state_set_object_borrowed(void* opaque_state, int slot, std::uintptr_t address) noexcept;
 extern "C" std::uintptr_t nsb_director_state_array_data_at(void* opaque_state, int slot) noexcept;
 extern "C" std::int64_t nsb_director_state_array_shape_at(void* opaque_state, int slot, int dimension) noexcept;
 extern "C" std::int64_t nsb_director_state_array_stride_at(void* opaque_state, int slot, int dimension) noexcept;

@@ -23,6 +23,7 @@ from llvmlite import binding, ir
 from numba import types
 from numba.core import cgutils
 from numba.core.errors import TypingError
+from numba.core.typeconv import Conversion
 from numba.core.typing import signature
 from numba.core.typing.templates import infer_global
 from numba.extending import (
@@ -55,9 +56,22 @@ class BridgeObjectType(types.Type):
     def key(self) -> tuple[str, str]:
         return self.bridge_id, self.cxx_type
 
+    def can_convert_to(self, typingctx, other):
+        if (type(self) is BridgeObjectType and isinstance(other, ConstBridgeObjectType)
+                and self.key == other.key):
+            return Conversion.safe
+
+    def unify(self, typingctx, other):
+        if (type(self) in (BridgeObjectType, ConstBridgeObjectType)
+                and type(other) in (BridgeObjectType, ConstBridgeObjectType)
+                and self.key == other.key):
+            return bridge_object_type(self.bridge_id, self.cxx_type,
+                const=isinstance(self, ConstBridgeObjectType) or isinstance(other, ConstBridgeObjectType),
+                force_const=True)
+
 
 class ConstBridgeObjectType(BridgeObjectType):
-    """A callback-scoped const view of a class opting into data members."""
+    """A const borrowed view preserving C++ callback and state constness."""
 
     def __init__(self, bridge_id, cxx_type):
         super().__init__(bridge_id, cxx_type)
@@ -67,6 +81,13 @@ class ConstBridgeObjectType(BridgeObjectType):
 @box(ConstBridgeObjectType)
 def _box_const(typ, value, c):
     raise TypingError("const bridge views cannot escape as writable Python proxies")
+
+
+@lower_cast(BridgeObjectType, ConstBridgeObjectType)
+def _lower_borrowed_to_const(context, builder, fromty, toty, value):
+    if fromty.key != toty.key or isinstance(fromty, (OwnedBridgeObjectType, BorrowedReturnBridgeObjectType)):
+        raise TypingError("const conversion requires matching borrowed object types")
+    return value
 
 
 class OwnedBridgeObjectType(BridgeObjectType):
@@ -161,6 +182,14 @@ def _unbox_borrowed_pointer(typ, obj, c):
 @unbox(BridgeObjectType)
 def unbox_bridge_object(typ, obj, c):
     return _unbox_borrowed_pointer(typ, obj, c)
+
+
+@unbox(OwnedBridgeObjectType)
+def unbox_owned_bridge_object(typ, obj, c):
+    # Dispatchers create Python wrappers even for helpers called only from
+    # compiled code. A Python proxy cannot supply an NRT-owned argument.
+    c.pyapi.err_set_string("PyExc_TypeError", "frame-owned bridge arguments require a compiled caller")
+    return NativeValue(c.context.get_constant_null(typ), is_error=cgutils.true_bit)
 
 
 @dataclass(frozen=True)

@@ -143,7 +143,7 @@ def state_object_meminfo_at(backend: StateBackend):
 
 
 
-def state_object_at(backend: StateBackend, object_type):
+def state_object_at(backend: StateBackend, object_type, *, borrowed=False):
     """Return a borrowed object view which retains a native state token, if any."""
 
     @intrinsic
@@ -152,9 +152,8 @@ def state_object_at(backend: StateBackend, object_type):
 
         if state != types.voidptr or not isinstance(slot, types.Integer):
             return None
-        result_type = ordinary.BorrowedReturnBridgeObjectType(
-            object_type.bridge_id, object_type.cxx_type
-        )
+        result_type = object_type if borrowed else ordinary.BorrowedReturnBridgeObjectType(
+            object_type.bridge_id, object_type.cxx_type)
         signature = result_type(state, slot)
 
         def codegen(context, builder, sig, args):
@@ -170,6 +169,10 @@ def state_object_at(backend: StateBackend, object_type):
             )
             native_slot = context.cast(builder, args[1], sig.args[1], types.intc)
             address = builder.call(address_function, [args[0], native_slot])
+            with builder.if_then(builder.icmp_unsigned("==", address, ir.Constant(address.type, 0))):
+                context.call_conv.return_user_exc(builder, ReferenceError, ("state object field is empty or closed",))
+            if borrowed:
+                return builder.inttoptr(address, context.get_value_type(result_type))
             meminfo_address = builder.call(meminfo_function, [args[0], native_slot])
             meminfo = builder.inttoptr(meminfo_address, context.get_value_type(types.MemInfoPointer(types.voidptr)))
             context.nrt.incref(builder, types.MemInfoPointer(types.voidptr), meminfo)
@@ -386,6 +389,8 @@ class DirectorStateProperty:
             instance._object_cache.pop(self.slot, None)
             instance._object_keepalives.pop(self.slot, None)
             raise ReferenceError(f"native state object field {self.name!r} has no live C++ owner")
+        if self.name in getattr(instance, "_const_borrowed_fields", ()):
+            raise TypeError("const borrowed state cannot escape as a writable Python proxy")
         cached = instance._object_cache.get(self.slot)
         if cached is not None and cached[0] == generation:
             return cached[1]
@@ -404,6 +409,13 @@ class DirectorStateProperty:
             _python_scalar_set(state, self.kind, self.slot, value)
             return
         assert self.bridge is not None
+        if self.name in getattr(instance, "_borrowed_fields", ()):
+            if value is not None:
+                raise TypeError(f"borrowed state field {self.name!r} rejects Python object assignment")
+            state.SetObjectBorrowed(self.slot, 0)
+            instance._object_cache.pop(self.slot, None)
+            instance._object_keepalives.pop(self.slot, None)
+            return
         address = self.bridge.proxy_to_address(value)
         state.SetObjectFromPython(self.slot, address)
         generation = int(state.ObjectGeneration(self.slot))

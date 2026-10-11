@@ -130,6 +130,15 @@ void StateBlock::SetObjectFromNative(int slot, std::uintptr_t address, void* mem
     ReleaseObject(previous);
 }
 
+void StateBlock::SetObjectBorrowed(int slot, std::uintptr_t address) {
+    RequireAlive();
+    ObjectSlot& object = objects_[ObjectIndex(slot)];
+    ReleaseObject(object);
+    object.address = address;
+    object.ownership = address == 0 ? ObjectOwnership::Empty : ObjectOwnership::Borrowed;
+    ++object.generation;
+}
+
 bool StateBlock::ClearObjectIf(int slot, std::uintptr_t expected_address) noexcept {
     if (!alive_ || slot < 0 || static_cast<std::size_t>(slot) >= objects_.size()) {
         return false;
@@ -204,6 +213,10 @@ void StateHandle::ReplaceObjectFromCpp(int slot, unsigned long long address) {
     if (state_ == nullptr) throw std::runtime_error("native state handle has no state block");
     state_->ReplaceObjectFromCpp(slot, static_cast<std::uintptr_t>(address));
 }
+void StateHandle::SetObjectBorrowed(int slot, unsigned long long address) {
+    state_->SetObjectBorrowed(slot, static_cast<std::uintptr_t>(address));
+}
+
 void StateHandle::SetObjectFromNative(int slot, unsigned long long address, unsigned long long meminfo) {
     if (state_ == nullptr) throw std::runtime_error("native state handle has no state block");
     state_->SetObjectFromNative(slot, static_cast<std::uintptr_t>(address), reinterpret_cast<void*>(meminfo));
@@ -277,6 +290,13 @@ extern "C" std::uintptr_t nsb_director_state_array_data_at(void* state, int slot
     try { return state == nullptr ? 0 : static_cast<StateBlock*>(state)->ArrayData(slot); }
     catch (...) { return 0; }
 }
+extern "C" int nsb_director_state_set_object_borrowed(void* state, int slot, std::uintptr_t address) noexcept {
+    try {
+        if (state == nullptr) return 1;
+        static_cast<StateBlock*>(state)->SetObjectBorrowed(slot, address);
+        return 0;
+    } catch (...) { return 1; }
+}
 extern "C" std::int64_t nsb_director_state_array_shape_at(void* state, int slot, int dimension) noexcept {
     try { return state == nullptr ? 0 : static_cast<StateBlock*>(state)->ArrayShape(slot, dimension); }
     catch (...) { return 0; }
@@ -318,6 +338,7 @@ unsigned long long nsb_director_state_function_address(const char* name) noexcep
     if (std::strcmp(name, "nsb_director_state_object_address_at") == 0) return reinterpret_cast<unsigned long long>(&nsb_director_state_object_address_at);
     if (std::strcmp(name, "nsb_director_state_object_meminfo_at") == 0) return reinterpret_cast<unsigned long long>(&nsb_director_state_object_meminfo_at);
     if (std::strcmp(name, "nsb_director_state_set_object_native") == 0) return reinterpret_cast<unsigned long long>(&nsb_director_state_set_object_native);
+    if (std::strcmp(name, "nsb_director_state_set_object_borrowed") == 0) return reinterpret_cast<unsigned long long>(&nsb_director_state_set_object_borrowed);
     if (std::strcmp(name, "nsb_director_state_array_data_at") == 0) return reinterpret_cast<unsigned long long>(&nsb_director_state_array_data_at);
     if (std::strcmp(name, "nsb_director_state_array_shape_at") == 0) return reinterpret_cast<unsigned long long>(&nsb_director_state_array_shape_at);
     if (std::strcmp(name, "nsb_director_state_array_stride_at") == 0) return reinterpret_cast<unsigned long long>(&nsb_director_state_array_stride_at);

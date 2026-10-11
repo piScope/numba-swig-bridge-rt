@@ -29,6 +29,7 @@ from numba.extending import intrinsic, make_attribute_wrapper, overload, overloa
 
 from . import director_state as state_runtime
 from . import ordinary as ordinary_runtime
+from .state_inference import InferenceState, infer_object_fields
 from .modules import resolve_modules
 from nsb_rt.backends import StateBackend, state_backend
 
@@ -297,18 +298,21 @@ class _StateViewType(types.Type):
         object_slots: Mapping[str, tuple[int, ordinary_runtime.BridgeObjectType]],
         array_slots: Mapping[str, tuple[int, types.Array]],
         cached_slots: Mapping[str, types.Type] | None = None,
+        borrowed_fields=(),
     ) -> None:
         self.backend = backend
         self.scalar_slots = dict(scalar_slots)
         self.object_slots = dict(object_slots)
         self.array_slots = dict(array_slots)
         self.cached_slots = dict(cached_slots or {})
+        self.borrowed_fields = frozenset(borrowed_fields)
         self._key = (
             self.backend.identifier,
             tuple(self.scalar_slots.items()),
             tuple((name, slot, object_type.key) for name, (slot, object_type) in self.object_slots.items()),
             tuple((name, slot, array_type) for name, (slot, array_type) in self.array_slots.items()),
             tuple(self.cached_slots.items()),
+            tuple(sorted(self.borrowed_fields)),
         )
         super().__init__(name=f"numba_swig_bridge.state{self._key!r}")
 
@@ -343,6 +347,12 @@ def is_slot_occupied(state, field):
 
 @overload(is_slot_occupied)
 def _overload_is_slot_occupied(state, field):
+    if isinstance(state, InferenceState) and isinstance(field, types.StringLiteral):
+        if field.literal_value not in state.fields:
+            raise TypingError(f"undeclared state field {field.literal_value!r}")
+        def analysis_occupied(state, field):
+            return True
+        return analysis_occupied
     if not isinstance(state, _StateViewType) or not isinstance(field, types.StringLiteral):
         return None
     name = field.literal_value
@@ -472,7 +482,9 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
 
                 return implementation
             slot, object_type = attribute.object_slots[field]
-            reader = state_runtime.state_object_at(attribute.backend, object_type)
+            reader = state_runtime.state_object_at(
+                attribute.backend, object_type, borrowed=field in attribute.borrowed_fields,
+            )
 
             def implementation(attribute):
                 return reader(attribute.opaque, slot)
@@ -486,12 +498,22 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
         overload_attribute(_StateViewType, name)(object_lower(name))
 
     def object_setter(field):
-        slot, object_type = state_type.object_slots[field]
-
         @lower_setattr(_StateViewType, field)
         def lower(context, builder, sig, args):
-            value = cgutils.create_struct_proxy(sig.args[1])(context, builder, value=args[1])
+            slot, object_type = sig.args[0].object_slots[field]
+            backend = sig.args[0].backend
             state = cgutils.create_struct_proxy(sig.args[0])(context, builder, value=args[0])
+            if field in sig.args[0].borrowed_fields:
+                function = cgutils.get_or_insert_function(
+                    builder.module, ir.FunctionType(ir.IntType(32), [
+                        state.opaque.type, ir.IntType(32), ir.IntType(types.uintp.bitwidth),
+                    ]), name=backend.symbol_name("set_object_borrowed"),
+                )
+                status = builder.call(function, [state.opaque, ir.Constant(ir.IntType(32), slot),
+                    builder.ptrtoint(args[1], ir.IntType(types.uintp.bitwidth))])
+                ordinary_runtime._raise_on_failure(context, builder, status)
+                return context.get_dummy_value()
+            value = cgutils.create_struct_proxy(sig.args[1])(context, builder, value=args[1])
             # Constructed bridge objects transfer their result ownership to
             # StateBlock directly; the setter must not add another reference.
             function = cgutils.get_or_insert_function(
@@ -499,7 +521,7 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
                 ir.FunctionType(ir.IntType(32), [
                     state.opaque.type, ir.IntType(32), ir.IntType(types.uintp.bitwidth), ir.IntType(8).as_pointer(),
                 ]),
-                name=state_type.backend.symbol_name("set_object_native"),
+                name=backend.symbol_name("set_object_native"),
             )
             status = builder.call(function, [
                 state.opaque, ir.Constant(ir.IntType(32), slot),
@@ -658,7 +680,7 @@ def _compile_callback(
         if parameter["kind"] == "object":
             constructor_name = f"_object_constructor_{index}"
             object_constructors[constructor_name] = ordinary_runtime.object_from_address(
-                ordinary_runtime.bridge_object_type(binding.bridge_id, parameter["cxx_type"], const=parameter.get("const", False))
+                ordinary_runtime.bridge_object_type(binding.bridge_id, parameter["cxx_type"], const=parameter.get("const", False), force_const=True)
             )
             converted.append(f"{constructor_name}({name})")
         else:
@@ -945,6 +967,8 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
         if subclass_style and user_class.__bases__ != (base,):
             raise TypeError("a subclass director must directly inherit only its binding's SWIG base")
         overrides = _collect_overrides(user_class, binding)
+        policies = infer_object_fields(binding, overrides, scalar_fields, object_fields, array_fields) if object_fields else {}
+        borrowed_fields = {name for name, (mode, _) in policies.items() if mode == "borrowed"}
         fallbacks = [method for method in binding.methods if not method.abstract and method.identity not in overrides]
         if fallbacks:
             names = ", ".join(method.identity for method in fallbacks)
@@ -958,9 +982,14 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
             binding.python_facade, backend=binding.state_backend,
             scalar_fields=scalar_fields, object_fields=object_fields, array_fields=array_fields
         )
+        state_facade._borrowed_fields = frozenset(borrowed_fields)
+        state_facade._const_borrowed_fields = frozenset(
+            name for name, (mode, const) in policies.items() if mode == "borrowed" and const
+        )
         scalar_slots = dict(state_facade._scalar_slots)
         object_slots = {
-            name: (state_facade._object_slots[name], ordinary_runtime.bridge_object_type(binding.bridge_id, bridge.cxx_type))
+            name: (state_facade._object_slots[name], ordinary_runtime.bridge_object_type(
+                binding.bridge_id, bridge.cxx_type, const=policies.get(name, (None, False))[1], force_const=True))
             for name, bridge in object_fields.items()
         }
         array_slots = {
@@ -997,7 +1026,8 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
                     name: value for name, value in array_slots.items() if name in authorized
                 }
                 live_state_type = _StateViewType(
-                    binding.state_backend, restricted_scalars, restricted_objects, restricted_arrays
+                    binding.state_backend, restricted_scalars, restricted_objects, restricted_arrays,
+                    borrowed_fields=borrowed_fields,
                 )
                 cached_slots = {}
                 for name in cached_names:
@@ -1005,13 +1035,13 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
                         cached_slots[name] = state_runtime.scalar_numba_type(restricted_scalars[name][0])
                     elif name in restricted_objects:
                         object_type = restricted_objects[name][1]
-                        cached_slots[name] = ordinary_runtime.BorrowedReturnBridgeObjectType(
-                            object_type.bridge_id, object_type.cxx_type
-                        )
+                        cached_slots[name] = (object_type if name in borrowed_fields else
+                            ordinary_runtime.BorrowedReturnBridgeObjectType(object_type.bridge_id, object_type.cxx_type))
                     else:
                         cached_slots[name] = restricted_arrays[name][1]
                 state_type = _StateViewType(
-                    binding.state_backend, restricted_scalars, restricted_objects, restricted_arrays, cached_slots
+                    binding.state_backend, restricted_scalars, restricted_objects, restricted_arrays, cached_slots,
+                    borrowed_fields=borrowed_fields,
                 )
                 _install_state_attributes(live_state_type)
                 if state_type != live_state_type:

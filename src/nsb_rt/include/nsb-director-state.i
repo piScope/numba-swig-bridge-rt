@@ -30,6 +30,7 @@ public:
     bool Bool(int slot) const;
     void SetBool(int slot, bool value);
     void SetObjectFromPython(int slot, unsigned long long address);
+    void SetObjectBorrowed(int slot, unsigned long long address);
     void ReplaceObjectFromCpp(int slot, unsigned long long address);
     void SetObjectFromNative(int slot, unsigned long long address, unsigned long long meminfo);
     unsigned long long ObjectAddress(int slot) const;
