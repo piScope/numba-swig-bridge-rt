@@ -1,0 +1,201 @@
+{
+  "schema_version": 2,
+  "kind": "swig_bridge_inventory",
+  "sources": [
+    {
+      "module": "nsb_sample7_directors",
+      "swig_module": "nsb_sample7_directors",
+      "interface": "directors.i"
+    }
+  ],
+  "classes": [
+    {
+      "cxx_type": "nsb_sample7::Accumulator",
+      "owner_module": "nsb_sample7_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Accumulator",
+      "abstract": true,
+      "constructors": [
+        {
+          "cxx_name": "Accumulator",
+          "access": "public",
+          "parameters": [],
+          "swig_declaration": "f().",
+          "signature": "nsb_sample7::Accumulator::Accumulator()"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Accumulate",
+          "python_name": "Accumulate",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "double",
+              "cxx_type": "double"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": true,
+          "swig_declaration": "q(const).f(double).",
+          "signature": "double nsb_sample7::Accumulator::Accumulate(double) const",
+          "bridge_status": "requires_policy",
+          "nsb_director_override": "1"
+        }
+      ],
+      "public_bases": [],
+      "public_base_declarations": [],
+      "virtual_base_declarations": [],
+      "nsb_director_python_class": "nsb_Accumulator"
+    }
+  ],
+  "typedefs": [
+    {
+      "cxx_name": "int16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_fast16_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_fast8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_least16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int_least32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_least64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_least8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "intmax_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "intptr_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "uint16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_fast16_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_fast8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_least16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint_least32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_least64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_least8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uintmax_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uintptr_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    }
+  ],
+  "enums": []
+}

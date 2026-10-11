@@ -26,7 +26,14 @@ from numba.core import cgutils
 from llvmlite import ir
 from numba.core.errors import TypingError
 from numba.core.datamodel import models
-from numba.extending import intrinsic, make_attribute_wrapper, overload, overload_attribute, lower_setattr, register_model
+from numba.extending import (
+    intrinsic,
+    make_attribute_wrapper,
+    overload,
+    overload_attribute,
+    lower_setattr,
+    register_model,
+)
 
 from . import director_state as state_runtime
 from . import ordinary as ordinary_runtime
@@ -34,9 +41,12 @@ from .state_inference import InferenceState, infer_object_fields
 from .modules import resolve_modules
 from nsb_rt.backends import StateBackend, state_backend
 
-
-_PY_INCREF_ADDRESS = int(ctypes.cast(ctypes.pythonapi.Py_IncRef, ctypes.c_void_p).value or 0)
-_PY_DECREF_ADDRESS = int(ctypes.cast(ctypes.pythonapi.Py_DecRef, ctypes.c_void_p).value or 0)
+_PY_INCREF_ADDRESS = int(
+    ctypes.cast(ctypes.pythonapi.Py_IncRef, ctypes.c_void_p).value or 0
+)
+_PY_DECREF_ADDRESS = int(
+    ctypes.cast(ctypes.pythonapi.Py_DecRef, ctypes.c_void_p).value or 0
+)
 
 
 class NumbaSwigBridgeFallbackWarning(UserWarning):
@@ -72,7 +82,9 @@ class DirectorBinding:
     state_backend: StateBackend
     constructors: tuple[tuple[dict[str, Any], ...], ...] = ()
 
-    def method_for_selector(self, selector: tuple[str, tuple[str, ...]]) -> DirectorMethod:
+    def method_for_selector(
+        self, selector: tuple[str, tuple[str, ...]]
+    ) -> DirectorMethod:
         matches = [method for method in self.methods if method.selector == selector]
         if len(matches) != 1:
             raise KeyError(selector)
@@ -110,9 +122,14 @@ def _nsb_factory_name(cxx_type: str) -> str:
 
 def _load_descriptor(path: str | Path) -> dict[str, Any]:
     descriptor = json.loads(Path(path).read_text())
-    if descriptor.get("kind") != "numba_swig_director_descriptor" or descriptor.get("schema_version") != 2:
+    if (
+        descriptor.get("kind") != "numba_swig_director_descriptor"
+        or descriptor.get("schema_version") != 2
+    ):
         raise ValueError("invalid Numba director descriptor")
-    if not isinstance(descriptor.get("bridge_id"), str) or not isinstance(descriptor.get("directors"), list):
+    if not isinstance(descriptor.get("bridge_id"), str) or not isinstance(
+        descriptor.get("directors"), list
+    ):
         raise ValueError("director descriptor is incomplete")
     return descriptor
 
@@ -132,8 +149,11 @@ def _ordinary_classes(path: str | Path) -> dict[str, dict[str, Any]]:
 
 
 def install_director_bindings(
-    modules: Mapping[str, Any], director_descriptor_path: str | Path, ordinary_descriptor_path: str | Path,
-    *, helper_module: Any,
+    modules: Mapping[str, Any],
+    director_descriptor_path: str | Path,
+    ordinary_descriptor_path: str | Path,
+    *,
+    helper_module: Any,
 ) -> dict[str, DirectorBinding]:
     """Install generated director metadata after ordinary object types exist."""
 
@@ -150,10 +170,14 @@ def install_director_bindings(
         )
     ordinary_descriptor = ordinary_runtime._load_descriptor(ordinary_descriptor_path)
     if ordinary_descriptor["bridge_id"] != descriptor["bridge_id"]:
-        raise ValueError("ordinary and director descriptors have different bridge identities")
+        raise ValueError(
+            "ordinary and director descriptors have different bridge identities"
+        )
     module_map = resolve_modules(modules, descriptor["directors"])
     ordinary = _ordinary_classes(ordinary_descriptor_path)
-    object_bridges = state_runtime.object_bridges_from_descriptor(modules, ordinary_descriptor_path)
+    object_bridges = state_runtime.object_bridges_from_descriptor(
+        modules, ordinary_descriptor_path
+    )
     bridge_id = descriptor["bridge_id"]
     installed: dict[str, DirectorBinding] = {}
     for record in descriptor["directors"]:
@@ -168,18 +192,24 @@ def install_director_bindings(
         if not all(isinstance(value, str) for value in (cxx_type, facade, proxy_name)):
             raise ValueError("director record has incomplete type metadata")
         if not isinstance(method_records, list) or ordinary_record is None:
-            raise ValueError(f"director {cxx_type} has no matching ordinary bridge record")
+            raise ValueError(
+                f"director {cxx_type} has no matching ordinary bridge record"
+            )
         if ordinary_record["owner_module"] != record["owner_module"]:
             raise ValueError(f"director {cxx_type} has inconsistent module ownership")
         helper_name = ordinary_record.get("borrowed_proxy_helper")
         if not isinstance(helper_name, str):
-            raise ValueError(f"ordinary bridge record for {cxx_type} has no proxy helper")
+            raise ValueError(
+                f"ordinary bridge record for {cxx_type} has no proxy helper"
+            )
         try:
             proxy = getattr(target_module, proxy_name)
             borrowed_helper = getattr(target_module, helper_name)
             factory = getattr(helper_module, _nsb_factory_name(cxx_type))
         except AttributeError as error:
-            raise RuntimeError(f"native bridge has no generated helper or factory for {cxx_type}") from error
+            raise RuntimeError(
+                f"native bridge has no generated helper or factory for {cxx_type}"
+            ) from error
         methods: list[DirectorMethod] = []
         for method in method_records:
             if not isinstance(method, dict):
@@ -193,38 +223,71 @@ def install_director_bindings(
             if not isinstance(parameters, list) or not isinstance(returns, dict):
                 raise ValueError(f"director method {identity} is incomplete")
             parameter_types = tuple(
-                (parameter.get("cxx_type") if parameter.get("kind") == "object"
-                 else parameter.get("declared_cxx_type", parameter.get("cxx_type")))
-                for parameter in parameters if isinstance(parameter, dict)
+                (
+                    parameter.get("cxx_type")
+                    if parameter.get("kind") == "object"
+                    else parameter.get("declared_cxx_type", parameter.get("cxx_type"))
+                )
+                for parameter in parameters
+                if isinstance(parameter, dict)
             )
-            if len(parameter_types) != len(parameters) or not all(isinstance(item, str) for item in parameter_types):
-                raise ValueError(f"director method {identity} has invalid parameter metadata")
-            methods.append(DirectorMethod(
-                identity, cxx_name, parameter_types, method.get("abstract") is True,
-                tuple(dict(item) for item in parameters), dict(returns),
-            ))
+            if len(parameter_types) != len(parameters) or not all(
+                isinstance(item, str) for item in parameter_types
+            ):
+                raise ValueError(
+                    f"director method {identity} has invalid parameter metadata"
+                )
+            methods.append(
+                DirectorMethod(
+                    identity,
+                    cxx_name,
+                    parameter_types,
+                    method.get("abstract") is True,
+                    tuple(dict(item) for item in parameters),
+                    dict(returns),
+                )
+            )
         raw_constructors = record.get("constructors")
         if raw_constructors is None:
             # Descriptors generated before constructor overload support carry
             # one constructor directly. Keep them loadable.
-            raw_constructors = [{"parameters": record.get("constructor_parameters", [])}]
+            raw_constructors = [
+                {"parameters": record.get("constructor_parameters", [])}
+            ]
         if not isinstance(raw_constructors, list) or not raw_constructors:
             raise ValueError(f"director {cxx_type} has no constructor metadata")
         constructors: list[tuple[dict[str, Any], ...]] = []
         for constructor in raw_constructors:
-            parameters = constructor.get("parameters") if isinstance(constructor, dict) else None
-            if not isinstance(parameters, list) or not all(isinstance(item, dict) for item in parameters):
-                raise ValueError(f"director {cxx_type} has invalid constructor metadata")
+            parameters = (
+                constructor.get("parameters") if isinstance(constructor, dict) else None
+            )
+            if not isinstance(parameters, list) or not all(
+                isinstance(item, dict) for item in parameters
+            ):
+                raise ValueError(
+                    f"director {cxx_type} has invalid constructor metadata"
+                )
             constructors.append(tuple(dict(item) for item in parameters))
         binding = DirectorBinding(
-            bridge_id, cxx_type, facade, target_module, proxy, borrowed_helper,
-            tuple(sorted(methods, key=lambda item: item.identity)), dict(object_bridges), factory, helper_module, backend,
+            bridge_id,
+            cxx_type,
+            facade,
+            target_module,
+            proxy,
+            borrowed_helper,
+            tuple(sorted(methods, key=lambda item: item.identity)),
+            dict(object_bridges),
+            factory,
+            helper_module,
+            backend,
             tuple(constructors),
         )
         key = (bridge_id, cxx_type)
         current = _BINDINGS.get(key)
         if current is not None and current != binding:
-            raise RuntimeError(f"director binding already exists for {bridge_id}:{cxx_type}")
+            raise RuntimeError(
+                f"director binding already exists for {bridge_id}:{cxx_type}"
+            )
         _BINDINGS[key] = binding
         installed[cxx_type] = binding
     return installed
@@ -234,7 +297,9 @@ def director_binding(bridge_id: str, cxx_type: str) -> DirectorBinding:
     try:
         return _BINDINGS[(bridge_id, cxx_type)]
     except KeyError as error:
-        raise ValueError(f"no installed director binding for {bridge_id}:{cxx_type}") from error
+        raise ValueError(
+            f"no installed director binding for {bridge_id}:{cxx_type}"
+        ) from error
 
 
 def _normalize_stateaccess(value: object) -> tuple[str, ...] | str | None:
@@ -264,8 +329,11 @@ def override(*arguments, stateaccess=None):
     access = _normalize_stateaccess(stateaccess)
 
     def validate(function):
-        defaults = [name for name, parameter in inspect.signature(function).parameters.items()
-                    if parameter.default is not inspect.Parameter.empty]
+        defaults = [
+            name
+            for name, parameter in inspect.signature(function).parameters.items()
+            if parameter.default is not inspect.Parameter.empty
+        ]
         if defaults:
             raise TypeError(
                 "@nsb.override does not accept default arguments "
@@ -322,8 +390,14 @@ class _StateViewType(types.Type):
         self._key = (
             self.backend.identifier,
             tuple(self.scalar_slots.items()),
-            tuple((name, slot, object_type.key) for name, (slot, object_type) in self.object_slots.items()),
-            tuple((name, slot, array_type) for name, (slot, array_type) in self.array_slots.items()),
+            tuple(
+                (name, slot, object_type.key)
+                for name, (slot, object_type) in self.object_slots.items()
+            ),
+            tuple(
+                (name, slot, array_type)
+                for name, (slot, array_type) in self.array_slots.items()
+            ),
             tuple(self.cached_slots.items()),
             tuple(sorted(self.borrowed_fields)),
         )
@@ -337,11 +411,17 @@ class _StateViewType(types.Type):
 @register_model(_StateViewType)
 class _StateViewModel(models.StructModel):
     def __init__(self, dmm, fe_type):
-        super().__init__(dmm, fe_type, [
-            ("opaque", types.voidptr),
-            *((f"cached_{index}", value_type)
-              for index, value_type in enumerate(fe_type.cached_slots.values())),
-        ])
+        super().__init__(
+            dmm,
+            fe_type,
+            [
+                ("opaque", types.voidptr),
+                *(
+                    (f"cached_{index}", value_type)
+                    for index, value_type in enumerate(fe_type.cached_slots.values())
+                ),
+            ],
+        )
 
 
 make_attribute_wrapper(_StateViewType, "opaque", "opaque")
@@ -355,7 +435,9 @@ def is_slot_occupied(state, field):
     ``nsb.is_slot_occupied(self, "workspace")``.
     """
 
-    raise TypeError("nsb.is_slot_occupied() is available inside Numba director overrides")
+    raise TypeError(
+        "nsb.is_slot_occupied() is available inside Numba director overrides"
+    )
 
 
 @overload(is_slot_occupied)
@@ -363,10 +445,14 @@ def _overload_is_slot_occupied(state, field):
     if isinstance(state, InferenceState) and isinstance(field, types.StringLiteral):
         if field.literal_value not in state.fields:
             raise TypingError(f"undeclared state field {field.literal_value!r}")
+
         def analysis_occupied(state, field):
             return True
+
         return analysis_occupied
-    if not isinstance(state, _StateViewType) or not isinstance(field, types.StringLiteral):
+    if not isinstance(state, _StateViewType) or not isinstance(
+        field, types.StringLiteral
+    ):
         return None
     name = field.literal_value
     if name in state.object_slots:
@@ -386,6 +472,7 @@ def _overload_is_slot_occupied(state, field):
 
         return implementation
     if name in state.scalar_slots:
+
         def implementation(state, field):
             return True
 
@@ -397,6 +484,7 @@ def _state_view_constructor(state_type: _StateViewType):
     cached_types = tuple(state_type.cached_slots.values())
 
     if not cached_types:
+
         @intrinsic
         def empty_constructor(typingctx, opaque):
             if opaque != types.voidptr:
@@ -436,7 +524,10 @@ def _state_view_constructor(state_type: _StateViewType):
 def _install_state_attributes(state_type: _StateViewType) -> None:
     def scalar_lower(field):
         def lower(attribute):
-            if not isinstance(attribute, _StateViewType) or field not in attribute.scalar_slots:
+            if (
+                not isinstance(attribute, _StateViewType)
+                or field not in attribute.scalar_slots
+            ):
                 return None
             if field in attribute.cached_slots:
                 index = tuple(attribute.cached_slots).index(field)
@@ -448,7 +539,9 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
                     signature = attribute.cached_slots[field](value)
 
                     def codegen(context, builder, sig, args):
-                        proxy = cgutils.create_struct_proxy(attribute)(context, builder, value=args[0])
+                        proxy = cgutils.create_struct_proxy(attribute)(
+                            context, builder, value=args[0]
+                        )
                         return getattr(proxy, f"cached_{index}")
 
                     return signature, codegen
@@ -473,7 +566,10 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
 
     def object_lower(field):
         def lower(attribute):
-            if not isinstance(attribute, _StateViewType) or field not in attribute.object_slots:
+            if (
+                not isinstance(attribute, _StateViewType)
+                or field not in attribute.object_slots
+            ):
                 return None
             if field in attribute.cached_slots:
                 index = tuple(attribute.cached_slots).index(field)
@@ -485,7 +581,9 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
                     signature = attribute.cached_slots[field](value)
 
                     def codegen(context, builder, sig, args):
-                        proxy = cgutils.create_struct_proxy(attribute)(context, builder, value=args[0])
+                        proxy = cgutils.create_struct_proxy(attribute)(
+                            context, builder, value=args[0]
+                        )
                         return getattr(proxy, f"cached_{index}")
 
                     return signature, codegen
@@ -496,7 +594,9 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
                 return implementation
             slot, object_type = attribute.object_slots[field]
             reader = state_runtime.state_object_at(
-                attribute.backend, object_type, borrowed=field in attribute.borrowed_fields,
+                attribute.backend,
+                object_type,
+                borrowed=field in attribute.borrowed_fields,
             )
 
             def implementation(attribute):
@@ -515,41 +615,73 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
         def lower(context, builder, sig, args):
             slot, object_type = sig.args[0].object_slots[field]
             backend = sig.args[0].backend
-            state = cgutils.create_struct_proxy(sig.args[0])(context, builder, value=args[0])
+            state = cgutils.create_struct_proxy(sig.args[0])(
+                context, builder, value=args[0]
+            )
             if field in sig.args[0].borrowed_fields:
                 function = cgutils.get_or_insert_function(
-                    builder.module, ir.FunctionType(ir.IntType(32), [
-                        state.opaque.type, ir.IntType(32), ir.IntType(types.uintp.bitwidth),
-                    ]), name=backend.symbol_name("set_object_borrowed"),
+                    builder.module,
+                    ir.FunctionType(
+                        ir.IntType(32),
+                        [
+                            state.opaque.type,
+                            ir.IntType(32),
+                            ir.IntType(types.uintp.bitwidth),
+                        ],
+                    ),
+                    name=backend.symbol_name("set_object_borrowed"),
                 )
-                status = builder.call(function, [state.opaque, ir.Constant(ir.IntType(32), slot),
-                    builder.ptrtoint(args[1], ir.IntType(types.uintp.bitwidth))])
+                status = builder.call(
+                    function,
+                    [
+                        state.opaque,
+                        ir.Constant(ir.IntType(32), slot),
+                        builder.ptrtoint(args[1], ir.IntType(types.uintp.bitwidth)),
+                    ],
+                )
                 ordinary_runtime._raise_on_failure(context, builder, status)
                 return context.get_dummy_value()
             mpi_type = getattr(sys.modules.get("nsb_rt.runtime.mpi"), "comm_type", None)
             if object_type == mpi_type:
                 if sig.args[1] != mpi_type:
                     from numba.core.errors import TypingError
-                    raise TypingError("communicator state requires a communicator value")
+
+                    raise TypingError(
+                        "communicator state requires a communicator value"
+                    )
                 # StateBlock consumes a reference; the RHS retains its own.
                 context.nrt.incref(builder, sig.args[1], args[1])
-            value = cgutils.create_struct_proxy(sig.args[1])(context, builder, value=args[1])
+            value = cgutils.create_struct_proxy(sig.args[1])(
+                context, builder, value=args[1]
+            )
             # Constructed bridge objects transfer their result ownership to
             # StateBlock directly; the setter must not add another reference.
             function = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(32), [
-                    state.opaque.type, ir.IntType(32), ir.IntType(types.uintp.bitwidth), ir.IntType(8).as_pointer(),
-                ]),
+                ir.FunctionType(
+                    ir.IntType(32),
+                    [
+                        state.opaque.type,
+                        ir.IntType(32),
+                        ir.IntType(types.uintp.bitwidth),
+                        ir.IntType(8).as_pointer(),
+                    ],
+                ),
                 name=backend.symbol_name("set_object_native"),
             )
-            status = builder.call(function, [
-                state.opaque, ir.Constant(ir.IntType(32), slot),
-                builder.ptrtoint(value.pointer, ir.IntType(types.uintp.bitwidth)),
-                builder.bitcast(value.meminfo, ir.IntType(8).as_pointer()),
-            ])
+            status = builder.call(
+                function,
+                [
+                    state.opaque,
+                    ir.Constant(ir.IntType(32), slot),
+                    builder.ptrtoint(value.pointer, ir.IntType(types.uintp.bitwidth)),
+                    builder.bitcast(value.meminfo, ir.IntType(8).as_pointer()),
+                ],
+            )
             if object_type == mpi_type:
-                with builder.if_then(builder.icmp_unsigned("!=", status, ir.Constant(status.type, 0))):
+                with builder.if_then(
+                    builder.icmp_unsigned("!=", status, ir.Constant(status.type, 0))
+                ):
                     context.nrt.decref(builder, sig.args[1], args[1])
             ordinary_runtime._raise_on_failure(context, builder, status)
             return context.get_dummy_value()
@@ -561,7 +693,10 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
 
     def array_lower(field):
         def lower(attribute):
-            if not isinstance(attribute, _StateViewType) or field not in attribute.array_slots:
+            if (
+                not isinstance(attribute, _StateViewType)
+                or field not in attribute.array_slots
+            ):
                 return None
             if field in attribute.cached_slots:
                 index = tuple(attribute.cached_slots).index(field)
@@ -573,7 +708,9 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
                     signature = attribute.cached_slots[field](value)
 
                     def codegen(context, builder, sig, args):
-                        proxy = cgutils.create_struct_proxy(attribute)(context, builder, value=args[0])
+                        proxy = cgutils.create_struct_proxy(attribute)(
+                            context, builder, value=args[0]
+                        )
                         return getattr(proxy, f"cached_{index}")
 
                     return signature, codegen
@@ -584,10 +721,14 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
                 return implementation
             slot, array_type = attribute.array_slots[field]
             reader = state_runtime.state_array_at(attribute.backend, array_type)
+
             def implementation(attribute):
                 return reader(attribute.opaque, slot)
+
             return implementation
+
         return lower
+
     for name in state_type.array_slots:
         overload_attribute(_StateViewType, name)(array_lower(name))
 
@@ -597,29 +738,46 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
         @lower_setattr(_StateViewType, field)
         def lower(context, builder, sig, args):
             value = context.make_array(sig.args[1])(context, builder, value=args[1])
-            state = cgutils.create_struct_proxy(sig.args[0])(context, builder, value=args[0])
+            state = cgutils.create_struct_proxy(sig.args[0])(
+                context, builder, value=args[0]
+            )
             # StateBlock keeps this array after the assignment expression has
             # released its temporary NRT ownership.
             context.nrt.incref(builder, sig.args[1], args[1])
             shape = list(cgutils.unpack_tuple(builder, value.shape, array_type.ndim))
-            strides = list(cgutils.unpack_tuple(builder, value.strides, array_type.ndim))
+            strides = list(
+                cgutils.unpack_tuple(builder, value.strides, array_type.ndim)
+            )
             zero = ir.Constant(ir.IntType(types.intp.bitwidth), 0)
             shape.extend([zero] * (3 - array_type.ndim))
             strides.extend([zero] * (3 - array_type.ndim))
             function = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(32), [
-                    state.opaque.type, ir.IntType(32), ir.IntType(types.uintp.bitwidth), ir.IntType(8).as_pointer(),
-                    ir.IntType(32), *([ir.IntType(types.intp.bitwidth)] * 6),
-                ]),
+                ir.FunctionType(
+                    ir.IntType(32),
+                    [
+                        state.opaque.type,
+                        ir.IntType(32),
+                        ir.IntType(types.uintp.bitwidth),
+                        ir.IntType(8).as_pointer(),
+                        ir.IntType(32),
+                        *([ir.IntType(types.intp.bitwidth)] * 6),
+                    ],
+                ),
                 name=state_type.backend.symbol_name("set_array_native"),
             )
-            status = builder.call(function, [
-                state.opaque, ir.Constant(ir.IntType(32), slot),
-                builder.ptrtoint(value.data, ir.IntType(types.uintp.bitwidth)),
-                builder.bitcast(value.meminfo, ir.IntType(8).as_pointer()),
-                ir.Constant(ir.IntType(32), array_type.ndim), *shape, *strides,
-            ])
+            status = builder.call(
+                function,
+                [
+                    state.opaque,
+                    ir.Constant(ir.IntType(32), slot),
+                    builder.ptrtoint(value.data, ir.IntType(types.uintp.bitwidth)),
+                    builder.bitcast(value.meminfo, ir.IntType(8).as_pointer()),
+                    ir.Constant(ir.IntType(32), array_type.ndim),
+                    *shape,
+                    *strides,
+                ],
+            )
             ordinary_runtime._raise_on_failure(context, builder, status)
             return context.get_dummy_value()
 
@@ -641,12 +799,19 @@ def _scalar_type(parameter: dict[str, Any]):
     try:
         return mapping[parameter["kind"]]
     except KeyError as error:
-        raise RuntimeError(f"unsupported scalar callback parameter {parameter}") from error
+        raise RuntimeError(
+            f"unsupported scalar callback parameter {parameter}"
+        ) from error
 
 
 def _pointer_type(parameter: dict[str, Any]):
     dtype = parameter.get("numpy_dtype")
-    mapping = {"float32": types.float32, "float64": types.float64, "int32": types.int32, "bool": types.boolean}
+    mapping = {
+        "float32": types.float32,
+        "float64": types.float64,
+        "int32": types.int32,
+        "bool": types.boolean,
+    }
     try:
         return types.CPointer(mapping[dtype])
     except KeyError as error:
@@ -656,7 +821,11 @@ def _pointer_type(parameter: dict[str, Any]):
 def _callback_type(binding: DirectorBinding, parameter: dict[str, Any]):
     kind = parameter["kind"]
     if kind == "object":
-        ordinary_runtime.bridge_object_type(binding.bridge_id, parameter["cxx_type"], const=parameter.get("const", False))
+        ordinary_runtime.bridge_object_type(
+            binding.bridge_id,
+            parameter["cxx_type"],
+            const=parameter.get("const", False),
+        )
         return types.voidptr
     if kind == "pointer":
         return _pointer_type(parameter)
@@ -682,15 +851,24 @@ def _callback_result_type(method: DirectorMethod):
     try:
         return mapping[kind]
     except KeyError as error:
-        raise RuntimeError(f"unsupported Numba director callback return {method.returns}") from error
+        raise RuntimeError(
+            f"unsupported Numba director callback return {method.returns}"
+        ) from error
 
 
 def _compile_callback(
-    binding: DirectorBinding, method: DirectorMethod, override,
-    state_constructor, live_state_constructor, cached_fields: tuple[str, ...],
+    binding: DirectorBinding,
+    method: DirectorMethod,
+    override,
+    state_constructor,
+    live_state_constructor,
+    cached_fields: tuple[str, ...],
 ):
     compiled = njit(cache=False)(override)
-    cfunc_types = [types.voidptr, *(_callback_type(binding, parameter) for parameter in method.parameters)]
+    cfunc_types = [
+        types.voidptr,
+        *(_callback_type(binding, parameter) for parameter in method.parameters),
+    ]
     returns_void = method.returns.get("kind") == "void"
     if not returns_void:
         cfunc_types.append(types.CPointer(_callback_result_type(method)))
@@ -702,14 +880,23 @@ def _compile_callback(
     for index, (parameter, name) in enumerate(zip(method.parameters, names)):
         if parameter["kind"] == "object":
             constructor_name = f"_object_constructor_{index}"
-            object_constructors[constructor_name] = ordinary_runtime.object_from_address(
-                ordinary_runtime.bridge_object_type(binding.bridge_id, parameter["cxx_type"], const=parameter.get("const", False), force_const=True)
+            object_constructors[constructor_name] = (
+                ordinary_runtime.object_from_address(
+                    ordinary_runtime.bridge_object_type(
+                        binding.bridge_id,
+                        parameter["cxx_type"],
+                        const=parameter.get("const", False),
+                        force_const=True,
+                    )
+                )
             )
             converted.append(f"{constructor_name}({name})")
         else:
             converted.append(name)
     if method.returns.get("kind") == "object":
-        result_address = ordinary_runtime.director_result_address(binding.bridge_id, method.returns)
+        result_address = ordinary_runtime.director_result_address(
+            binding.bridge_id, method.returns
+        )
     parameter_text = ", ".join(["opaque_state", *names])
     if cached_fields:
         cached_arguments = ", ".join(f"live_state.{name}" for name in cached_fields)
@@ -720,26 +907,29 @@ def _compile_callback(
         state_setup = ""
     call_text = ", ".join([state_expression, *converted])
     if returns_void:
-        callback_statement = f'''{state_setup}    try:
+        callback_statement = f"""{state_setup}    try:
         _compiled({call_text})
         return 1
     except Exception:
-        return 0'''
+        return 0"""
     else:
         result_expression = (
             f"_result_address(_compiled({call_text}))"
-            if result_address is not None else f"_compiled({call_text})"
+            if result_address is not None
+            else f"_compiled({call_text})"
         )
-        callback_statement = f'''{state_setup}    try:
+        callback_statement = f"""{state_setup}    try:
         result[0] = {result_expression}
         return 1
     except Exception:
-        return 0'''
-    source = "\n".join([
-        "@cfunc(_signature, cache=False)",
-        f"def callback({parameter_text}{', result' if not returns_void else ''}):",
-        callback_statement,
-    ])
+        return 0"""
+    source = "\n".join(
+        [
+            "@cfunc(_signature, cache=False)",
+            f"def callback({parameter_text}{', result' if not returns_void else ''}):",
+            callback_statement,
+        ]
+    )
     namespace = {
         "cfunc": cfunc,
         "_signature": signature,
@@ -753,7 +943,9 @@ def _compile_callback(
     return compiled, namespace["callback"]
 
 
-def _state_field_usage(function: Callable[..., Any], fields: set[str]) -> tuple[set[str], set[str]]:
+def _state_field_usage(
+    function: Callable[..., Any], fields: set[str]
+) -> tuple[set[str], set[str]]:
     """Conservatively find statically named state reads and assignments.
 
     Numba supports calls to already-jitted helpers, so follow referenced Python
@@ -777,17 +969,22 @@ def _state_field_usage(function: Callable[..., Any], fields: set[str]) -> tuple[
         while changed:
             changed = False
             for previous, instruction in zip(instructions, instructions[1:]):
-                if (previous.opname in {"LOAD_FAST", "LOAD_DEREF"}
-                        and previous.argval in state_names
-                        and instruction.opname in {"STORE_FAST", "STORE_DEREF"}
-                        and instruction.argval not in state_names):
+                if (
+                    previous.opname in {"LOAD_FAST", "LOAD_DEREF"}
+                    and previous.argval in state_names
+                    and instruction.opname in {"STORE_FAST", "STORE_DEREF"}
+                    and instruction.argval not in state_names
+                ):
                     state_names.add(instruction.argval)
                     changed = True
         for index, instruction in enumerate(instructions):
-            if (instruction.opname in {"LOAD_ATTR", "LOAD_METHOD"}
-                    and instruction.argval in fields and index
-                    and instructions[index - 1].opname in {"LOAD_FAST", "LOAD_DEREF"}
-                    and instructions[index - 1].argval in state_names):
+            if (
+                instruction.opname in {"LOAD_ATTR", "LOAD_METHOD"}
+                and instruction.argval in fields
+                and index
+                and instructions[index - 1].opname in {"LOAD_FAST", "LOAD_DEREF"}
+                and instructions[index - 1].argval in state_names
+            ):
                 reads.add(instruction.argval)
             elif instruction.opname == "STORE_ATTR" and instruction.argval in fields:
                 writes.add(instruction.argval)
@@ -800,11 +997,13 @@ def _state_field_usage(function: Callable[..., Any], fields: set[str]) -> tuple[
             passes_state = False
             for index, instruction in enumerate(instructions):
                 if instruction.opname == "LOAD_GLOBAL" and instruction.argval == name:
-                    for argument in instructions[index + 1:index + 20]:
+                    for argument in instructions[index + 1 : index + 20]:
                         if argument.opname == "CALL":
                             break
-                        if (argument.opname in {"LOAD_FAST", "LOAD_DEREF"}
-                                and argument.argval in state_names):
+                        if (
+                            argument.opname in {"LOAD_FAST", "LOAD_DEREF"}
+                            and argument.argval in state_names
+                        ):
                             passes_state = True
                             break
                 if passes_state:
@@ -816,13 +1015,17 @@ def _state_field_usage(function: Callable[..., Any], fields: set[str]) -> tuple[
     return reads, writes
 
 
-def _collect_overrides(user_class: type, binding: DirectorBinding) -> dict[str, Callable[..., Any]]:
+def _collect_overrides(
+    user_class: type, binding: DirectorBinding
+) -> dict[str, Callable[..., Any]]:
     marked = [
-        value for value in user_class.__dict__.values()
+        value
+        for value in user_class.__dict__.values()
         if callable(value) and hasattr(value, "__numba_swig_override_selector__")
     ]
     available = ", ".join(
-        f"{method.cxx_name}({', '.join(method.parameter_types)})" for method in binding.methods
+        f"{method.cxx_name}({', '.join(method.parameter_types)})"
+        for method in binding.methods
     )
     result: dict[str, Callable[..., Any]] = {}
     for function in marked:
@@ -834,7 +1037,8 @@ def _collect_overrides(user_class: type, binding: DirectorBinding) -> dict[str, 
             # Overloads and differently named Python methods still need an
             # explicit selector.
             name_matches = [
-                candidate for candidate in binding.methods
+                candidate
+                for candidate in binding.methods
                 if candidate.cxx_name == function.__name__
             ]
             if len(name_matches) == 1:
@@ -842,7 +1046,9 @@ def _collect_overrides(user_class: type, binding: DirectorBinding) -> dict[str, 
             elif len(binding.methods) == 1:
                 method = binding.methods[0]
             else:
-                raise TypeError("bare @override is ambiguous; use @override(" + available + ")")
+                raise TypeError(
+                    "bare @override is ambiguous; use @override(" + available + ")"
+                )
         else:
             try:
                 method = binding.method_for_selector(selector)
@@ -854,15 +1060,24 @@ def _collect_overrides(user_class: type, binding: DirectorBinding) -> dict[str, 
         if method.identity in result:
             raise TypeError(f"duplicate @override for {method.identity}")
         result[method.identity] = function
-    missing = [method.identity for method in binding.methods if method.abstract and method.identity not in result]
+    missing = [
+        method.identity
+        for method in binding.methods
+        if method.abstract and method.identity not in result
+    ]
     if missing:
-        raise TypeError(f"{user_class.__name__} is missing required @override: {', '.join(missing)}")
+        raise TypeError(
+            f"{user_class.__name__} is missing required @override: {', '.join(missing)}"
+        )
     return result
 
 
-def _validate_state(
-    state: Mapping[str, Any], binding: DirectorBinding
-) -> tuple[dict[str, str], dict[str, state_runtime.DeclaredObjectBridge], dict[str, types.Array], dict[str, DirectorBinding]]:
+def _validate_state(state: Mapping[str, Any], binding: DirectorBinding) -> tuple[
+    dict[str, str],
+    dict[str, state_runtime.DeclaredObjectBridge],
+    dict[str, types.Array],
+    dict[str, DirectorBinding],
+]:
     """Resolve scalar, ordinary-object, and nested-director state declarations.
 
     ``state={"buffer": fixture.Buffer}`` stores one borrowed Buffer address.
@@ -888,19 +1103,27 @@ def _validate_state(
             scalar_fields[name] = scalar_kind
         elif isinstance(annotation, types.Array):
             array_fields[name] = annotation
-        elif (mpi_runtime := sys.modules.get("nsb_rt.runtime.mpi")) is not None and mpi_runtime.is_communicator_annotation(annotation):
+        elif (
+            mpi_runtime := sys.modules.get("nsb_rt.runtime.mpi")
+        ) is not None and mpi_runtime.is_communicator_annotation(annotation):
             object_fields[name] = mpi_runtime.communicator_state_bridge()
         elif isinstance(annotation, state_runtime.DeclaredObjectBridge):
             if annotation.cxx_type not in binding.object_bridges:
-                raise TypeError(f"state field {name!r} uses an object outside this bridge descriptor")
+                raise TypeError(
+                    f"state field {name!r} uses an object outside this bridge descriptor"
+                )
             object_fields[name] = annotation
         elif isinstance(annotation, DirectorBinding):
             if annotation.bridge_id != binding.bridge_id:
-                raise TypeError(f"nested director state field {name!r} comes from another bridge")
+                raise TypeError(
+                    f"nested director state field {name!r} comes from another bridge"
+                )
             try:
                 object_fields[name] = binding.object_bridges[annotation.cxx_type]
             except KeyError as error:
-                raise TypeError(f"nested director state field {name!r} has no ordinary bridge type") from error
+                raise TypeError(
+                    f"nested director state field {name!r} has no ordinary bridge type"
+                ) from error
             nested_fields[name] = annotation
         elif annotation in proxies:
             object_fields[name] = proxies[annotation]
@@ -915,14 +1138,22 @@ def _validate_state(
 class _NestedDirectorStateProperty(state_runtime.DirectorStateProperty):
     """An object state slot whose value must be a matching decorated director."""
 
-    def __init__(self, slot: int, bridge: state_runtime.DeclaredObjectBridge, expected: DirectorBinding) -> None:
+    def __init__(
+        self,
+        slot: int,
+        bridge: state_runtime.DeclaredObjectBridge,
+        expected: DirectorBinding,
+    ) -> None:
         super().__init__(slot=slot, bridge=bridge)
         self.expected = expected
 
     def __set__(self, instance: object, value: object) -> None:
-        if (getattr(instance, "_nsb_director", None) is not None
-                and not getattr(instance, "_nsb_initializing", False)):
-            raise RuntimeError("nested director state cannot be replaced after the outer director is live")
+        if getattr(instance, "_nsb_director", None) is not None and not getattr(
+            instance, "_nsb_initializing", False
+        ):
+            raise RuntimeError(
+                "nested director state cannot be replaced after the outer director is live"
+            )
         if getattr(value, "_numba_swig_bridge_binding", None) is not self.expected:
             raise TypeError(
                 f"nested director state field {self.name!r} requires a director for {self.expected.cxx_type}"
@@ -948,8 +1179,13 @@ def _binding_for_base(base: type) -> DirectorBinding:
     )
 
 
-def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any],
-             base: type | None = None, fallback: str = "warn"):
+def director(
+    *,
+    binding: DirectorBinding | None = None,
+    state: Mapping[str, Any],
+    base: type | None = None,
+    fallback: str = "warn",
+):
     """Decorate a Python class as a selected native C++ director.
 
     A direct subclass of a registered SWIG director base can omit ``binding``.
@@ -972,29 +1208,53 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
         inferred_base = resolved_base is None
         if resolved_binding is None:
             if resolved_base is not None:
-                raise TypeError("a director without binding= must directly inherit its registered SWIG base")
+                raise TypeError(
+                    "a director without binding= must directly inherit its registered SWIG base"
+                )
             direct_bases = user_class.__bases__
             if len(direct_bases) != 1:
-                raise TypeError("a director without binding= must directly inherit one registered SWIG base")
+                raise TypeError(
+                    "a director without binding= must directly inherit one registered SWIG base"
+                )
             resolved_base = direct_bases[0]
             resolved_binding = _binding_for_base(resolved_base)
         elif resolved_base is None:
             resolved_base = resolved_binding.base_proxy
         if resolved_base is not resolved_binding.base_proxy:
-            raise TypeError("base and binding must come from the same generated director record")
+            raise TypeError(
+                "base and binding must come from the same generated director record"
+            )
 
-        scalar_fields, object_fields, array_fields, nested_fields = _validate_state(state, resolved_binding)
+        scalar_fields, object_fields, array_fields, nested_fields = _validate_state(
+            state, resolved_binding
+        )
         binding = resolved_binding
         base = resolved_base
         subclass_style = issubclass(user_class, base)
         if inferred_base and not subclass_style:
-            raise TypeError("a director without base= must subclass its binding's SWIG base")
+            raise TypeError(
+                "a director without base= must subclass its binding's SWIG base"
+            )
         if subclass_style and user_class.__bases__ != (base,):
-            raise TypeError("a subclass director must directly inherit only its binding's SWIG base")
+            raise TypeError(
+                "a subclass director must directly inherit only its binding's SWIG base"
+            )
         overrides = _collect_overrides(user_class, binding)
-        policies = infer_object_fields(binding, overrides, scalar_fields, object_fields, array_fields) if object_fields else {}
-        borrowed_fields = {name for name, (mode, _) in policies.items() if mode == "borrowed"}
-        fallbacks = [method for method in binding.methods if not method.abstract and method.identity not in overrides]
+        policies = (
+            infer_object_fields(
+                binding, overrides, scalar_fields, object_fields, array_fields
+            )
+            if object_fields
+            else {}
+        )
+        borrowed_fields = {
+            name for name, (mode, _) in policies.items() if mode == "borrowed"
+        }
+        fallbacks = [
+            method
+            for method in binding.methods
+            if not method.abstract and method.identity not in overrides
+        ]
         if fallbacks:
             names = ", ".join(method.identity for method in fallbacks)
             message = f"{user_class.__name__} does not override {names}; the C++ base implementation will be used"
@@ -1004,21 +1264,38 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
                 warnings.warn(message, NumbaSwigBridgeFallbackWarning, stacklevel=2)
 
         state_facade = state_runtime.make_state_facade(
-            binding.python_facade, backend=binding.state_backend,
-            scalar_fields=scalar_fields, object_fields=object_fields, array_fields=array_fields
+            binding.python_facade,
+            backend=binding.state_backend,
+            scalar_fields=scalar_fields,
+            object_fields=object_fields,
+            array_fields=array_fields,
         )
         state_facade._borrowed_fields = frozenset(borrowed_fields)
         state_facade._const_borrowed_fields = frozenset(
-            name for name, (mode, const) in policies.items() if mode == "borrowed" and const
+            name
+            for name, (mode, const) in policies.items()
+            if mode == "borrowed" and const
         )
         scalar_slots = dict(state_facade._scalar_slots)
         object_slots = {
-            name: (state_facade._object_slots[name], bridge.numba_state_type if hasattr(bridge, "numba_state_type") else ordinary_runtime.bridge_object_type(
-                binding.bridge_id, bridge.cxx_type, const=policies.get(name, (None, False))[1], force_const=True))
+            name: (
+                state_facade._object_slots[name],
+                (
+                    bridge.numba_state_type
+                    if hasattr(bridge, "numba_state_type")
+                    else ordinary_runtime.bridge_object_type(
+                        binding.bridge_id,
+                        bridge.cxx_type,
+                        const=policies.get(name, (None, False))[1],
+                        force_const=True,
+                    )
+                ),
+            )
             for name, bridge in object_fields.items()
         }
         array_slots = {
-            name: (state_facade._array_slots[name], array_fields[name]) for name in array_fields
+            name: (state_facade._array_slots[name], array_fields[name])
+            for name in array_fields
         }
         all_fields = set(scalar_slots) | set(object_slots) | set(array_slots)
         compiled: dict[str, Any] = {}
@@ -1035,60 +1312,102 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
                     unknown = authorized - all_fields
                     if unknown:
                         names = ", ".join(repr(name) for name in sorted(unknown))
-                        raise TypeError(f"stateaccess contains undeclared state field(s): {names}")
+                        raise TypeError(
+                            f"stateaccess contains undeclared state field(s): {names}"
+                        )
                     reads, writes = _state_field_usage(override, all_fields)
                     cache_candidates = reads - writes
                     order = tuple(state) if access == "*" else access
-                    cached_names = tuple(name for name in order if name in cache_candidates)
+                    cached_names = tuple(
+                        name for name in order if name in cache_candidates
+                    )
 
                 restricted_scalars = {
-                    name: value for name, value in scalar_slots.items() if name in authorized
+                    name: value
+                    for name, value in scalar_slots.items()
+                    if name in authorized
                 }
                 restricted_objects = {
-                    name: value for name, value in object_slots.items() if name in authorized
+                    name: value
+                    for name, value in object_slots.items()
+                    if name in authorized
                 }
                 restricted_arrays = {
-                    name: value for name, value in array_slots.items() if name in authorized
+                    name: value
+                    for name, value in array_slots.items()
+                    if name in authorized
                 }
                 live_state_type = _StateViewType(
-                    binding.state_backend, restricted_scalars, restricted_objects, restricted_arrays,
+                    binding.state_backend,
+                    restricted_scalars,
+                    restricted_objects,
+                    restricted_arrays,
                     borrowed_fields=borrowed_fields,
                 )
                 cached_slots = {}
                 for name in cached_names:
                     if name in restricted_scalars:
-                        cached_slots[name] = state_runtime.scalar_numba_type(restricted_scalars[name][0])
+                        cached_slots[name] = state_runtime.scalar_numba_type(
+                            restricted_scalars[name][0]
+                        )
                     elif name in restricted_objects:
                         object_type = restricted_objects[name][1]
-                        cached_slots[name] = (object_type if name in borrowed_fields or object_type == getattr(sys.modules.get("nsb_rt.runtime.mpi"), "comm_type", None) else
-                            ordinary_runtime.BorrowedReturnBridgeObjectType(object_type.bridge_id, object_type.cxx_type))
+                        cached_slots[name] = (
+                            object_type
+                            if name in borrowed_fields
+                            or object_type
+                            == getattr(
+                                sys.modules.get("nsb_rt.runtime.mpi"), "comm_type", None
+                            )
+                            else ordinary_runtime.BorrowedReturnBridgeObjectType(
+                                object_type.bridge_id, object_type.cxx_type
+                            )
+                        )
                     else:
                         cached_slots[name] = restricted_arrays[name][1]
                 state_type = _StateViewType(
-                    binding.state_backend, restricted_scalars, restricted_objects, restricted_arrays, cached_slots,
+                    binding.state_backend,
+                    restricted_scalars,
+                    restricted_objects,
+                    restricted_arrays,
+                    cached_slots,
                     borrowed_fields=borrowed_fields,
                 )
                 _install_state_attributes(live_state_type)
                 if state_type != live_state_type:
                     _install_state_attributes(state_type)
-                compiled[method.identity], callbacks[method.identity] = _compile_callback(
-                    binding, method, override, _state_view_constructor(state_type),
-                    _state_view_constructor(live_state_type), cached_names,
+                compiled[method.identity], callbacks[method.identity] = (
+                    _compile_callback(
+                        binding,
+                        method,
+                        override,
+                        _state_view_constructor(state_type),
+                        _state_view_constructor(live_state_type),
+                        cached_names,
+                    )
                 )
         user_init = user_class.__dict__.get("__init__")
 
         def _callback_addresses() -> tuple[int, ...]:
             return tuple(
-                int(callbacks[method.identity].address) if method.identity in callbacks else 0
+                (
+                    int(callbacks[method.identity].address)
+                    if method.identity in callbacks
+                    else 0
+                )
                 for method in binding.methods
             )
 
         constructor_signatures = tuple(
-            inspect.Signature([
-                inspect.Parameter(parameter.get("name") or f"arg{index}",
-                                  inspect.Parameter.POSITIONAL_OR_KEYWORD)
-                for index, parameter in enumerate(constructor)
-            ])
+            inspect.Signature(
+                [
+                    inspect.Parameter(
+                        parameter.get("name") or f"arg{index}",
+                        inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                    )
+                    for index, parameter in enumerate(constructor)
+                ]
+            )
             for constructor in binding.constructors
         )
 
@@ -1113,7 +1432,10 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
                 raise RuntimeError("C++ director base is already initialized")
             state = self._require_nsb_director_state()
             lease_operations = (
-                "lease_address", "lease_is_alive", "lease_close", "lease_release",
+                "lease_address",
+                "lease_is_alive",
+                "lease_close",
+                "lease_release",
                 "object_address_at",
             )
             native_operations = tuple(
@@ -1122,12 +1444,16 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
             )
             lease = int(state.AcquireLease())
             if lease == 0:
-                raise RuntimeError("native state backend could not acquire a director lease")
+                raise RuntimeError(
+                    "native state backend could not acquire a director lease"
+                )
             director = binding.nsb_factory(
                 *arguments, *_callback_addresses(), lease, *native_operations
             )
             if director is None or not director.IsAlive():
-                raise RuntimeError("generated Numba director factory rejected its constructor arguments, state or callbacks")
+                raise RuntimeError(
+                    "generated Numba director factory rejected its constructor arguments, state or callbacks"
+                )
             self._nsb_director = director
             if subclass_style:
                 proxy = binding.borrowed_proxy_helper(int(director.BaseAddress()))
@@ -1137,7 +1463,9 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
 
         def _base_init(self, *args, **kwargs):
             if not getattr(self, "_nsb_initializing", False):
-                raise RuntimeError("C++ base initialization is only allowed during director construction")
+                raise RuntimeError(
+                    "C++ base initialization is only allowed during director construction"
+                )
             _construct_native(self, _bind_constructor(*args, **kwargs))
 
         def __init__(self, *args, **kwargs):
@@ -1146,7 +1474,9 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
             else:
                 base_arguments = kwargs.pop("base_args", ())
                 if not isinstance(base_arguments, (tuple, list)):
-                    raise TypeError("base_args must be a tuple or list of C++ constructor arguments")
+                    raise TypeError(
+                        "base_args must be a tuple or list of C++ constructor arguments"
+                    )
                 base_arguments = _bind_constructor(*base_arguments)
             self._initialize_nsb_director_state()
             self._nsb_director = None
@@ -1164,10 +1494,14 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
                 elif subclass_style:
                     _base_init(self, *args, **kwargs)
                 elif args or kwargs:
-                    raise TypeError(f"{user_class.__name__} accepts no constructor arguments")
+                    raise TypeError(
+                        f"{user_class.__name__} accepts no constructor arguments"
+                    )
                 if subclass_style:
                     if self._nsb_director is None:
-                        raise RuntimeError("director initializer must call super().__init__()")
+                        raise RuntimeError(
+                            "director initializer must call super().__init__()"
+                        )
                     director = self._nsb_director
                 else:
                     director = _construct_native(self, base_arguments)
@@ -1175,22 +1509,35 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
                     try:
                         inner = self._nested_directors[field]
                     except KeyError as error:
-                        raise RuntimeError(f"outer director did not assign its declared nested state {field!r}") from error
-                    if getattr(inner, "_numba_swig_bridge_binding", None) is not expected:
-                        raise TypeError(f"nested state {field!r} does not match its declared director binding")
+                        raise RuntimeError(
+                            f"outer director did not assign its declared nested state {field!r}"
+                        ) from error
+                    if (
+                        getattr(inner, "_numba_swig_bridge_binding", None)
+                        is not expected
+                    ):
+                        raise TypeError(
+                            f"nested state {field!r} does not match its declared director binding"
+                        )
                     retained = binding.helper_module.retain_nsb_director_dependency(
                         director,
                         inner._require_nsb_director(),
                         state_facade._object_slots[field],
                     )
                     if not retained:
-                        raise RuntimeError(f"generated Numba director rejected nested state field {field!r}")
+                        raise RuntimeError(
+                            f"generated Numba director rejected nested state field {field!r}"
+                        )
                     inner._retain_for_outer()
                     self._retained_nested.append(inner)
-                    self._nested_keepalives.extend([
-                        inner, inner._nsb_callbacks, inner._numba_compiled_overrides,
-                        inner._object_keepalives,
-                    ])
+                    self._nested_keepalives.extend(
+                        [
+                            inner,
+                            inner._nsb_callbacks,
+                            inner._numba_compiled_overrides,
+                            inner._object_keepalives,
+                        ]
+                    )
                 _LIVE_DIRECTORS.add(self)
             except BaseException:
                 self.close()
@@ -1206,10 +1553,15 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
 
         def _profile_helper(self, identity):
             self._require_nsb_director()
-            matches = [item for item in binding.methods
-                       if item.identity == identity or item.cxx_name == identity]
+            matches = [
+                item
+                for item in binding.methods
+                if item.identity == identity or item.cxx_name == identity
+            ]
             if len(matches) != 1:
-                raise ValueError(f"{binding.cxx_type} has no director callback {identity!r}")
+                raise ValueError(
+                    f"{binding.cxx_type} has no director callback {identity!r}"
+                )
             method = matches[0]
             symbol = "".join(
                 character if character.isalnum() or character == "_" else "_"
@@ -1231,7 +1583,9 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
             """Return native callback count and inclusive elapsed seconds."""
             symbol, helper = _profile_helper(self, identity)
             calls = int(getattr(helper, f"nsb_director_profile_calls_{symbol}")())
-            nanoseconds = int(getattr(helper, f"nsb_director_profile_nanoseconds_{symbol}")())
+            nanoseconds = int(
+                getattr(helper, f"nsb_director_profile_nanoseconds_{symbol}")()
+            )
             return {"calls": calls, "seconds": nanoseconds / 1_000_000_000.0}
 
         def _retain_for_outer(self) -> None:
@@ -1299,7 +1653,11 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
         @property
         def is_alive(self):
             director = getattr(self, "_nsb_director", None)
-            return bool(director is not None and director.IsAlive() and state_facade.is_alive.__get__(self))
+            return bool(
+                director is not None
+                and director.IsAlive()
+                and state_facade.is_alive.__get__(self)
+            )
 
         namespace = {
             "__doc__": user_class.__doc__,
@@ -1330,8 +1688,11 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
         if subclass_style:
             # Preserve class identity and __class__ cells so both forms of super()
             # reach this per-director initializer without changing the SWIG base.
-            adapter = type(binding.python_facade + "Base", (base, state_facade),
-                           {"__init__": _base_init})
+            adapter = type(
+                binding.python_facade + "Base",
+                (base, state_facade),
+                {"__init__": _base_init},
+            )
 
             def swig_this(self):
                 self._require_nsb_director()

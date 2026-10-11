@@ -1,4 +1,5 @@
 """Read and modify two concrete C++ template instantiations from Numba."""
+
 from numba import njit
 from nsb_sample2 import IntArray, DoubleArray
 import nsb_sample2.registration  # Install the generated bridge.
@@ -47,8 +48,10 @@ def write_at(array, index, value):
 
 for array in (ints, doubles):
     for index in (-1, array.Size()):
-        for action in (lambda: read_at(array, index),
-                       lambda: write_at(array, index, 1 if isinstance(array, IntArray) else 1.0)):
+        for action in (
+            lambda: read_at(array, index),
+            lambda: write_at(array, index, 1 if isinstance(array, IntArray) else 1.0),
+        ):
             try:
                 action()
             except RuntimeError:

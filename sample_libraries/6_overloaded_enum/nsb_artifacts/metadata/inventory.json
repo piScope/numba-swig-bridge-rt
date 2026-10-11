@@ -1,0 +1,486 @@
+{
+  "schema_version": 2,
+  "kind": "swig_bridge_inventory",
+  "sources": [
+    {
+      "module": "nsb_sample6_directors",
+      "swig_module": "nsb_sample6_directors",
+      "interface": "directors.i"
+    }
+  ],
+  "classes": [
+    {
+      "cxx_type": "nsb_sample6::Evaluator",
+      "owner_module": "nsb_sample6_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Evaluator",
+      "abstract": true,
+      "constructors": [
+        {
+          "cxx_name": "Evaluator",
+          "access": "public",
+          "parameters": [
+            {
+              "name": "equations",
+              "swig_type": "int",
+              "cxx_type": "int"
+            },
+            {
+              "name": "dimension",
+              "swig_type": "int",
+              "cxx_type": "int"
+            },
+            {
+              "name": "mode",
+              "swig_type": "nsb_sample6::Evaluator::Mode",
+              "cxx_type": "nsb_sample6::Evaluator::Mode"
+            }
+          ],
+          "swig_declaration": "f(int,int,Mode).",
+          "signature": "nsb_sample6::Evaluator::Evaluator(int, int, nsb_sample6::Evaluator::Mode)"
+        },
+        {
+          "cxx_name": "Evaluator",
+          "access": "public",
+          "parameters": [
+            {
+              "name": "scale",
+              "swig_type": "double",
+              "cxx_type": "double"
+            },
+            {
+              "name": "mode",
+              "swig_type": "nsb_sample6::Evaluator::Mode",
+              "cxx_type": "nsb_sample6::Evaluator::Mode"
+            }
+          ],
+          "swig_declaration": "f(double,Mode).",
+          "signature": "nsb_sample6::Evaluator::Evaluator(double, nsb_sample6::Evaluator::Mode)"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Equations",
+          "python_name": "Equations",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "int nsb_sample6::Evaluator::Equations() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Dimension",
+          "python_name": "Dimension",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "int nsb_sample6::Evaluator::Dimension() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "GetMode",
+          "python_name": "GetMode",
+          "return_swig_type": "nsb_sample6::Evaluator::Mode",
+          "return_cxx_type": "nsb_sample6::Evaluator::Mode",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "nsb_sample6::Evaluator::Mode nsb_sample6::Evaluator::GetMode() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Evaluate",
+          "python_name": "Evaluate",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "double",
+              "cxx_type": "double"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": true,
+          "swig_declaration": "q(const).f(double).",
+          "signature": "double nsb_sample6::Evaluator::Evaluate(double) const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Bias",
+          "python_name": "Bias",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "double",
+              "cxx_type": "double"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(double).",
+          "signature": "double nsb_sample6::Evaluator::Bias(double) const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Record",
+          "python_name": "Record",
+          "return_swig_type": "void",
+          "return_cxx_type": "void",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "double",
+              "cxx_type": "double"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(double).",
+          "signature": "void nsb_sample6::Evaluator::Record(double) const",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "public_base_declarations": [],
+      "virtual_base_declarations": [],
+      "nsb_director_python_class": "nsb_Evaluator"
+    },
+    {
+      "cxx_type": "nsb_sample6::ProtectedConcrete",
+      "owner_module": "nsb_sample6_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "ProtectedConcrete",
+      "abstract": false,
+      "constructors": [
+        {
+          "cxx_name": "ProtectedConcrete",
+          "access": "protected",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "swig_declaration": "f(int).",
+          "signature": "nsb_sample6::ProtectedConcrete::ProtectedConcrete(int)"
+        },
+        {
+          "cxx_name": "ProtectedConcrete",
+          "access": "protected",
+          "parameters": [],
+          "swig_declaration": "f().",
+          "signature": "nsb_sample6::ProtectedConcrete::ProtectedConcrete()"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Evaluate",
+          "python_name": "Evaluate",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "double",
+              "cxx_type": "double"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(double).",
+          "signature": "double nsb_sample6::ProtectedConcrete::Evaluate(double) const",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "public_base_declarations": [],
+      "virtual_base_declarations": [],
+      "nsb_director_python_class": "nsb_ProtectedConcrete"
+    },
+    {
+      "cxx_type": "nsb_sample6::ProtectedEvaluator",
+      "owner_module": "nsb_sample6_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "ProtectedEvaluator",
+      "abstract": true,
+      "constructors": [
+        {
+          "cxx_name": "ProtectedEvaluator",
+          "access": "protected",
+          "parameters": [
+            {
+              "name": "unused",
+              "swig_type": "p.q(const).int",
+              "cxx_type": "const int*"
+            }
+          ],
+          "swig_declaration": "f(p.q(const).int).",
+          "signature": "nsb_sample6::ProtectedEvaluator::ProtectedEvaluator(const int*)"
+        },
+        {
+          "cxx_name": "ProtectedEvaluator",
+          "access": "protected",
+          "parameters": [],
+          "swig_declaration": "f().",
+          "signature": "nsb_sample6::ProtectedEvaluator::ProtectedEvaluator()"
+        },
+        {
+          "cxx_name": "ProtectedEvaluator",
+          "access": "protected",
+          "parameters": [
+            {
+              "name": "count",
+              "swig_type": "int",
+              "cxx_type": "int"
+            },
+            {
+              "name": "scale",
+              "swig_type": "double",
+              "cxx_type": "double"
+            },
+            {
+              "name": "mode",
+              "swig_type": "nsb_sample6::ProtectedEvaluator::Mode",
+              "cxx_type": "nsb_sample6::ProtectedEvaluator::Mode"
+            },
+            {
+              "name": "enabled",
+              "swig_type": "bool",
+              "cxx_type": "bool"
+            },
+            {
+              "name": "offset",
+              "swig_type": "std::int64_t",
+              "cxx_type": "std::int64_t"
+            }
+          ],
+          "swig_declaration": "f(int,double,Mode,bool,std::int64_t).",
+          "signature": "nsb_sample6::ProtectedEvaluator::ProtectedEvaluator(int, double, nsb_sample6::ProtectedEvaluator::Mode, bool, std::int64_t)"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Evaluate",
+          "python_name": "Evaluate",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "double",
+              "cxx_type": "double"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": true,
+          "swig_declaration": "q(const).f(double).",
+          "signature": "double nsb_sample6::ProtectedEvaluator::Evaluate(double) const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Bias",
+          "python_name": "Bias",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "double nsb_sample6::ProtectedEvaluator::Bias() const",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "public_base_declarations": [],
+      "virtual_base_declarations": [],
+      "nsb_director_python_class": "nsb_ProtectedEvaluator"
+    }
+  ],
+  "typedefs": [
+    {
+      "cxx_name": "int16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_fast16_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_fast8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_least16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int_least32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_least64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_least8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "intmax_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "intptr_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "uint16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_fast16_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_fast8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_least16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint_least32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_least64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_least8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uintmax_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uintptr_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    }
+  ],
+  "enums": [
+    "nsb_sample6::Evaluator::Mode",
+    "nsb_sample6::ProtectedEvaluator::Mode"
+  ]
+}

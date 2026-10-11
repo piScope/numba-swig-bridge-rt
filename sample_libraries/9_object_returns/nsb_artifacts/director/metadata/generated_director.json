@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "kind": "generated_nsb_director_recipe",
+  "directors": [
+    {
+      "cxx_type": "nsb_sample9::GradientConsumer",
+      "factory": "create_nsb_director_nsb_sample9_GradientConsumer",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample9::GradientConsumer::Read() const",
+          "symbol": "nsb_sample9__GradientConsumer__Read___const",
+          "abstract": true
+        },
+        {
+          "identity": "nsb_sample9::GradientConsumer::SetOperator(const nsb_sample9::GradientBase&)",
+          "symbol": "nsb_sample9__GradientConsumer__SetOperator_const_nsb_sample9__GradientBase",
+          "abstract": true
+        }
+      ]
+    },
+    {
+      "cxx_type": "nsb_sample9::Provider",
+      "factory": "create_nsb_director_nsb_sample9_Provider",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample9::Provider::GetChild()",
+          "symbol": "nsb_sample9__Provider__GetChild",
+          "abstract": true
+        },
+        {
+          "identity": "nsb_sample9::Provider::MaybeChild(bool)",
+          "symbol": "nsb_sample9__Provider__MaybeChild_bool",
+          "abstract": true
+        }
+      ]
+    }
+  ]
+}

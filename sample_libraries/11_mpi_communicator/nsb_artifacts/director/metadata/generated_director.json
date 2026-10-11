@@ -1,0 +1,18 @@
+{
+  "schema_version": 2,
+  "kind": "generated_nsb_director_recipe",
+  "directors": [
+    {
+      "cxx_type": "CommCallback",
+      "factory": "create_nsb_director_CommCallback",
+      "declaring_header": "sample.hpp",
+      "methods": [
+        {
+          "identity": "CommCallback::Value() const",
+          "symbol": "CommCallback__Value___const",
+          "abstract": true
+        }
+      ]
+    }
+  ]
+}

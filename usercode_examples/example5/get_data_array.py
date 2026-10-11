@@ -1,9 +1,16 @@
 """Use typed 1-D, Fortran-layout 2-D, and strided 3-D data views from Numba."""
+
 from numba import njit
 from nsb_sample5 import registration  # noqa: F401
 from nsb_sample5_storage import (
-    Vector, IntVector, FloatVector, BoolVector, DenseMatrix, DenseTensor,
+    Vector,
+    IntVector,
+    FloatVector,
+    BoolVector,
+    DenseMatrix,
+    DenseTensor,
 )
+
 
 @njit
 def fill(vector, int_vector, float_vector, bool_vector, matrix, tensor):
@@ -23,6 +30,7 @@ def fill(vector, int_vector, float_vector, bool_vector, matrix, tensor):
     q = tensor.GetDataArray()
     q[2, 1, 2] = 99.0
     return v.sum() + iv.sum() + fv.sum() + bv.sum() + a[1, 2] + q[2, 1, 2]
+
 
 v, iv = Vector(3), IntVector(3)
 fv, bv = FloatVector(3), BoolVector(3)

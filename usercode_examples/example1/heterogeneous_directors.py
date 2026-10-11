@@ -7,7 +7,6 @@ import nsb_sample1_directors as directors
 import nsb_sample1_registration as sample_bridge
 import nsb_rt as nsb
 
-
 inner_binding = sample_bridge.director_binding("nsb_sample1::Inner")
 auxiliary_binding = sample_bridge.director_binding("nsb_sample1::Auxiliary")
 outer_binding = sample_bridge.director_binding("nsb_sample1::Outer")

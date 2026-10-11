@@ -1,0 +1,2 @@
+include *.cpp *.hpp *.i *.toml CMakeLists.txt setup.py nsb_sample1.py
+recursive-include nsb_artifacts *

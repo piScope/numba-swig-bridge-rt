@@ -5,11 +5,11 @@
 passed to another compiled helper, and `state={"comm": MPI.Comm}` in a director.
 
 Install the runtime and optional sample 11 with the same MPI implementation
-used by mpi4py. From the repository root, after generating the sample artifacts:
+used by mpi4py. Frozen artifacts are already included; install and run explicitly:
 
 ```sh
-CC=mpicc CXX=mpicxx python -m pip install ./sample_libraries/11_mpi_communicator
-mpiexec -n 2 python package/numba-swig-bridge-rt/usercode_examples/example11/mpi_communicator.py
+CC=mpicc CXX=mpicxx python -m nsb_rt.samples install 11
+mpiexec -n 2 python -m nsb_rt.samples run 11
 ```
 
 When using the example installed with the runtime, locate it under

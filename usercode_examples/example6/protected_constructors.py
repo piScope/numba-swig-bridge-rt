@@ -1,4 +1,5 @@
 """Protected constructor forwarding with runtime-compiled user overrides."""
+
 from numba import types
 import nsb_rt as nsb
 import nsb_sample6 as sample
@@ -34,19 +35,25 @@ class DefaultConcrete(sample.ProtectedConcrete):
 
 
 def run_test():
-    instances = [Evaluator(), Evaluator(2, 1.5, sample.ProtectedEvaluator.ADD, True, 4),
-                 Evaluator(2, 1.5, sample.ProtectedEvaluator.MULTIPLY, False, 4),
-                 Concrete(5), DefaultConcrete()]
+    instances = [
+        Evaluator(),
+        Evaluator(2, 1.5, sample.ProtectedEvaluator.ADD, True, 4),
+        Evaluator(2, 1.5, sample.ProtectedEvaluator.MULTIPLY, False, 4),
+        Concrete(5),
+        DefaultConcrete(),
+    ]
     try:
-        assert sample.invoke_protected(instances[0], 2.) == 9.
-        assert sample.invoke_protected(instances[1], 2.) == 9.5
-        assert sample.invoke_protected(instances[2], 2.) == 2.
-        assert sample.invoke_concrete(instances[3], 2.) == 10.
-        assert sample.invoke_concrete(instances[4], 2.) == 5.
+        assert sample.invoke_protected(instances[0], 2.0) == 9.0
+        assert sample.invoke_protected(instances[1], 2.0) == 9.5
+        assert sample.invoke_protected(instances[2], 2.0) == 2.0
+        assert sample.invoke_concrete(instances[3], 2.0) == 10.0
+        assert sample.invoke_concrete(instances[4], 2.0) == 5.0
         try:
+
             @nsb.director(state={"unused": types.intc})
             class Missing(sample.ProtectedEvaluator):
                 pass
+
         except TypeError as error:
             assert "override" in str(error)
         else:
@@ -64,5 +71,5 @@ def run_test():
             instance.close()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run_test()

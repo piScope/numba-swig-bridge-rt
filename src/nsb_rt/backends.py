@@ -15,15 +15,23 @@ from llvmlite import binding
 
 from ._version import STATE_ABI_VERSION
 
-
 # These are the C ABI entry points supplied by the StateHandle implementation.
 # Their registered LLVM names are backend-qualified, so two downstream state
 # backends can safely coexist in one process.
 STATE_ACCESSORS = (
-    "float_at", "double_at", "int_at", "int64_at", "bool_at",
-    "object_address_at", "object_meminfo_at", "set_object_native",
+    "float_at",
+    "double_at",
+    "int_at",
+    "int64_at",
+    "bool_at",
+    "object_address_at",
+    "object_meminfo_at",
+    "set_object_native",
     "set_object_borrowed",
-    "array_data_at", "array_shape_at", "array_stride_at", "set_array_native",
+    "array_data_at",
+    "array_shape_at",
+    "array_stride_at",
+    "set_array_native",
 )
 LEASE_OPERATIONS = ("lease_address", "lease_is_alive", "lease_close", "lease_release")
 _FUNCTIONS = (*STATE_ACCESSORS, *LEASE_OPERATIONS)
@@ -74,7 +82,9 @@ class StateBackend:
 _BACKENDS: dict[str, StateBackend] = {}
 
 
-def register_state_backend(identifier: str, module: ModuleType, *, state_abi: int) -> StateBackend:
+def register_state_backend(
+    identifier: str, module: ModuleType, *, state_abi: int
+) -> StateBackend:
     """Register one downstream state provider, rejecting incompatible reuse."""
     if not isinstance(identifier, str) or not identifier.isidentifier():
         raise ValueError("state backend identifier must be a Python identifier")
@@ -89,7 +99,9 @@ def register_state_backend(identifier: str, module: ModuleType, *, state_abi: in
     if existing is not None:
         if existing.module is module and existing.state_abi == state_abi:
             return existing
-        raise RuntimeError(f"state backend {identifier!r} is already registered by a different module or ABI")
+        raise RuntimeError(
+            f"state backend {identifier!r} is already registered by a different module or ABI"
+        )
     module_abi = getattr(module, "NUMBA_SWIG_BRIDGE_STATE_ABI_VERSION", None)
     if module_abi != state_abi:
         raise RuntimeError(
@@ -103,7 +115,9 @@ def register_state_backend(identifier: str, module: ModuleType, *, state_abi: in
     # name.  A cfunc compiled for backend ``mfem`` can consequently never
     # be rebound to another downstream library's state implementation.
     for operation in STATE_ACCESSORS:
-        binding.add_symbol(backend.symbol_name(operation), backend.function_address(operation))
+        binding.add_symbol(
+            backend.symbol_name(operation), backend.function_address(operation)
+        )
     _BACKENDS[identifier] = backend
     return backend
 

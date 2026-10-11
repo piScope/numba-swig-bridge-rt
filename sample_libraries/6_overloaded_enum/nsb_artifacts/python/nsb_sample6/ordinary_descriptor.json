@@ -1,0 +1,343 @@
+{
+  "schema_version": 4,
+  "conversions": [],
+  "kind": "numba_swig_ordinary_bridge_descriptor",
+  "bridge_id": "nsb_sample6",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample6_directors",
+        "swig_module": "nsb_sample6_directors",
+        "interface": "directors.i"
+      }
+    ]
+  },
+  "classes": [
+    {
+      "cxx_type": "nsb_sample6::Evaluator",
+      "owner_module": "nsb_sample6_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample6_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Evaluator",
+      "symbol": "nsb_sample6_Evaluator",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample6_Evaluator",
+      "owned_proxy_helper": "nsb_owned_nsb_sample6_Evaluator",
+      "methods": [
+        {
+          "identity": "nsb_sample6::Evaluator::Equations() const",
+          "symbol": "nsb_nsb_sample6_Evaluator_0_Equations",
+          "cxx_name": "Equations",
+          "python_name": "Equations",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample6::Evaluator::Dimension() const",
+          "symbol": "nsb_nsb_sample6_Evaluator_1_Dimension",
+          "cxx_name": "Dimension",
+          "python_name": "Dimension",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample6::Evaluator::Evaluate(double) const",
+          "symbol": "nsb_nsb_sample6_Evaluator_3_Evaluate",
+          "cxx_name": "Evaluate",
+          "python_name": "Evaluate",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample6::Evaluator::Bias(double) const",
+          "symbol": "nsb_nsb_sample6_Evaluator_4_Bias",
+          "cxx_name": "Bias",
+          "python_name": "Bias",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample6::Evaluator::Record(double) const",
+          "symbol": "nsb_nsb_sample6_Evaluator_5_Record",
+          "cxx_name": "Record",
+          "python_name": "Record",
+          "const": true,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample6_Evaluator_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Bias",
+        "Dimension",
+        "Equations",
+        "Evaluate",
+        "GetMode",
+        "Record"
+      ],
+      "skipped_methods": [
+        {
+          "signature": "nsb_sample6::Evaluator::Mode nsb_sample6::Evaluator::GetMode() const",
+          "reason": "method nsb_sample6::Evaluator::GetMode() const uses unsupported type 'nsb_sample6::Evaluator::Mode' ('nsb_sample6::Evaluator::Mode'): it is outside the supported scalar, selected-object, and annotated-array ABI"
+        }
+      ]
+    },
+    {
+      "cxx_type": "nsb_sample6::ProtectedConcrete",
+      "owner_module": "nsb_sample6_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample6_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "ProtectedConcrete",
+      "symbol": "nsb_sample6_ProtectedConcrete",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample6_ProtectedConcrete",
+      "owned_proxy_helper": "nsb_owned_nsb_sample6_ProtectedConcrete",
+      "methods": [
+        {
+          "identity": "nsb_sample6::ProtectedConcrete::Evaluate(double) const",
+          "symbol": "nsb_nsb_sample6_ProtectedConcrete_0_Evaluate",
+          "cxx_name": "Evaluate",
+          "python_name": "Evaluate",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample6_ProtectedConcrete_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Evaluate"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample6::ProtectedEvaluator",
+      "owner_module": "nsb_sample6_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample6_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "ProtectedEvaluator",
+      "symbol": "nsb_sample6_ProtectedEvaluator",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample6_ProtectedEvaluator",
+      "owned_proxy_helper": "nsb_owned_nsb_sample6_ProtectedEvaluator",
+      "methods": [
+        {
+          "identity": "nsb_sample6::ProtectedEvaluator::Evaluate(double) const",
+          "symbol": "nsb_nsb_sample6_ProtectedEvaluator_0_Evaluate",
+          "cxx_name": "Evaluate",
+          "python_name": "Evaluate",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample6::ProtectedEvaluator::Bias() const",
+          "symbol": "nsb_nsb_sample6_ProtectedEvaluator_1_Bias",
+          "cxx_name": "Bias",
+          "python_name": "Bias",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample6_ProtectedEvaluator_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Bias",
+        "Evaluate"
+      ],
+      "skipped_methods": []
+    }
+  ]
+}

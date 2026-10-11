@@ -1,0 +1,3 @@
+include README.md bridge.toml sample.i sample.hpp state.i
+recursive-include nsb_artifacts *.json *.py *.i *.hpp *.cpp
+recursive-include nsb_sample11 *.py

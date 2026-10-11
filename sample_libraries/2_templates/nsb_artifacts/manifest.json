@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "artifact_schema_version": 1,
+  "bridge_id": "nsb_sample2",
+  "generator_version": "0.15.2",
+  "required_runtime_version": "0.15.0",
+  "state_backend": "nsb_sample2",
+  "state_module": "nsb_director_state_bindings",
+  "state_abi": 7,
+  "swig_version": "SWIG Version 4.5.1",
+  "inventory": "metadata/inventory.json",
+  "ordinary_descriptor": "metadata/ordinary_descriptor.json",
+  "director_descriptor": "metadata/director_descriptor.json",
+  "extensions": {
+    "nsb_sample2_arrays": {
+      "interface": "arrays.i",
+      "helper_fragment": "generated/nsb_sample2_arrays/numba-swig-bridge.i",
+      "include_dirs": [
+        "."
+      ],
+      "framework_include": true,
+      "swig_options": [],
+      "wrapper_definitions": [
+        "NUMBA_SWIG_BRIDGE_GENERATED"
+      ]
+    }
+  },
+  "registration_module": "nsb_sample2.registration",
+  "registration": "python/nsb_sample2/registration.py",
+  "python_files": [
+    "python/nsb_sample2/registration.py",
+    "python/nsb_sample2/ordinary_descriptor.json",
+    "python/nsb_sample2/director_descriptor.json"
+  ],
+  "director": null,
+  "generated_files": [
+    "generated/nsb_sample2_arrays/numba-swig-bridge.i",
+    "manifest.json",
+    "metadata/director_descriptor.json",
+    "metadata/inventory.json",
+    "metadata/ordinary_descriptor.json",
+    "python/nsb_sample2/director_descriptor.json",
+    "python/nsb_sample2/ordinary_descriptor.json",
+    "python/nsb_sample2/registration.py"
+  ]
+}

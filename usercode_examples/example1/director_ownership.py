@@ -19,8 +19,14 @@ class OffsetEvaluator(directors.Evaluator):
         return value + self.offset
 
     @nsb.override(
-        "Evaluate", "nsb_sample1::Buffer", "nsb_sample1::Buffer",
-        "nsb_sample1::Counter", "double", "int", "std::int64_t", "bool",
+        "Evaluate",
+        "nsb_sample1::Buffer",
+        "nsb_sample1::Buffer",
+        "nsb_sample1::Counter",
+        "double",
+        "int",
+        "std::int64_t",
+        "bool",
     )
     def evaluate(self, source, destination, counter, scale, bias, count, reverse):
         return self.offset

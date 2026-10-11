@@ -1,0 +1,620 @@
+{
+  "schema_version": 4,
+  "conversions": [],
+  "kind": "numba_swig_ordinary_bridge_descriptor",
+  "bridge_id": "nsb_sample4",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample4_directors",
+        "swig_module": "nsb_sample4_directors",
+        "interface": "directors.i"
+      }
+    ]
+  },
+  "classes": [
+    {
+      "cxx_type": "nsb_sample4::Evaluator",
+      "owner_module": "nsb_sample4_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample4_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Evaluator",
+      "symbol": "nsb_sample4_Evaluator",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample4_Evaluator",
+      "owned_proxy_helper": "nsb_owned_nsb_sample4_Evaluator",
+      "methods": [
+        {
+          "identity": "nsb_sample4::Evaluator::Equations() const",
+          "symbol": "nsb_nsb_sample4_Evaluator_0_Equations",
+          "cxx_name": "Equations",
+          "python_name": "Equations",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample4::Evaluator::Dimension() const",
+          "symbol": "nsb_nsb_sample4_Evaluator_1_Dimension",
+          "cxx_name": "Dimension",
+          "python_name": "Dimension",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample4::Evaluator::Evaluate(double) const",
+          "symbol": "nsb_nsb_sample4_Evaluator_2_Evaluate",
+          "cxx_name": "Evaluate",
+          "python_name": "Evaluate",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample4::Evaluator::Bias(double) const",
+          "symbol": "nsb_nsb_sample4_Evaluator_3_Bias",
+          "cxx_name": "Bias",
+          "python_name": "Bias",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample4_Evaluator_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Bias",
+        "Dimension",
+        "Equations",
+        "Evaluate"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample4::FloatEvaluator",
+      "owner_module": "nsb_sample4_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample4_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "FloatEvaluator",
+      "symbol": "nsb_sample4_FloatEvaluator",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample4_FloatEvaluator",
+      "owned_proxy_helper": "nsb_owned_nsb_sample4_FloatEvaluator",
+      "methods": [
+        {
+          "identity": "nsb_sample4::FloatEvaluator::Gain() const",
+          "symbol": "nsb_nsb_sample4_FloatEvaluator_0_Gain",
+          "cxx_name": "Gain",
+          "python_name": "Gain",
+          "const": true,
+          "return": {
+            "kind": "float",
+            "cxx_type": "float",
+            "c_abi_type": "float",
+            "numba_type": "types.float32",
+            "llvm_type": "float",
+            "declared_cxx_type": "nsb_sample4::scalar_t"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample4::FloatEvaluator::Apply(nsb_sample4::scalar_t) const",
+          "symbol": "nsb_nsb_sample4_FloatEvaluator_1_Apply",
+          "cxx_name": "Apply",
+          "python_name": "Apply",
+          "const": true,
+          "return": {
+            "kind": "float",
+            "cxx_type": "float",
+            "c_abi_type": "float",
+            "numba_type": "types.float32",
+            "llvm_type": "float",
+            "declared_cxx_type": "nsb_sample4::scalar_t"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "nsb_sample4::scalar_t",
+              "kind": "float",
+              "cxx_type": "float",
+              "c_abi_type": "float",
+              "numba_type": "types.float32",
+              "llvm_type": "float"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "nsb_sample4::scalar_t",
+              "kind": "float",
+              "cxx_type": "float",
+              "c_abi_type": "float",
+              "numba_type": "types.float32",
+              "llvm_type": "float",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample4::FloatEvaluator::SumValues(const float*, std::int64_t) const",
+          "symbol": "nsb_nsb_sample4_FloatEvaluator_2_SumValues",
+          "cxx_name": "SumValues",
+          "python_name": "SumValues",
+          "const": true,
+          "return": {
+            "kind": "float",
+            "cxx_type": "float",
+            "c_abi_type": "float",
+            "numba_type": "types.float32",
+            "llvm_type": "float",
+            "declared_cxx_type": "nsb_sample4::scalar_t"
+          },
+          "parameters": [
+            {
+              "recipe": "borrowed-contiguous-array-1d-f32-input",
+              "parameter_indices": [
+                0,
+                1
+              ],
+              "pointer_parameter": "values",
+              "count_parameter": "count",
+              "kind": "array",
+              "numpy_dtype": "float32",
+              "numba_dtype": "types.float32",
+              "rank": 1,
+              "layout": "C",
+              "access": "input",
+              "memory": "host",
+              "retention": "forbidden",
+              "transfer": "zero-copy",
+              "cxx_pointer_type": "const float*",
+              "c_abi_pointer_type": "const float*",
+              "bool_copy": false,
+              "name": "values",
+              "argument_index": 0
+            }
+          ],
+          "abi_parameters": [
+            {
+              "kind": "array_data",
+              "array_argument": 0,
+              "cxx_type": "const float*",
+              "c_abi_type": "const float*",
+              "llvm_type": "voidptr",
+              "bool_copy": false
+            },
+            {
+              "kind": "array_count",
+              "array_argument": 0,
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "llvm_type": "int64"
+            }
+          ],
+          "lowering": {
+            "recipe": "borrowed-contiguous-array-1d-f32-input",
+            "parameter_indices": [
+              0,
+              1
+            ],
+            "pointer_parameter": "values",
+            "count_parameter": "count",
+            "kind": "array",
+            "numpy_dtype": "float32",
+            "numba_dtype": "types.float32",
+            "rank": 1,
+            "layout": "C",
+            "access": "input",
+            "memory": "host",
+            "retention": "forbidden",
+            "transfer": "zero-copy",
+            "cxx_pointer_type": "const float*",
+            "c_abi_pointer_type": "const float*",
+            "bool_copy": false
+          }
+        },
+        {
+          "identity": "nsb_sample4::FloatEvaluator::Scale(nsb_sample4::scalar_t) const",
+          "symbol": "nsb_nsb_sample4_FloatEvaluator_3_Scale",
+          "cxx_name": "Scale",
+          "python_name": "Scale",
+          "const": true,
+          "return": {
+            "kind": "float",
+            "cxx_type": "float",
+            "c_abi_type": "float",
+            "numba_type": "types.float32",
+            "llvm_type": "float",
+            "declared_cxx_type": "nsb_sample4::scalar_t"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "nsb_sample4::scalar_t",
+              "kind": "float",
+              "cxx_type": "float",
+              "c_abi_type": "float",
+              "numba_type": "types.float32",
+              "llvm_type": "float"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "nsb_sample4::scalar_t",
+              "kind": "float",
+              "cxx_type": "float",
+              "c_abi_type": "float",
+              "numba_type": "types.float32",
+              "llvm_type": "float",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample4_FloatEvaluator_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Apply",
+        "Gain",
+        "Scale",
+        "SumValues"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample4::FloatOps",
+      "owner_module": "nsb_sample4_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample4_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "FloatOps",
+      "symbol": "nsb_sample4_FloatOps",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample4_FloatOps",
+      "owned_proxy_helper": "nsb_owned_nsb_sample4_FloatOps",
+      "methods": [
+        {
+          "identity": "nsb_sample4::FloatOps::RoundTrip(nsb_sample4::scalar_t) const",
+          "symbol": "nsb_nsb_sample4_FloatOps_0_RoundTrip",
+          "cxx_name": "RoundTrip",
+          "python_name": "RoundTrip",
+          "const": true,
+          "return": {
+            "kind": "float",
+            "cxx_type": "float",
+            "c_abi_type": "float",
+            "numba_type": "types.float32",
+            "llvm_type": "float",
+            "declared_cxx_type": "nsb_sample4::scalar_t"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "nsb_sample4::scalar_t",
+              "kind": "float",
+              "cxx_type": "float",
+              "c_abi_type": "float",
+              "numba_type": "types.float32",
+              "llvm_type": "float"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "nsb_sample4::scalar_t",
+              "kind": "float",
+              "cxx_type": "float",
+              "c_abi_type": "float",
+              "numba_type": "types.float32",
+              "llvm_type": "float",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample4::FloatOps::DoubleRoundTrip(nsb_sample4::real64_t) const",
+          "symbol": "nsb_nsb_sample4_FloatOps_1_DoubleRoundTrip",
+          "cxx_name": "DoubleRoundTrip",
+          "python_name": "DoubleRoundTrip",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "nsb_sample4::real64_t"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "nsb_sample4::real64_t",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "nsb_sample4::real64_t",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample4::FloatOps::Precision(float) const",
+          "symbol": "nsb_nsb_sample4_FloatOps_2_Precision",
+          "cxx_name": "Precision",
+          "python_name": "Precision",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "float",
+              "kind": "float",
+              "cxx_type": "float",
+              "c_abi_type": "float",
+              "numba_type": "types.float32",
+              "llvm_type": "float"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "float",
+              "kind": "float",
+              "cxx_type": "float",
+              "c_abi_type": "float",
+              "numba_type": "types.float32",
+              "llvm_type": "float",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample4::FloatOps::Precision(double) const",
+          "symbol": "nsb_nsb_sample4_FloatOps_3_Precision",
+          "cxx_name": "Precision",
+          "python_name": "Precision",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample4::FloatOps::SumValues(const nsb_sample4::scalar_t*, std::int64_t) const",
+          "symbol": "nsb_nsb_sample4_FloatOps_4_SumValues",
+          "cxx_name": "SumValues",
+          "python_name": "SumValues",
+          "const": true,
+          "return": {
+            "kind": "float",
+            "cxx_type": "float",
+            "c_abi_type": "float",
+            "numba_type": "types.float32",
+            "llvm_type": "float",
+            "declared_cxx_type": "nsb_sample4::scalar_t"
+          },
+          "parameters": [
+            {
+              "recipe": "borrowed-contiguous-array-1d-f32-input",
+              "parameter_indices": [
+                0,
+                1
+              ],
+              "pointer_parameter": "values",
+              "count_parameter": "count",
+              "kind": "array",
+              "numpy_dtype": "float32",
+              "numba_dtype": "types.float32",
+              "rank": 1,
+              "layout": "C",
+              "access": "input",
+              "memory": "host",
+              "retention": "forbidden",
+              "transfer": "zero-copy",
+              "cxx_pointer_type": "const float*",
+              "c_abi_pointer_type": "const float*",
+              "bool_copy": false,
+              "name": "values",
+              "argument_index": 0
+            }
+          ],
+          "abi_parameters": [
+            {
+              "kind": "array_data",
+              "array_argument": 0,
+              "cxx_type": "const float*",
+              "c_abi_type": "const float*",
+              "llvm_type": "voidptr",
+              "bool_copy": false
+            },
+            {
+              "kind": "array_count",
+              "array_argument": 0,
+              "cxx_type": "std::int64_t",
+              "c_abi_type": "std::int64_t",
+              "llvm_type": "int64"
+            }
+          ],
+          "lowering": {
+            "recipe": "borrowed-contiguous-array-1d-f32-input",
+            "parameter_indices": [
+              0,
+              1
+            ],
+            "pointer_parameter": "values",
+            "count_parameter": "count",
+            "kind": "array",
+            "numpy_dtype": "float32",
+            "numba_dtype": "types.float32",
+            "rank": 1,
+            "layout": "C",
+            "access": "input",
+            "memory": "host",
+            "retention": "forbidden",
+            "transfer": "zero-copy",
+            "cxx_pointer_type": "const float*",
+            "c_abi_pointer_type": "const float*",
+            "bool_copy": false
+          }
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample4::FloatOps::FloatOps()",
+          "symbol": "nsb_nsb_sample4_FloatOps_construct_0",
+          "parameters": []
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample4_FloatOps_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "DoubleRoundTrip",
+        "Precision",
+        "RoundTrip",
+        "SumValues"
+      ],
+      "skipped_methods": []
+    }
+  ]
+}

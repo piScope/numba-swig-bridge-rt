@@ -7,7 +7,6 @@ import nsb_sample1_directors as directors
 import nsb_sample1_registration as sample_bridge
 import nsb_rt as nsb
 
-
 binding = sample_bridge.director_binding("nsb_sample1::Evaluator")
 
 
@@ -93,7 +92,12 @@ try:
     )
     pointer_total = directors.invoke_evaluate_values(base, source)
     ordinary_total = transform(directors.Arithmetic(), source, destination, counter)
-    assert (callback_total, pointer_total, ordinary_total, counter.Value()) == (18.5, 8.5, 17.0, 6)
+    assert (callback_total, pointer_total, ordinary_total, counter.Value()) == (
+        18.5,
+        8.5,
+        17.0,
+        6,
+    )
     print("Numba director and ordinary bridge completed")
 finally:
     evaluator.close()

@@ -1,4 +1,5 @@
 """Scalar/enum member access and const rejection through installed bridges."""
+
 from numba import njit, types
 from numba.core.errors import TypingError
 import nsb_rt as nsb
@@ -61,46 +62,54 @@ def run_test():
     finally:
         callback.close()
 
-    for name in ('fixed', 'immutable', 'restricted', 'hidden', 'ignored'):
+    for name in ("fixed", "immutable", "restricted", "hidden", "ignored"):
         namespace = {}
-        exec(f'def write(data):\n    data.{name} = 0\n', namespace)
-        rejects(namespace['write'], data)
+        exec(f"def write(data):\n    data.{name} = 0\n", namespace)
+        rejects(namespace["write"], data)
 
     @njit
     def read_const(data):
         view = data.ConstView()
         return view.count + view.weight + view.Total()
+
     assert read_const(data) == data.count + data.weight + data.Total()
 
     def write_const(data):
         view = data.ConstView()
         view.count = 0
+
     rejects(write_const, data)
 
     def call_mutable(data):
         data.ConstView().Increment()
+
     rejects(call_mutable, data)
 
     def pass_mutable(data):
         data.TakeMutable(data.ConstView())
+
     rejects(pass_mutable, data)
 
     def cast_write(data):
         view = nsb.upcast(data.ConstView(), sample.Data)
         view.count = 0
+
     rejects(cast_write, data)
 
     def escape(data):
         return data.ConstView()
+
     rejects(escape, data)
 
     try:
+
         @nsb.director(state={"unused": types.intc})
         class BadCallback(sample.Callback):
             @nsb.override
             def Apply(self, source, target):
                 source.count = 1
                 return 0.0
+
     except TypingError:
         pass
     else:
@@ -119,6 +128,7 @@ def run_test():
         assert slot_child is not None
         slot_child.weight = 6.0
         return const_child.count + slot_child.weight
+
     assert pointer_access(container) == 27
     assert container.ReadCount() == 21
 
@@ -126,9 +136,11 @@ def run_test():
     @njit
     def retain_python_owner(container):
         return container.pointer
+
     retained = retain_python_owner(container)
     del container
     import gc
+
     gc.collect()
     assert retained.count == 21
 
@@ -139,37 +151,50 @@ def run_test():
         assert child is not None
         child.count = 31
         return nsb.borrowed_from(child, owner)
+
     retained_native = retain_native_owner()
     gc.collect()
     assert retained_native.count == 31
 
     container = sample.Container()
-    for field in ('pointer', 'const_pointee', 'const_slot', 'both_const', 'null_pointer'):
+    for field in (
+        "pointer",
+        "const_pointee",
+        "const_slot",
+        "both_const",
+        "null_pointer",
+    ):
         namespace = {}
-        exec(f'def write(obj):\n    obj.{field} = obj.pointer\n', namespace)
-        rejects(namespace['write'], container)
-    for field in ('const_pointee', 'both_const'):
+        exec(f"def write(obj):\n    obj.{field} = obj.pointer\n", namespace)
+        rejects(namespace["write"], container)
+    for field in ("const_pointee", "both_const"):
         namespace = {}
-        exec(f'def write(obj):\n    child = obj.{field}\n    if child is not None:\n        child.count = 0\n', namespace)
-        rejects(namespace['write'], container)
+        exec(
+            f"def write(obj):\n    child = obj.{field}\n    if child is not None:\n        child.count = 0\n",
+            namespace,
+        )
+        rejects(namespace["write"], container)
 
     def opaque_write(container):
         child = container.opaque
         if child is not None:
             child.Write(9)
+
     rejects(opaque_write, container)
 
     def opaque_self_write(container):
         child = container.opaque
         if child is not None:
             child.Self().Write(9)
+
     rejects(opaque_self_write, container)
 
     def unbridged(container):
         return container.unsupported
+
     rejects(unbridged, container)
     print("data members: Normal End")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run_test()

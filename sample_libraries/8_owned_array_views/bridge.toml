@@ -1,0 +1,11 @@
+bridge_id = "nsb_sample8"
+source_root = "."
+output_dir = "nsb_artifacts"
+registration_module = "nsb_sample8.registration"
+director_helper_module = "nsb_sample8_director_bindings"
+state_backend = "nsb_sample8"
+state_module = "nsb_sample8_state_bindings"
+[[interfaces]]
+interface = "storage.i"
+python_module = "nsb_sample8_storage"
+include_dirs = ["."]

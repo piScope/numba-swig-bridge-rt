@@ -1,0 +1,78 @@
+{
+  "schema_version": 4,
+  "conversions": [],
+  "kind": "numba_swig_ordinary_bridge_descriptor",
+  "bridge_id": "nsb_sample7",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample7_directors",
+        "swig_module": "nsb_sample7_directors",
+        "interface": "directors.i"
+      }
+    ]
+  },
+  "classes": [
+    {
+      "cxx_type": "nsb_sample7::Accumulator",
+      "owner_module": "nsb_sample7_directors",
+      "function_address_helper": "nsb_function_address_nsb_sample7_directors",
+      "source_interface": "directors.i",
+      "python_proxy": "Accumulator",
+      "symbol": "nsb_sample7_Accumulator",
+      "generated_pointer_accessor": true,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample7_Accumulator",
+      "owned_proxy_helper": "nsb_owned_nsb_sample7_Accumulator",
+      "methods": [
+        {
+          "identity": "nsb_sample7::Accumulator::Accumulate(double) const",
+          "symbol": "nsb_nsb_sample7_Accumulator_0_Accumulate",
+          "cxx_name": "Accumulate",
+          "python_name": "Accumulate",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample7_Accumulator_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Accumulate"
+      ],
+      "skipped_methods": []
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "artifact_schema_version": 1,
+  "bridge_id": "nsb_sample11",
+  "generator_version": "0.15.2",
+  "required_runtime_version": "0.15.1",
+  "state_backend": "nsb_sample11",
+  "state_module": "nsb_sample11_state",
+  "state_abi": 7,
+  "swig_version": "SWIG Version 4.5.1",
+  "inventory": "metadata/inventory.json",
+  "ordinary_descriptor": "metadata/ordinary_descriptor.json",
+  "director_descriptor": "metadata/director_descriptor.json",
+  "extensions": {
+    "nsb_sample11_api": {
+      "interface": "sample.i",
+      "helper_fragment": "generated/nsb_sample11_api/numba-swig-bridge.i",
+      "include_dirs": [
+        "."
+      ],
+      "framework_include": true,
+      "swig_options": [],
+      "wrapper_definitions": [
+        "NUMBA_SWIG_BRIDGE_GENERATED"
+      ]
+    }
+  },
+  "registration_module": "nsb_sample11.registration",
+  "registration": "python/nsb_sample11/registration.py",
+  "python_files": [
+    "python/nsb_sample11/registration.py",
+    "python/nsb_sample11/ordinary_descriptor.json",
+    "python/nsb_sample11/director_descriptor.json"
+  ],
+  "director": {
+    "python_module": "nsb_sample11_director_bindings",
+    "sources": [
+      "director/cpp/nsb_director.cpp"
+    ],
+    "headers": [
+      "director/cpp/nsb_director.hpp"
+    ],
+    "swig_interface": "director/swig/nsb-director-bridge.i",
+    "metadata": "director/metadata/generated_director.json"
+  },
+  "mpi": {
+    "python_module": "_nsb_sample11_mpi",
+    "capability": "mpi_comm_v1",
+    "sources": [
+      "mpi/cpp/nsb_mpi.cpp"
+    ],
+    "headers": [
+      "mpi/cpp/nsb_mpi.hpp"
+    ],
+    "build_dependencies": [
+      "mpi4py",
+      "MPI C++ headers and libraries"
+    ],
+    "required_runtime_version": "0.15.1"
+  },
+  "generated_files": [
+    "director/cpp/nsb_director.cpp",
+    "director/cpp/nsb_director.hpp",
+    "director/metadata/generated_director.json",
+    "director/swig/nsb-director-bridge.i",
+    "generated/nsb_sample11_api/numba-swig-bridge.i",
+    "manifest.json",
+    "metadata/director_descriptor.json",
+    "metadata/inventory.json",
+    "metadata/ordinary_descriptor.json",
+    "mpi/cpp/nsb_mpi.cpp",
+    "mpi/cpp/nsb_mpi.hpp",
+    "python/nsb_sample11/director_descriptor.json",
+    "python/nsb_sample11/ordinary_descriptor.json",
+    "python/nsb_sample11/registration.py"
+  ]
+}

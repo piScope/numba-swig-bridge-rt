@@ -1,4 +1,7 @@
 recursive-include src/nsb_rt/include *.i
 recursive-include src/nsb_rt/cpp *.hpp *.cpp
-graft usercode_examples
+recursive-include usercode_examples *.py *.md *.sh
+recursive-include sample_libraries *.py *.md *.toml *.json *.i *.cpp *.hpp *.txt *.in
+global-exclude *.py[cod] *.so *.a *.o
 include LICENSE
+include .github/README.md

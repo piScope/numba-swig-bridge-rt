@@ -1,4 +1,5 @@
 """Inherited methods, explicit base views, and checked downcasts inside @njit."""
+
 from numba import njit
 from nsb_sample3 import Base, Derived
 import nsb_rt as nsb
@@ -19,15 +20,15 @@ def call_derived_method(obj):
 base = Base(7)
 derived = Derived(7)
 assert derived.BaseMethod() == 7
-print('Python: Derived.BaseMethod() passed', flush=True)
+print("Python: Derived.BaseMethod() passed", flush=True)
 assert call_base_method(base) == 7
-print('Numba: Base.BaseMethod() passed', flush=True)
+print("Numba: Base.BaseMethod() passed", flush=True)
 assert call_derived_method(derived) == 14
-print('Numba: Derived.DerivedMethod() passed', flush=True)
+print("Numba: Derived.DerivedMethod() passed", flush=True)
 
 # The actual question: compile the same base method on the derived object.
 assert call_base_method(derived) == 7
-print('Numba: Derived.BaseMethod() passed', flush=True)
+print("Numba: Derived.BaseMethod() passed", flush=True)
 
 assert call_base_method(GrandDerived(8)) == 8
 
@@ -72,8 +73,10 @@ def checked_downcast(base):
 try:
     checked_downcast(Base(7))
 except TypeError:
-    print('Checked downcast failure raised TypeError', flush=True)
+    print("Checked downcast failure raised TypeError", flush=True)
 else:
-    raise AssertionError('a Base instance is not a Derived instance')
+    raise AssertionError("a Base instance is not a Derived instance")
 
-print('Automatic inheritance, explicit upcasts, and checked downcasts passed', flush=True)
+print(
+    "Automatic inheritance, explicit upcasts, and checked downcasts passed", flush=True
+)

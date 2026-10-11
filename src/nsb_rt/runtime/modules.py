@@ -6,7 +6,9 @@ from typing import Any
 
 def resolve_modules(modules: Mapping[str, Any], records: list[dict]) -> dict[str, Any]:
     if not isinstance(modules, Mapping):
-        raise TypeError("bridge registration requires a mapping of Python module names to modules")
+        raise TypeError(
+            "bridge registration requires a mapping of Python module names to modules"
+        )
     required = set()
     seen = set()
     for record in records:

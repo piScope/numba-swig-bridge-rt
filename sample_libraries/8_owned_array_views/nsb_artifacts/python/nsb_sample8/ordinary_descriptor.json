@@ -1,0 +1,535 @@
+{
+  "schema_version": 4,
+  "conversions": [],
+  "kind": "numba_swig_ordinary_bridge_descriptor",
+  "bridge_id": "nsb_sample8",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample8_storage",
+        "swig_module": "nsb_sample8_storage",
+        "interface": "storage.i"
+      }
+    ]
+  },
+  "classes": [
+    {
+      "cxx_type": "nsb_sample8::DenseMatrix",
+      "owner_module": "nsb_sample8_storage",
+      "function_address_helper": "nsb_function_address_nsb_sample8_storage",
+      "source_interface": "storage.i",
+      "python_proxy": "DenseMatrix",
+      "symbol": "nsb_sample8_DenseMatrix",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample8_DenseMatrix",
+      "owned_proxy_helper": "nsb_owned_nsb_sample8_DenseMatrix",
+      "methods": [
+        {
+          "identity": "nsb_sample8::DenseMatrix::Height() const",
+          "symbol": "nsb_nsb_sample8_DenseMatrix_0_Height",
+          "cxx_name": "Height",
+          "python_name": "Height",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample8::DenseMatrix::Width() const",
+          "symbol": "nsb_nsb_sample8_DenseMatrix_1_Width",
+          "cxx_name": "Width",
+          "python_name": "Width",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample8::DenseMatrix::GetData() const",
+          "symbol": "nsb_nsb_sample8_DenseMatrix_2_GetData",
+          "cxx_name": "GetData",
+          "python_name": "GetData",
+          "const": true,
+          "return": {
+            "kind": "scalar_pointer",
+            "cxx_type": "double*",
+            "c_abi_type": "double*",
+            "numpy_dtype": "float64",
+            "const": false,
+            "declared_cxx_type": "double*"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample8::DenseMatrix::Get(int, int) const",
+          "symbol": "nsb_nsb_sample8_DenseMatrix_3_Get",
+          "cxx_name": "Get",
+          "python_name": "Get",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "row",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "col",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "row",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            },
+            {
+              "name": "col",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 1
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample8::DenseMatrix::Set(int, int, double)",
+          "symbol": "nsb_nsb_sample8_DenseMatrix_4_Set",
+          "cxx_name": "Set",
+          "python_name": "Set",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [
+            {
+              "name": "row",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "col",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "row",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            },
+            {
+              "name": "col",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 1
+            },
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 2
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample8::DenseMatrix::Sum() const",
+          "symbol": "nsb_nsb_sample8_DenseMatrix_5_Sum",
+          "cxx_name": "Sum",
+          "python_name": "Sum",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample8::DenseMatrix::DenseMatrix(double*, int, int)",
+          "symbol": "nsb_nsb_sample8_DenseMatrix_construct_0",
+          "parameters": [
+            {
+              "name": "data",
+              "declared_cxx_type": "double*",
+              "kind": "scalar_pointer",
+              "cxx_type": "double*",
+              "c_abi_type": "double*",
+              "numba_type": "scalar_pointer",
+              "llvm_type": "voidptr",
+              "numpy_dtype": "float64"
+            },
+            {
+              "name": "rows",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            },
+            {
+              "name": "cols",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample8_DenseMatrix_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Get",
+        "GetData",
+        "Height",
+        "Set",
+        "Sum",
+        "Width"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample8::Vector",
+      "owner_module": "nsb_sample8_storage",
+      "function_address_helper": "nsb_function_address_nsb_sample8_storage",
+      "source_interface": "storage.i",
+      "python_proxy": "Vector",
+      "symbol": "nsb_sample8_Vector",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample8_Vector",
+      "owned_proxy_helper": "nsb_owned_nsb_sample8_Vector",
+      "methods": [
+        {
+          "identity": "nsb_sample8::Vector::Size() const",
+          "symbol": "nsb_nsb_sample8_Vector_0_Size",
+          "cxx_name": "Size",
+          "python_name": "Size",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample8::Vector::GetData() const",
+          "symbol": "nsb_nsb_sample8_Vector_1_GetData",
+          "cxx_name": "GetData",
+          "python_name": "GetData",
+          "const": true,
+          "return": {
+            "kind": "scalar_pointer",
+            "cxx_type": "double*",
+            "c_abi_type": "double*",
+            "numpy_dtype": "float64",
+            "const": false,
+            "declared_cxx_type": "double*"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample8::Vector::Sum() const",
+          "symbol": "nsb_nsb_sample8_Vector_2_Sum",
+          "cxx_name": "Sum",
+          "python_name": "Sum",
+          "const": true,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample8::Vector::Add(double)",
+          "symbol": "nsb_nsb_sample8_Vector_3_Add",
+          "cxx_name": "Add",
+          "python_name": "Add",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "double",
+              "kind": "double",
+              "cxx_type": "double",
+              "c_abi_type": "double",
+              "numba_type": "types.float64",
+              "llvm_type": "double",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample8::Vector::GetDataArray() const",
+          "symbol": "nsb_nsb_sample8_Vector_4_array_view",
+          "cxx_name": "GetDataArray",
+          "python_name": "GetDataArray",
+          "const": true,
+          "return": {
+            "kind": "array_view_1d",
+            "dtype": "float64",
+            "data": "GetData",
+            "size": "Size",
+            "mutable": "true"
+          },
+          "parameters": [],
+          "abi_parameters": []
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample8::Vector::Vector(double*, int)",
+          "symbol": "nsb_nsb_sample8_Vector_construct_0",
+          "parameters": [
+            {
+              "name": "data",
+              "declared_cxx_type": "double*",
+              "kind": "scalar_pointer",
+              "cxx_type": "double*",
+              "c_abi_type": "double*",
+              "numba_type": "scalar_pointer",
+              "llvm_type": "voidptr",
+              "numpy_dtype": "float64"
+            },
+            {
+              "name": "size",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample8_Vector_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Add",
+        "GetData",
+        "GetDataArray",
+        "Size",
+        "Sum"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample8::ViewCallback",
+      "owner_module": "nsb_sample8_storage",
+      "function_address_helper": "nsb_function_address_nsb_sample8_storage",
+      "source_interface": "storage.i",
+      "python_proxy": "ViewCallback",
+      "symbol": "nsb_sample8_ViewCallback",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample8_ViewCallback",
+      "owned_proxy_helper": "nsb_owned_nsb_sample8_ViewCallback",
+      "methods": [
+        {
+          "identity": "nsb_sample8::ViewCallback::Apply(const nsb_sample8::Vector&, nsb_sample8::Vector&)",
+          "symbol": "nsb_nsb_sample8_ViewCallback_0_Apply",
+          "cxx_name": "Apply",
+          "python_name": "Apply",
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "input",
+              "declared_cxx_type": "const nsb_sample8::Vector&",
+              "kind": "object",
+              "cxx_type": "nsb_sample8::Vector",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            },
+            {
+              "name": "output",
+              "declared_cxx_type": "nsb_sample8::Vector&",
+              "kind": "object",
+              "cxx_type": "nsb_sample8::Vector",
+              "passing": "reference",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "input",
+              "declared_cxx_type": "const nsb_sample8::Vector&",
+              "kind": "object",
+              "cxx_type": "nsb_sample8::Vector",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 0
+            },
+            {
+              "name": "output",
+              "declared_cxx_type": "nsb_sample8::Vector&",
+              "kind": "object",
+              "cxx_type": "nsb_sample8::Vector",
+              "passing": "reference",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 1
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample8_ViewCallback_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Apply"
+      ],
+      "skipped_methods": []
+    }
+  ]
+}

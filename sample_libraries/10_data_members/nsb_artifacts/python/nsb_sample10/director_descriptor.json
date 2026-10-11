@@ -1,0 +1,75 @@
+{
+  "schema_version": 2,
+  "kind": "numba_swig_director_descriptor",
+  "bridge_id": "nsb_sample10",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample10_directors",
+        "swig_module": "nsb_sample10_directors",
+        "interface": "directors.i"
+      }
+    ]
+  },
+  "directors": [
+    {
+      "cxx_type": "nsb_sample10::Callback",
+      "owner_module": "nsb_sample10_directors",
+      "source_interface": "directors.i",
+      "python_facade": "nsb_Callback",
+      "python_proxy": "Callback",
+      "selection": "automatic",
+      "methods": [
+        {
+          "identity": "nsb_sample10::Callback::Apply(const nsb_sample10::Data&, nsb_sample10::Data&)",
+          "symbol": "nsb_sample10__Callback__Apply_const_nsb_sample10__Data___nsb_sample10__Data",
+          "cxx_name": "Apply",
+          "signature": "double nsb_sample10::Callback::Apply(const nsb_sample10::Data&, nsb_sample10::Data&)",
+          "abstract": true,
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "source",
+              "cxx_type": "nsb_sample10::Data",
+              "declared_cxx_type": "const nsb_sample10::Data&",
+              "kind": "object",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            },
+            {
+              "name": "target",
+              "cxx_type": "nsb_sample10::Data",
+              "declared_cxx_type": "nsb_sample10::Data&",
+              "kind": "object",
+              "passing": "reference",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "skipped_virtuals": [],
+      "constructors": [
+        {
+          "parameters": []
+        }
+      ],
+      "skipped_constructors": []
+    }
+  ],
+  "state_backend": "nsb_sample10"
+}

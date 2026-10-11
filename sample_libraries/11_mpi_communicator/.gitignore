@@ -1,0 +1,9 @@
+/build/
+/dist/
+/*.egg-info/
+/sample_wrap.cpp
+/state_wrap.cpp
+/nsb_artifacts/python/nsb_sample11.py
+/nsb_artifacts/python/nsb_sample11_state.py
+/nsb_artifacts/python/nsb_sample11_director_bindings.py
+/nsb_artifacts/director/swig/*_wrap.cpp

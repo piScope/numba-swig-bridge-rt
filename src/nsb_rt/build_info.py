@@ -12,8 +12,10 @@ def get_build_info() -> dict:
     metadata = Path(__file__).with_name("build_info.json")
     build = json.loads(metadata.read_text()) if metadata.is_file() else {}
     return {
-        "version": __version__, "abi_version": STATE_ABI_VERSION,
-        "include_dir": str(include_dir()), "cpp_dir": str(cpp_dir()),
+        "version": __version__,
+        "abi_version": STATE_ABI_VERSION,
+        "include_dir": str(include_dir()),
+        "cpp_dir": str(cpp_dir()),
         "header": str(cpp_dir() / "nsb_director_state.hpp"),
         "sources": [str(cpp_dir() / "nsb_director_state.cpp")],
         "state_interface": str(include_dir() / "nsb-director-state.i"),

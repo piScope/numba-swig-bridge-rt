@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "kind": "numba_swig_director_descriptor",
+  "bridge_id": "nsb_sample11",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample11_api",
+        "swig_module": "nsb_sample11_api",
+        "interface": "sample.i"
+      }
+    ]
+  },
+  "directors": [
+    {
+      "cxx_type": "CommCallback",
+      "owner_module": "nsb_sample11_api",
+      "source_interface": "sample.i",
+      "python_facade": "nsb_CommCallback",
+      "python_proxy": "CommCallback",
+      "selection": "automatic",
+      "methods": [
+        {
+          "identity": "CommCallback::Value() const",
+          "symbol": "CommCallback__Value___const",
+          "cxx_name": "Value",
+          "signature": "int CommCallback::Value() const",
+          "abstract": true,
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "lowering": null
+        }
+      ],
+      "skipped_virtuals": [],
+      "constructors": [
+        {
+          "parameters": []
+        }
+      ],
+      "skipped_constructors": []
+    }
+  ],
+  "state_backend": "nsb_sample11"
+}

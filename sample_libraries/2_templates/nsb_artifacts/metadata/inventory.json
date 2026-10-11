@@ -1,0 +1,378 @@
+{
+  "schema_version": 2,
+  "kind": "swig_bridge_inventory",
+  "sources": [
+    {
+      "module": "nsb_sample2_arrays",
+      "swig_module": "nsb_sample2_arrays",
+      "interface": "arrays.i"
+    }
+  ],
+  "classes": [
+    {
+      "cxx_type": "nsb_sample2::Array<double>",
+      "owner_module": "nsb_sample2_arrays",
+      "source_interface": "arrays.i",
+      "python_proxy": "DoubleArray",
+      "abstract": false,
+      "constructors": [
+        {
+          "cxx_name": "Array",
+          "access": "public",
+          "parameters": [
+            {
+              "name": "size",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "swig_declaration": "f(int).",
+          "signature": "nsb_sample2::Array<double>::Array(int)"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Size",
+          "python_name": "Size",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "int nsb_sample2::Array<double>::Size() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Get",
+          "python_name": "__getitem__",
+          "return_swig_type": "double",
+          "return_cxx_type": "double",
+          "parameters": [
+            {
+              "name": "index",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(int).",
+          "signature": "double nsb_sample2::Array<double>::Get(int) const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Set",
+          "python_name": "__setitem__",
+          "return_swig_type": "void",
+          "return_cxx_type": "void",
+          "parameters": [
+            {
+              "name": "index",
+              "swig_type": "int",
+              "cxx_type": "int"
+            },
+            {
+              "name": "value",
+              "swig_type": "double",
+              "cxx_type": "double"
+            }
+          ],
+          "const": false,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "f(int,double).",
+          "signature": "void nsb_sample2::Array<double>::Set(int, double)",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "CopyTo",
+          "python_name": "CopyTo",
+          "return_swig_type": "void",
+          "return_cxx_type": "void",
+          "parameters": [
+            {
+              "name": "target",
+              "swig_type": "r.nsb_sample2::Array<(double)>",
+              "cxx_type": "nsb_sample2::Array<double>&"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(r.nsb_sample2::Array<(double)>).",
+          "signature": "void nsb_sample2::Array<double>::CopyTo(nsb_sample2::Array<double>&) const",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "public_base_declarations": [],
+      "pointer_accessor": "_nsb_pointer"
+    },
+    {
+      "cxx_type": "nsb_sample2::Array<int>",
+      "owner_module": "nsb_sample2_arrays",
+      "source_interface": "arrays.i",
+      "python_proxy": "IntArray",
+      "abstract": false,
+      "constructors": [
+        {
+          "cxx_name": "Array",
+          "access": "public",
+          "parameters": [
+            {
+              "name": "size",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "swig_declaration": "f(int).",
+          "signature": "nsb_sample2::Array<int>::Array(int)"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Size",
+          "python_name": "Size",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "int nsb_sample2::Array<int>::Size() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Get",
+          "python_name": "__getitem__",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [
+            {
+              "name": "index",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(int).",
+          "signature": "int nsb_sample2::Array<int>::Get(int) const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Set",
+          "python_name": "__setitem__",
+          "return_swig_type": "void",
+          "return_cxx_type": "void",
+          "parameters": [
+            {
+              "name": "index",
+              "swig_type": "int",
+              "cxx_type": "int"
+            },
+            {
+              "name": "value",
+              "swig_type": "int",
+              "cxx_type": "int"
+            }
+          ],
+          "const": false,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "f(int,int).",
+          "signature": "void nsb_sample2::Array<int>::Set(int, int)",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "CopyTo",
+          "python_name": "CopyTo",
+          "return_swig_type": "void",
+          "return_cxx_type": "void",
+          "parameters": [
+            {
+              "name": "target",
+              "swig_type": "r.nsb_sample2::Array<(int)>",
+              "cxx_type": "nsb_sample2::Array<int>&"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(r.nsb_sample2::Array<(int)>).",
+          "signature": "void nsb_sample2::Array<int>::CopyTo(nsb_sample2::Array<int>&) const",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "public_base_declarations": [],
+      "pointer_accessor": "_nsb_pointer"
+    }
+  ],
+  "typedefs": [
+    {
+      "cxx_name": "int16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_fast16_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_fast8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_least16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int_least32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_least64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_least8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "intmax_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "intptr_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "uint16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_fast16_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_fast8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_least16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint_least32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_least64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_least8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uintmax_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uintptr_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    }
+  ],
+  "enums": []
+}

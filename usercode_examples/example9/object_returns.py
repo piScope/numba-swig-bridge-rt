@@ -1,4 +1,5 @@
 """Borrowed object pointer and reference results from a native director."""
+
 from numba import types
 import nsb_rt as nsb
 import nsb_sample9

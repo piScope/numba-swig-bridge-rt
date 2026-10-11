@@ -1,24 +1,21 @@
 # User-code examples
 
 Each directory contains Python usage examples for the corresponding numbered
-C++ library in the repository's [`sample_libraries/`](../../../sample_libraries/)
+C++ library in the repository's [`sample_libraries/`](../sample_libraries/)
 companion distributions.
 
-The samples are optional and are not installed with the runtime. From the
-repository root, install them before running examples:
+Sample sources ship with the runtime, but native sample packages are optional.
+Install native build tools, build a selected sample, then run its examples:
 
-```bash
-python -m pip install ./sample_libraries/*/
+```sh
+python -m pip install 'setuptools>=75' wheel cmake 'swig>=4.5'
+python -m nsb_rt.samples install 1
+python -m nsb_rt.samples run 1
 ```
 
-Sample 11 additionally requires MPI and mpi4py, with an MPI compiler for its
-build. To use serial samples only, install the corresponding numbered sample
-directories individually. See [example11](example11/README.md) for MPI setup.
-
-Run the examples after installing the runtime and the corresponding sample
-package. The runtime release check uses
-`scripts/validate_runtime_consumer.py` to execute sample-1 examples in a clean
-consumer environment.
+Omit the numbers for serial samples 1–10. Sample 11 additionally requires MPI
+and mpi4py and must be selected explicitly. See the
+[runtime manual](../README.md#build-and-run-the-optional-samples) for setup.
 
 - [`example1/`](example1/README.md) uses `nsb_sample1`: ordinary C++ methods,
   compiled director callbacks, and persistent nested director state across two
@@ -43,3 +40,5 @@ consumer environment.
   transfer, and lazy native-owned director state.
 - [`example11/`](example11/README.md) uses `nsb_sample11`: MPI communicator
   arguments, rank/size attributes, native constructors and communicator state.
+
+- [`example10/`](example10/data_members.py) uses `nsb_sample10`: native data-member access.

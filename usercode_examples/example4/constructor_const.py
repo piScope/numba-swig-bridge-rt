@@ -1,4 +1,5 @@
 """Forward C++ constructor arguments and dispatch const virtual overrides."""
+
 import nsb_rt as nsb
 from numba import njit, types
 from nsb_sample4 import Evaluator, invoke_evaluate, invoke_bias
@@ -7,8 +8,11 @@ import nsb_sample4.registration as bridge
 original_base_initializer = Evaluator.__init__
 
 
-@nsb.director(binding=bridge.director_binding("nsb_sample4::Evaluator"),
-              state={"scale": types.float64}, fallback="silent")
+@nsb.director(
+    binding=bridge.director_binding("nsb_sample4::Evaluator"),
+    state={"scale": types.float64},
+    fallback="silent",
+)
 class ScaledEvaluator(Evaluator):
     def __init__(self, equations, dimension, scale):
         super().__init__(equations, dimension)
@@ -22,8 +26,11 @@ class ScaledEvaluator(Evaluator):
         return self.Equations(), self.Dimension()
 
 
-@nsb.director(binding=bridge.director_binding("nsb_sample4::Evaluator"),
-              state={"offset": types.float64}, fallback="silent")
+@nsb.director(
+    binding=bridge.director_binding("nsb_sample4::Evaluator"),
+    state={"offset": types.float64},
+    fallback="silent",
+)
 class ExplicitEvaluator(Evaluator):
     def __init__(self, equations, dimension):
         super(ExplicitEvaluator, self).__init__(equations, dimension)
@@ -34,16 +41,22 @@ class ExplicitEvaluator(Evaluator):
         return value + self.offset
 
 
-@nsb.director(binding=bridge.director_binding("nsb_sample4::Evaluator"),
-              state={"offset": types.float64}, fallback="silent")
+@nsb.director(
+    binding=bridge.director_binding("nsb_sample4::Evaluator"),
+    state={"offset": types.float64},
+    fallback="silent",
+)
 class AutomaticEvaluator(Evaluator):
     @nsb.override("Evaluate", "double")
     def evaluate(self, value):
         return value + self.offset
 
 
-@nsb.director(binding=bridge.director_binding("nsb_sample4::Evaluator"),
-              state={"offset": types.float64}, fallback="silent")
+@nsb.director(
+    binding=bridge.director_binding("nsb_sample4::Evaluator"),
+    state={"offset": types.float64},
+    fallback="silent",
+)
 class MissingBaseInitializer(Evaluator):
     def __init__(self):
         pass
@@ -53,8 +66,11 @@ class MissingBaseInitializer(Evaluator):
         return value + self.offset
 
 
-@nsb.director(binding=bridge.director_binding("nsb_sample4::Evaluator"),
-              state={"offset": types.float64}, fallback="silent")
+@nsb.director(
+    binding=bridge.director_binding("nsb_sample4::Evaluator"),
+    state={"offset": types.float64},
+    fallback="silent",
+)
 class RepeatedBaseInitializer(Evaluator):
     def __init__(self):
         super().__init__(3, 2)
@@ -91,9 +107,11 @@ def main():
     finally:
         evaluator.close()
 
-    for operation in (lambda: evaluator.Equations(),
-                      lambda: invoke_evaluate(evaluator, 1.0),
-                      lambda: native_call(evaluator, 1.0)):
+    for operation in (
+        lambda: evaluator.Equations(),
+        lambda: invoke_evaluate(evaluator, 1.0),
+        lambda: native_call(evaluator, 1.0),
+    ):
         try:
             operation()
         except (RuntimeError, TypeError):
@@ -106,7 +124,9 @@ def main():
         instance = cls(equations=3, dimension=2)
         try:
             assert instance.Equations() == 3
-            assert invoke_evaluate(instance, 4.0) == (5.0 if cls is ExplicitEvaluator else 4.0)
+            assert invoke_evaluate(instance, 4.0) == (
+                5.0 if cls is ExplicitEvaluator else 4.0
+            )
         finally:
             instance.close()
     for cls in (MissingBaseInitializer, RepeatedBaseInitializer):

@@ -1,4 +1,5 @@
 """Use both overloaded constructors of a native Numba director."""
+
 from numba import types
 import nsb_rt as nsb
 import nsb_sample6

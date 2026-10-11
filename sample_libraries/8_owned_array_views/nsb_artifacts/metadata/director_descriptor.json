@@ -1,0 +1,75 @@
+{
+  "schema_version": 2,
+  "kind": "numba_swig_director_descriptor",
+  "bridge_id": "nsb_sample8",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample8_storage",
+        "swig_module": "nsb_sample8_storage",
+        "interface": "storage.i"
+      }
+    ]
+  },
+  "directors": [
+    {
+      "cxx_type": "nsb_sample8::ViewCallback",
+      "owner_module": "nsb_sample8_storage",
+      "source_interface": "storage.i",
+      "python_facade": "nsb_ViewCallback",
+      "python_proxy": "ViewCallback",
+      "selection": "automatic",
+      "methods": [
+        {
+          "identity": "nsb_sample8::ViewCallback::Apply(const nsb_sample8::Vector&, nsb_sample8::Vector&)",
+          "symbol": "nsb_sample8__ViewCallback__Apply_const_nsb_sample8__Vector___nsb_sample8__Vector",
+          "cxx_name": "Apply",
+          "signature": "double nsb_sample8::ViewCallback::Apply(const nsb_sample8::Vector&, nsb_sample8::Vector&)",
+          "abstract": true,
+          "const": false,
+          "return": {
+            "kind": "double",
+            "cxx_type": "double",
+            "c_abi_type": "double",
+            "numba_type": "types.float64",
+            "llvm_type": "double",
+            "declared_cxx_type": "double"
+          },
+          "parameters": [
+            {
+              "name": "input",
+              "cxx_type": "nsb_sample8::Vector",
+              "declared_cxx_type": "const nsb_sample8::Vector&",
+              "kind": "object",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            },
+            {
+              "name": "output",
+              "cxx_type": "nsb_sample8::Vector",
+              "declared_cxx_type": "nsb_sample8::Vector&",
+              "kind": "object",
+              "passing": "reference",
+              "const": false,
+              "c_abi_type": "void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "skipped_virtuals": [],
+      "constructors": [
+        {
+          "parameters": []
+        }
+      ],
+      "skipped_constructors": []
+    }
+  ],
+  "state_backend": "nsb_sample8"
+}

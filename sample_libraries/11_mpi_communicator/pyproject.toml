@@ -1,0 +1,8 @@
+[build-system]
+requires = ["setuptools>=75", "wheel", "swig>=4.5.0", "mpi4py>=4", "numba-swig-bridge-rt>=0.15.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nsb-sample11"
+version = "0.1.0"
+dependencies = ["mpi4py>=4", "numba-swig-bridge-rt>=0.15.1"]

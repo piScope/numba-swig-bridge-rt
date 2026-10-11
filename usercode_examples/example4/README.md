@@ -3,7 +3,7 @@
 Install sample library `4_constructor_const`, then run:
 
 ```bash
-python package/numba-swig-bridge-rt/usercode_examples/example4/constructor_const.py
+python usercode_examples/example4/constructor_const.py
 ```
 
 The decorated class inherits the SWIG `Evaluator` base and calls

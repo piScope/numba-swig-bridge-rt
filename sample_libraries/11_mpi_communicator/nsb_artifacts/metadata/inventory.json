@@ -1,0 +1,263 @@
+{
+  "schema_version": 2,
+  "kind": "swig_bridge_inventory",
+  "sources": [
+    {
+      "module": "nsb_sample11_api",
+      "swig_module": "nsb_sample11_api",
+      "interface": "sample.i"
+    }
+  ],
+  "classes": [
+    {
+      "cxx_type": "CommCallback",
+      "owner_module": "nsb_sample11_api",
+      "source_interface": "sample.i",
+      "python_proxy": "CommCallback",
+      "abstract": true,
+      "constructors": [
+        {
+          "cxx_name": "CommCallback",
+          "access": "public",
+          "parameters": [],
+          "swig_declaration": "f().",
+          "signature": "CommCallback::CommCallback()"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "Value",
+          "python_name": "Value",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": true,
+          "static": false,
+          "abstract": true,
+          "swig_declaration": "q(const).f().",
+          "signature": "int CommCallback::Value() const",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "public_base_declarations": [],
+      "virtual_base_declarations": [],
+      "nsb_director_python_class": "nsb_CommCallback"
+    },
+    {
+      "cxx_type": "CommConsumer",
+      "owner_module": "nsb_sample11_api",
+      "source_interface": "sample.i",
+      "python_proxy": "CommConsumer",
+      "abstract": false,
+      "constructors": [
+        {
+          "cxx_name": "CommConsumer",
+          "access": "public",
+          "parameters": [
+            {
+              "name": "value",
+              "swig_type": "MPI_Comm",
+              "cxx_type": "MPI_Comm"
+            }
+          ],
+          "swig_declaration": "f(MPI_Comm).",
+          "signature": "CommConsumer::CommConsumer(MPI_Comm)"
+        }
+      ],
+      "members": [],
+      "methods": [
+        {
+          "cxx_name": "GetComm",
+          "python_name": "GetComm",
+          "return_swig_type": "MPI_Comm",
+          "return_cxx_type": "MPI_Comm",
+          "parameters": [],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f().",
+          "signature": "MPI_Comm CommConsumer::GetComm() const",
+          "bridge_status": "requires_policy"
+        },
+        {
+          "cxx_name": "Apply",
+          "python_name": "Apply",
+          "return_swig_type": "int",
+          "return_cxx_type": "int",
+          "parameters": [
+            {
+              "name": "callback",
+              "swig_type": "r.q(const).CommCallback",
+              "cxx_type": "const CommCallback&"
+            }
+          ],
+          "const": true,
+          "noexcept": false,
+          "virtual": false,
+          "static": false,
+          "abstract": false,
+          "swig_declaration": "q(const).f(r.q(const).CommCallback).",
+          "signature": "int CommConsumer::Apply(const CommCallback&) const",
+          "bridge_status": "requires_policy"
+        }
+      ],
+      "public_bases": [],
+      "public_base_declarations": [],
+      "pointer_accessor": "_nsb_pointer"
+    }
+  ],
+  "typedefs": [
+    {
+      "cxx_name": "MPI_Comm",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_fast16_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_fast64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_fast8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "int_least16_t",
+      "target_swig_type": "short",
+      "target_cxx_type": "short"
+    },
+    {
+      "cxx_name": "int_least32_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "int_least64_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "int_least8_t",
+      "target_swig_type": "signed char",
+      "target_cxx_type": "signed char"
+    },
+    {
+      "cxx_name": "intmax_t",
+      "target_swig_type": "long long",
+      "target_cxx_type": "long long"
+    },
+    {
+      "cxx_name": "intptr_t",
+      "target_swig_type": "int",
+      "target_cxx_type": "int"
+    },
+    {
+      "cxx_name": "uint16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_fast16_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_fast64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_fast8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uint_least16_t",
+      "target_swig_type": "unsigned short",
+      "target_cxx_type": "unsigned short"
+    },
+    {
+      "cxx_name": "uint_least32_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    },
+    {
+      "cxx_name": "uint_least64_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uint_least8_t",
+      "target_swig_type": "unsigned char",
+      "target_cxx_type": "unsigned char"
+    },
+    {
+      "cxx_name": "uintmax_t",
+      "target_swig_type": "unsigned long long",
+      "target_cxx_type": "unsigned long long"
+    },
+    {
+      "cxx_name": "uintptr_t",
+      "target_swig_type": "unsigned int",
+      "target_cxx_type": "unsigned int"
+    }
+  ],
+  "enums": []
+}

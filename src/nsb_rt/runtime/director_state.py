@@ -24,7 +24,6 @@ from .modules import resolve_modules
 
 from nsb_rt.backends import StateBackend
 
-
 PYTHON_ASSIGNED = 1
 CPP_OWNED = 2
 NATIVE_OWNED = 3
@@ -34,7 +33,9 @@ SCALAR_KINDS = ("float", "double", "int", "int64", "bool")
 try:
     NRT_MEMINFO_RELEASE_ADDRESS = int(_nrt_python.c_helpers["MemInfo_release"])
 except (AttributeError, KeyError) as error:
-    raise RuntimeError("Numba does not expose the MemInfo_release runtime helper required by native director state") from error
+    raise RuntimeError(
+        "Numba does not expose the MemInfo_release runtime helper required by native director state"
+    ) from error
 if NRT_MEMINFO_RELEASE_ADDRESS == 0:
     raise RuntimeError("Numba exported a null MemInfo_release runtime helper")
 
@@ -106,7 +107,9 @@ def state_object_address_at(backend: StateBackend):
         def codegen(context, builder, sig, args):
             function = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]),
+                ir.FunctionType(
+                    ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]
+                ),
                 name=backend.symbol_name("object_address_at"),
             )
             native_slot = context.cast(builder, args[1], sig.args[1], types.intc)
@@ -130,7 +133,9 @@ def state_object_meminfo_at(backend: StateBackend):
         def codegen(context, builder, sig, args):
             function = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]),
+                ir.FunctionType(
+                    ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]
+                ),
                 name=backend.symbol_name("object_meminfo_at"),
             )
             native_slot = context.cast(builder, args[1], sig.args[1], types.intc)
@@ -142,10 +147,10 @@ def state_object_meminfo_at(backend: StateBackend):
     return reader
 
 
-
 def state_object_at(backend: StateBackend, object_type, *, borrowed=False):
     """Return a borrowed object view which retains a native state token, if any."""
     import sys
+
     mpi = sys.modules.get("nsb_rt.runtime.mpi")
     if mpi is not None and object_type == mpi.comm_type:
         return mpi.communicator_state_at(backend)
@@ -156,29 +161,45 @@ def state_object_at(backend: StateBackend, object_type, *, borrowed=False):
 
         if state != types.voidptr or not isinstance(slot, types.Integer):
             return None
-        result_type = object_type if borrowed else ordinary.BorrowedReturnBridgeObjectType(
-            object_type.bridge_id, object_type.cxx_type)
+        result_type = (
+            object_type
+            if borrowed
+            else ordinary.BorrowedReturnBridgeObjectType(
+                object_type.bridge_id, object_type.cxx_type
+            )
+        )
         signature = result_type(state, slot)
 
         def codegen(context, builder, sig, args):
             address_function = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]),
+                ir.FunctionType(
+                    ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]
+                ),
                 name=backend.symbol_name("object_address_at"),
             )
             meminfo_function = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]),
+                ir.FunctionType(
+                    ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]
+                ),
                 name=backend.symbol_name("object_meminfo_at"),
             )
             native_slot = context.cast(builder, args[1], sig.args[1], types.intc)
             address = builder.call(address_function, [args[0], native_slot])
-            with builder.if_then(builder.icmp_unsigned("==", address, ir.Constant(address.type, 0))):
-                context.call_conv.return_user_exc(builder, ReferenceError, ("state object field is empty or closed",))
+            with builder.if_then(
+                builder.icmp_unsigned("==", address, ir.Constant(address.type, 0))
+            ):
+                context.call_conv.return_user_exc(
+                    builder, ReferenceError, ("state object field is empty or closed",)
+                )
             if borrowed:
                 return builder.inttoptr(address, context.get_value_type(result_type))
             meminfo_address = builder.call(meminfo_function, [args[0], native_slot])
-            meminfo = builder.inttoptr(meminfo_address, context.get_value_type(types.MemInfoPointer(types.voidptr)))
+            meminfo = builder.inttoptr(
+                meminfo_address,
+                context.get_value_type(types.MemInfoPointer(types.voidptr)),
+            )
             context.nrt.incref(builder, types.MemInfoPointer(types.voidptr), meminfo)
             result = cgutils.create_struct_proxy(result_type)(context, builder)
             result.meminfo = meminfo
@@ -188,7 +209,6 @@ def state_object_at(backend: StateBackend, object_type, *, borrowed=False):
         return signature, codegen
 
     return reader
-
 
 
 def state_array_data_at(backend: StateBackend, dtype):
@@ -204,7 +224,9 @@ def state_array_data_at(backend: StateBackend, dtype):
         def codegen(context, builder, sig, args):
             function = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]),
+                ir.FunctionType(
+                    ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]
+                ),
                 name=backend.symbol_name("array_data_at"),
             )
             native_slot = context.cast(builder, args[1], sig.args[1], types.intc)
@@ -228,7 +250,9 @@ def state_array_address_at(backend: StateBackend):
         def codegen(context, builder, sig, args):
             function = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]),
+                ir.FunctionType(
+                    ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]
+                ),
                 name=backend.symbol_name("array_data_at"),
             )
             native_slot = context.cast(builder, args[1], sig.args[1], types.intc)
@@ -242,14 +266,21 @@ def state_array_address_at(backend: StateBackend):
 def _array_dimension_at(backend: StateBackend, operation: str):
     @intrinsic
     def reader(typingctx, state, slot, dimension):
-        if state != types.voidptr or not isinstance(slot, types.Integer) or not isinstance(dimension, types.Integer):
+        if (
+            state != types.voidptr
+            or not isinstance(slot, types.Integer)
+            or not isinstance(dimension, types.Integer)
+        ):
             return None
         signature = types.intp(state, slot, dimension)
 
         def codegen(context, builder, sig, args):
             function = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(types.intp.bitwidth), [args[0].type, ir.IntType(32), ir.IntType(32)]),
+                ir.FunctionType(
+                    ir.IntType(types.intp.bitwidth),
+                    [args[0].type, ir.IntType(32), ir.IntType(32)],
+                ),
                 name=backend.symbol_name(operation),
             )
             native_slot = context.cast(builder, args[1], sig.args[1], types.intc)
@@ -282,27 +313,56 @@ def state_array_at(backend: StateBackend, array_type: types.Array):
         def codegen(context, builder, sig, args):
             address_function = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]),
+                ir.FunctionType(
+                    ir.IntType(types.uintp.bitwidth), [args[0].type, ir.IntType(32)]
+                ),
                 name=backend.symbol_name("array_data_at"),
             )
             extent_function = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(types.intp.bitwidth), [args[0].type, ir.IntType(32), ir.IntType(32)]),
+                ir.FunctionType(
+                    ir.IntType(types.intp.bitwidth),
+                    [args[0].type, ir.IntType(32), ir.IntType(32)],
+                ),
                 name=backend.symbol_name("array_shape_at"),
             )
             stride_function = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(types.intp.bitwidth), [args[0].type, ir.IntType(32), ir.IntType(32)]),
+                ir.FunctionType(
+                    ir.IntType(types.intp.bitwidth),
+                    [args[0].type, ir.IntType(32), ir.IntType(32)],
+                ),
                 name=backend.symbol_name("array_stride_at"),
             )
             native_slot = context.cast(builder, args[1], sig.args[1], types.intc)
-            data = builder.inttoptr(builder.call(address_function, [args[0], native_slot]), context.get_value_type(pointer_type))
-            dimensions = [ir.Constant(ir.IntType(32), index) for index in range(array_type.ndim)]
-            shape = [builder.call(extent_function, [args[0], native_slot, index]) for index in dimensions]
-            strides = [builder.call(stride_function, [args[0], native_slot, index]) for index in dimensions]
+            data = builder.inttoptr(
+                builder.call(address_function, [args[0], native_slot]),
+                context.get_value_type(pointer_type),
+            )
+            dimensions = [
+                ir.Constant(ir.IntType(32), index) for index in range(array_type.ndim)
+            ]
+            shape = [
+                builder.call(extent_function, [args[0], native_slot, index])
+                for index in dimensions
+            ]
+            strides = [
+                builder.call(stride_function, [args[0], native_slot, index])
+                for index in dimensions
+            ]
             result = context.make_array(array_type)(context, builder)
-            itemsize = ir.Constant(ir.IntType(types.intp.bitwidth), context.get_abi_sizeof(context.get_data_type(array_type.dtype)))
-            populate_array(result, data, cgutils.pack_array(builder, shape), cgutils.pack_array(builder, strides), itemsize, meminfo=None)
+            itemsize = ir.Constant(
+                ir.IntType(types.intp.bitwidth),
+                context.get_abi_sizeof(context.get_data_type(array_type.dtype)),
+            )
+            populate_array(
+                result,
+                data,
+                cgutils.pack_array(builder, shape),
+                cgutils.pack_array(builder, strides),
+                itemsize,
+                meminfo=None,
+            )
             return result._getvalue()
 
         return signature, codegen
@@ -322,19 +382,27 @@ class DeclaredObjectBridge:
     def proxy_to_address(self, proxy: object) -> int:
         pointer = getattr(proxy, "_nsb_pointer", None)
         if not callable(pointer):
-            raise TypeError(f"state field for {self.cxx_type} requires a {self.python_proxy} proxy")
+            raise TypeError(
+                f"state field for {self.cxx_type} requires a {self.python_proxy} proxy"
+            )
         address = int(pointer())
         if address == 0:
-            raise ValueError(f"state field for {self.cxx_type} received a null C++ address")
+            raise ValueError(
+                f"state field for {self.cxx_type} received a null C++ address"
+            )
         return address
 
     def address_to_proxy(self, address: int) -> object:
         if address == 0:
-            raise ReferenceError(f"state field for {self.cxx_type} has no live C++ object")
+            raise ReferenceError(
+                f"state field for {self.cxx_type} has no live C++ object"
+            )
         return getattr(self.helper_module, self.borrowed_proxy_helper)(int(address))
 
 
-def object_bridges_from_descriptor(modules: Mapping[str, Any], descriptor_path: str | Path) -> dict[str, DeclaredObjectBridge]:
+def object_bridges_from_descriptor(
+    modules: Mapping[str, Any], descriptor_path: str | Path
+) -> dict[str, DeclaredObjectBridge]:
     descriptor = json.loads(Path(descriptor_path).read_text())
     if descriptor.get("kind") != "numba_swig_ordinary_bridge_descriptor":
         raise ValueError("ordinary descriptor is invalid")
@@ -350,16 +418,30 @@ def object_bridges_from_descriptor(modules: Mapping[str, Any], descriptor_path: 
         cxx_type = record.get("cxx_type")
         proxy = record.get("python_proxy")
         helper = record.get("borrowed_proxy_helper")
-        if not all(isinstance(value, str) and value for value in (cxx_type, proxy, helper)):
-            raise ValueError("ordinary descriptor has incomplete object bridge metadata")
-        if not isinstance(getattr(target_module, proxy, None), type) or not callable(getattr(target_module, helper, None)):
-            raise RuntimeError(f"target module has no object bridge helpers for {cxx_type}")
+        if not all(
+            isinstance(value, str) and value for value in (cxx_type, proxy, helper)
+        ):
+            raise ValueError(
+                "ordinary descriptor has incomplete object bridge metadata"
+            )
+        if not isinstance(getattr(target_module, proxy, None), type) or not callable(
+            getattr(target_module, helper, None)
+        ):
+            raise RuntimeError(
+                f"target module has no object bridge helpers for {cxx_type}"
+            )
         bridges[cxx_type] = DeclaredObjectBridge(cxx_type, proxy, target_module, helper)
     return bridges
 
 
 class DirectorStateProperty:
-    def __init__(self, *, kind: str | None = None, slot: int, bridge: DeclaredObjectBridge | None = None) -> None:
+    def __init__(
+        self,
+        *,
+        kind: str | None = None,
+        slot: int,
+        bridge: DeclaredObjectBridge | None = None,
+    ) -> None:
         self.kind = kind
         self.slot = slot
         self.bridge = bridge
@@ -373,6 +455,7 @@ class DirectorStateProperty:
     def object(cls, slot: int, bridge: DeclaredObjectBridge):
         if hasattr(bridge, "numba_state_type"):
             from .mpi import communicator_state_property
+
             return communicator_state_property(slot)
         return cls(slot=slot, bridge=bridge)
 
@@ -395,9 +478,13 @@ class DirectorStateProperty:
         if address == 0:
             instance._object_cache.pop(self.slot, None)
             instance._object_keepalives.pop(self.slot, None)
-            raise ReferenceError(f"native state object field {self.name!r} has no live C++ owner")
+            raise ReferenceError(
+                f"native state object field {self.name!r} has no live C++ owner"
+            )
         if self.name in getattr(instance, "_const_borrowed_fields", ()):
-            raise TypeError("const borrowed state cannot escape as a writable Python proxy")
+            raise TypeError(
+                "const borrowed state cannot escape as a writable Python proxy"
+            )
         cached = instance._object_cache.get(self.slot)
         if cached is not None and cached[0] == generation:
             return cached[1]
@@ -418,7 +505,9 @@ class DirectorStateProperty:
         assert self.bridge is not None
         if self.name in getattr(instance, "_borrowed_fields", ()):
             if value is not None:
-                raise TypeError(f"borrowed state field {self.name!r} rejects Python object assignment")
+                raise TypeError(
+                    f"borrowed state field {self.name!r} rejects Python object assignment"
+                )
             state.SetObjectBorrowed(self.slot, 0)
             instance._object_cache.pop(self.slot, None)
             instance._object_keepalives.pop(self.slot, None)
@@ -479,11 +568,20 @@ def make_state_facade(
         raise ValueError("state field names must be unique")
     if any(kind not in SCALAR_KINDS for kind in scalar_fields.values()):
         raise ValueError("state scalar fields have an unsupported kind")
-    if any(not isinstance(bridge, DeclaredObjectBridge) for bridge in object_fields.values()):
+    if any(
+        not isinstance(bridge, DeclaredObjectBridge)
+        for bridge in object_fields.values()
+    ):
         raise TypeError("object state fields require a declared ordinary bridge type")
-    if any(not isinstance(array, types.Array) or array.ndim not in {1, 2, 3} or not array.mutable
-           for array in array_fields.values()):
-        raise TypeError("array state fields require writable one-, two-, or three-dimensional Numba arrays")
+    if any(
+        not isinstance(array, types.Array)
+        or array.ndim not in {1, 2, 3}
+        or not array.mutable
+        for array in array_fields.values()
+    ):
+        raise TypeError(
+            "array state fields require writable one-, two-, or three-dimensional Numba arrays"
+        )
 
     counters = {kind: 0 for kind in SCALAR_KINDS}
     scalar_slots: dict[str, tuple[str, int]] = {}
@@ -497,7 +595,13 @@ def make_state_facade(
         if getattr(self, "_nsb_director_state", None) is not None:
             raise RuntimeError("native state facade is already initialized")
         self._nsb_director_state = backend.module.StateHandle(
-            counters["double"], counters["int"], counters["int64"], counters["bool"], len(object_fields), counters["float"], len(array_fields),
+            counters["double"],
+            counters["int"],
+            counters["int64"],
+            counters["bool"],
+            len(object_fields),
+            counters["float"],
+            len(array_fields),
             NRT_MEMINFO_RELEASE_ADDRESS,
         )
         self._object_cache: dict[int, tuple[int, object]] = {}
@@ -537,28 +641,50 @@ def make_state_facade(
         "_nsb_state_backend": backend,
     }
     namespace.update(
-        {field: DirectorStateProperty.scalar(kind, slot) for field, (kind, slot) in scalar_slots.items()}
+        {
+            field: DirectorStateProperty.scalar(kind, slot)
+            for field, (kind, slot) in scalar_slots.items()
+        }
     )
     namespace.update(
-        {field: DirectorStateProperty.object(slot, object_fields[field]) for field, slot in object_slots.items()}
+        {
+            field: DirectorStateProperty.object(slot, object_fields[field])
+            for field, slot in object_slots.items()
+        }
     )
     for field, slot in array_slots.items():
         array_type = array_fields[field]
+
         def getter(self, field=field, slot=slot):
             return self._array_keepalives[slot]
+
         def setter(self, value, field=field, slot=slot, array_type=array_type):
             import numpy as np
-            if not isinstance(value, np.ndarray) or value.dtype != np.dtype(array_type.dtype.name):
-                raise TypeError(f"array state field {field!r} requires dtype {array_type.dtype}")
+
+            if not isinstance(value, np.ndarray) or value.dtype != np.dtype(
+                array_type.dtype.name
+            ):
+                raise TypeError(
+                    f"array state field {field!r} requires dtype {array_type.dtype}"
+                )
             if value.ndim != array_type.ndim or not value.flags.writeable:
-                raise TypeError(f"array state field {field!r} requires a writable array with {array_type.ndim} dimensions")
+                raise TypeError(
+                    f"array state field {field!r} requires a writable array with {array_type.ndim} dimensions"
+                )
             if array_type.layout == "C" and not value.flags.c_contiguous:
-                raise TypeError(f"array state field {field!r} requires C-contiguous storage")
+                raise TypeError(
+                    f"array state field {field!r} requires C-contiguous storage"
+                )
             if array_type.layout == "F" and not value.flags.f_contiguous:
-                raise TypeError(f"array state field {field!r} requires Fortran-contiguous storage")
+                raise TypeError(
+                    f"array state field {field!r} requires Fortran-contiguous storage"
+                )
             shape = tuple(value.shape) + (0,) * (3 - value.ndim)
             strides = tuple(value.strides) + (0,) * (3 - value.ndim)
-            self._require_nsb_director_state().SetArrayFromPython(slot, int(value.ctypes.data), value.ndim, *shape, *strides)
+            self._require_nsb_director_state().SetArrayFromPython(
+                slot, int(value.ctypes.data), value.ndim, *shape, *strides
+            )
             self._array_keepalives[slot] = value
+
         namespace[field] = property(getter, setter)
     return type(name, (), namespace)

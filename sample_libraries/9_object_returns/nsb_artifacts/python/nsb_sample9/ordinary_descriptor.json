@@ -1,0 +1,656 @@
+{
+  "schema_version": 4,
+  "conversions": [
+    {
+      "derived": "nsb_sample9::Gradient",
+      "base": "nsb_sample9::GradientBase",
+      "owner_module": "nsb_sample9_api",
+      "function_address_helper": "nsb_function_address_nsb_sample9_api",
+      "upcast": "nsb_cast_nsb_sample9_Gradient_0_up",
+      "dynamic_cast": "nsb_cast_nsb_sample9_Gradient_0_down",
+      "flags": "nsb_cast_nsb_sample9_Gradient_0_flags"
+    }
+  ],
+  "kind": "numba_swig_ordinary_bridge_descriptor",
+  "bridge_id": "nsb_sample9",
+  "source_inventory": {
+    "sources": [
+      {
+        "module": "nsb_sample9_api",
+        "swig_module": "nsb_sample9_api",
+        "interface": "directors.i"
+      }
+    ]
+  },
+  "classes": [
+    {
+      "cxx_type": "nsb_sample9::Child",
+      "owner_module": "nsb_sample9_api",
+      "function_address_helper": "nsb_function_address_nsb_sample9_api",
+      "source_interface": "directors.i",
+      "python_proxy": "Child",
+      "symbol": "nsb_sample9_Child",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample9_Child",
+      "owned_proxy_helper": "nsb_owned_nsb_sample9_Child",
+      "methods": [
+        {
+          "identity": "nsb_sample9::Child::Value() const",
+          "symbol": "nsb_nsb_sample9_Child_0_Value",
+          "cxx_name": "Value",
+          "python_name": "Value",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample9::Child::SetValue(int)",
+          "symbol": "nsb_nsb_sample9_Child_1_SetValue",
+          "cxx_name": "SetValue",
+          "python_name": "SetValue",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample9::Child::Child(int)",
+          "symbol": "nsb_nsb_sample9_Child_construct_0",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        },
+        {
+          "signature": "nsb_sample9::Child::Child()",
+          "symbol": "nsb_nsb_sample9_Child_construct_1",
+          "parameters": []
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample9_Child_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "SetValue",
+        "Value"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample9::Form",
+      "owner_module": "nsb_sample9_api",
+      "function_address_helper": "nsb_function_address_nsb_sample9_api",
+      "source_interface": "directors.i",
+      "python_proxy": "Form",
+      "symbol": "nsb_sample9_Form",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample9_Form",
+      "owned_proxy_helper": "nsb_owned_nsb_sample9_Form",
+      "methods": [
+        {
+          "identity": "nsb_sample9::Form::GetGradient(int)",
+          "symbol": "nsb_nsb_sample9_Form_0_GetGradient",
+          "cxx_name": "GetGradient",
+          "python_name": "GetGradient",
+          "const": false,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample9::GradientBase",
+            "passing": "reference",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "nsb_sample9::GradientBase&",
+            "borrowed_return": true,
+            "nullable": false
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample9::Form::Form()",
+          "symbol": "nsb_nsb_sample9_Form_construct_0",
+          "parameters": []
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample9_Form_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "GetGradient"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample9::Gradient",
+      "owner_module": "nsb_sample9_api",
+      "function_address_helper": "nsb_function_address_nsb_sample9_api",
+      "source_interface": "directors.i",
+      "python_proxy": "Gradient",
+      "symbol": "nsb_sample9_Gradient",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample9_Gradient",
+      "owned_proxy_helper": "nsb_owned_nsb_sample9_Gradient",
+      "methods": [
+        {
+          "identity": "nsb_sample9::Gradient::Value() const",
+          "symbol": "nsb_nsb_sample9_Gradient_0_Value",
+          "cxx_name": "Value",
+          "python_name": "Value",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample9::Gradient::SetValue(int)",
+          "symbol": "nsb_nsb_sample9_Gradient_1_SetValue",
+          "cxx_name": "SetValue",
+          "python_name": "SetValue",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample9::Gradient::Gradient(int)",
+          "symbol": "nsb_nsb_sample9_Gradient_construct_0",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample9_Gradient_destroy",
+      "public_bases": [
+        "nsb_sample9::GradientBase"
+      ],
+      "declared_method_names": [
+        "SetValue",
+        "Value"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample9::GradientBase",
+      "owner_module": "nsb_sample9_api",
+      "function_address_helper": "nsb_function_address_nsb_sample9_api",
+      "source_interface": "directors.i",
+      "python_proxy": "GradientBase",
+      "symbol": "nsb_sample9_GradientBase",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample9_GradientBase",
+      "owned_proxy_helper": "nsb_owned_nsb_sample9_GradientBase",
+      "methods": [
+        {
+          "identity": "nsb_sample9::GradientBase::Value() const",
+          "symbol": "nsb_nsb_sample9_GradientBase_0_Value",
+          "cxx_name": "Value",
+          "python_name": "Value",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample9_GradientBase_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Value"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample9::GradientConsumer",
+      "owner_module": "nsb_sample9_api",
+      "function_address_helper": "nsb_function_address_nsb_sample9_api",
+      "source_interface": "directors.i",
+      "python_proxy": "GradientConsumer",
+      "symbol": "nsb_sample9_GradientConsumer",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample9_GradientConsumer",
+      "owned_proxy_helper": "nsb_owned_nsb_sample9_GradientConsumer",
+      "methods": [
+        {
+          "identity": "nsb_sample9::GradientConsumer::SetOperator(const nsb_sample9::GradientBase&)",
+          "symbol": "nsb_nsb_sample9_GradientConsumer_0_SetOperator",
+          "cxx_name": "SetOperator",
+          "python_name": "SetOperator",
+          "const": false,
+          "return": {
+            "kind": "void",
+            "cxx_type": "void",
+            "c_abi_type": "void",
+            "numba_type": "types.none",
+            "llvm_type": "void",
+            "declared_cxx_type": "void"
+          },
+          "parameters": [
+            {
+              "name": "gradient",
+              "declared_cxx_type": "const nsb_sample9::GradientBase&",
+              "kind": "object",
+              "cxx_type": "nsb_sample9::GradientBase",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "gradient",
+              "declared_cxx_type": "const nsb_sample9::GradientBase&",
+              "kind": "object",
+              "cxx_type": "nsb_sample9::GradientBase",
+              "passing": "reference",
+              "const": true,
+              "c_abi_type": "const void*",
+              "numba_type": "bridge_object",
+              "llvm_type": "voidptr",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample9::GradientConsumer::Read() const",
+          "symbol": "nsb_nsb_sample9_GradientConsumer_1_Read",
+          "cxx_name": "Read",
+          "python_name": "Read",
+          "const": true,
+          "return": {
+            "kind": "int",
+            "cxx_type": "int",
+            "c_abi_type": "int",
+            "numba_type": "types.intc",
+            "llvm_type": "int32",
+            "declared_cxx_type": "int"
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample9_GradientConsumer_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "Read",
+        "SetOperator"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample9::Parent",
+      "owner_module": "nsb_sample9_api",
+      "function_address_helper": "nsb_function_address_nsb_sample9_api",
+      "source_interface": "directors.i",
+      "python_proxy": "Parent",
+      "symbol": "nsb_sample9_Parent",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample9_Parent",
+      "owned_proxy_helper": "nsb_owned_nsb_sample9_Parent",
+      "methods": [
+        {
+          "identity": "nsb_sample9::Parent::GetChild()",
+          "symbol": "nsb_nsb_sample9_Parent_0_GetChild",
+          "cxx_name": "GetChild",
+          "python_name": "GetChild",
+          "const": false,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample9::Child",
+            "passing": "reference",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "nsb_sample9::Child&",
+            "borrowed_return": true,
+            "nullable": false
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample9::Parent::GetChild() const",
+          "symbol": "nsb_nsb_sample9_Parent_1_GetChild",
+          "cxx_name": "GetChild",
+          "python_name": "GetChild",
+          "const": true,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample9::Child",
+            "passing": "reference",
+            "const": true,
+            "c_abi_type": "const void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "const nsb_sample9::Child&",
+            "borrowed_return": true,
+            "nullable": false
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample9::Parent::MaybeChild(bool)",
+          "symbol": "nsb_nsb_sample9_Parent_2_MaybeChild",
+          "cxx_name": "MaybeChild",
+          "python_name": "MaybeChild",
+          "const": false,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample9::Child",
+            "passing": "pointer",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "nsb_sample9::Child*",
+            "borrowed_return": true,
+            "nullable": true
+          },
+          "parameters": [
+            {
+              "name": "present",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "present",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [
+        {
+          "signature": "nsb_sample9::Parent::Parent(int)",
+          "symbol": "nsb_nsb_sample9_Parent_construct_0",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int",
+              "kind": "int",
+              "cxx_type": "int",
+              "c_abi_type": "int",
+              "numba_type": "types.intc",
+              "llvm_type": "int32"
+            }
+          ]
+        },
+        {
+          "signature": "nsb_sample9::Parent::Parent()",
+          "symbol": "nsb_nsb_sample9_Parent_construct_1",
+          "parameters": []
+        },
+        {
+          "signature": "nsb_sample9::Parent::Parent(int*)",
+          "symbol": "nsb_nsb_sample9_Parent_construct_2",
+          "parameters": [
+            {
+              "name": "value",
+              "declared_cxx_type": "int*",
+              "kind": "scalar_pointer",
+              "cxx_type": "int*",
+              "c_abi_type": "int*",
+              "numba_type": "scalar_pointer",
+              "llvm_type": "voidptr",
+              "numpy_dtype": "int32"
+            }
+          ]
+        }
+      ],
+      "destroy_symbol": "nsb_nsb_sample9_Parent_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "GetChild",
+        "MaybeChild"
+      ],
+      "skipped_methods": []
+    },
+    {
+      "cxx_type": "nsb_sample9::Provider",
+      "owner_module": "nsb_sample9_api",
+      "function_address_helper": "nsb_function_address_nsb_sample9_api",
+      "source_interface": "directors.i",
+      "python_proxy": "Provider",
+      "symbol": "nsb_sample9_Provider",
+      "generated_pointer_accessor": false,
+      "borrowed_proxy_helper": "nsb_borrowed_nsb_sample9_Provider",
+      "owned_proxy_helper": "nsb_owned_nsb_sample9_Provider",
+      "methods": [
+        {
+          "identity": "nsb_sample9::Provider::GetChild()",
+          "symbol": "nsb_nsb_sample9_Provider_0_GetChild",
+          "cxx_name": "GetChild",
+          "python_name": "GetChild",
+          "const": false,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample9::Child",
+            "passing": "reference",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "nsb_sample9::Child&",
+            "borrowed_return": true,
+            "nullable": false
+          },
+          "parameters": [],
+          "abi_parameters": [],
+          "lowering": null
+        },
+        {
+          "identity": "nsb_sample9::Provider::MaybeChild(bool)",
+          "symbol": "nsb_nsb_sample9_Provider_1_MaybeChild",
+          "cxx_name": "MaybeChild",
+          "python_name": "MaybeChild",
+          "const": false,
+          "return": {
+            "kind": "object",
+            "cxx_type": "nsb_sample9::Child",
+            "passing": "pointer",
+            "const": false,
+            "c_abi_type": "void*",
+            "numba_type": "bridge_object",
+            "llvm_type": "voidptr",
+            "declared_cxx_type": "nsb_sample9::Child*",
+            "borrowed_return": true,
+            "nullable": true
+          },
+          "parameters": [
+            {
+              "name": "present",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool"
+            }
+          ],
+          "abi_parameters": [
+            {
+              "name": "present",
+              "declared_cxx_type": "bool",
+              "kind": "bool",
+              "cxx_type": "bool",
+              "c_abi_type": "bool",
+              "numba_type": "types.boolean",
+              "llvm_type": "bool",
+              "argument_index": 0
+            }
+          ],
+          "lowering": null
+        }
+      ],
+      "members": [],
+      "skipped_members": [],
+      "constructors": [],
+      "destroy_symbol": "nsb_nsb_sample9_Provider_destroy",
+      "public_bases": [],
+      "declared_method_names": [
+        "GetChild",
+        "MaybeChild"
+      ],
+      "skipped_methods": []
+    }
+  ]
+}

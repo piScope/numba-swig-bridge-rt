@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "kind": "generated_nsb_director_recipe",
+  "directors": [
+    {
+      "cxx_type": "nsb_sample6::Evaluator",
+      "factory": "create_nsb_director_nsb_sample6_Evaluator",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample6::Evaluator::Bias(double) const",
+          "symbol": "nsb_sample6__Evaluator__Bias_double__const",
+          "abstract": false
+        },
+        {
+          "identity": "nsb_sample6::Evaluator::Evaluate(double) const",
+          "symbol": "nsb_sample6__Evaluator__Evaluate_double__const",
+          "abstract": true
+        },
+        {
+          "identity": "nsb_sample6::Evaluator::Record(double) const",
+          "symbol": "nsb_sample6__Evaluator__Record_double__const",
+          "abstract": false
+        }
+      ]
+    },
+    {
+      "cxx_type": "nsb_sample6::ProtectedConcrete",
+      "factory": "create_nsb_director_nsb_sample6_ProtectedConcrete",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample6::ProtectedConcrete::Evaluate(double) const",
+          "symbol": "nsb_sample6__ProtectedConcrete__Evaluate_double__const",
+          "abstract": false
+        }
+      ]
+    },
+    {
+      "cxx_type": "nsb_sample6::ProtectedEvaluator",
+      "factory": "create_nsb_director_nsb_sample6_ProtectedEvaluator",
+      "declaring_header": "directors.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample6::ProtectedEvaluator::Evaluate(double) const",
+          "symbol": "nsb_sample6__ProtectedEvaluator__Evaluate_double__const",
+          "abstract": true
+        }
+      ]
+    }
+  ]
+}

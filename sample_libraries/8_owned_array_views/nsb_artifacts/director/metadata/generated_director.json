@@ -1,0 +1,18 @@
+{
+  "schema_version": 2,
+  "kind": "generated_nsb_director_recipe",
+  "directors": [
+    {
+      "cxx_type": "nsb_sample8::ViewCallback",
+      "factory": "create_nsb_director_nsb_sample8_ViewCallback",
+      "declaring_header": "storage.hpp",
+      "methods": [
+        {
+          "identity": "nsb_sample8::ViewCallback::Apply(const nsb_sample8::Vector&, nsb_sample8::Vector&)",
+          "symbol": "nsb_sample8__ViewCallback__Apply_const_nsb_sample8__Vector___nsb_sample8__Vector",
+          "abstract": true
+        }
+      ]
+    }
+  ]
+}

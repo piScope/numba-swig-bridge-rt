@@ -57,17 +57,26 @@ class BridgeObjectType(types.Type):
         return self.bridge_id, self.cxx_type
 
     def can_convert_to(self, typingctx, other):
-        if (type(self) is BridgeObjectType and isinstance(other, ConstBridgeObjectType)
-                and self.key == other.key):
+        if (
+            type(self) is BridgeObjectType
+            and isinstance(other, ConstBridgeObjectType)
+            and self.key == other.key
+        ):
             return Conversion.safe
 
     def unify(self, typingctx, other):
-        if (type(self) in (BridgeObjectType, ConstBridgeObjectType)
-                and type(other) in (BridgeObjectType, ConstBridgeObjectType)
-                and self.key == other.key):
-            return bridge_object_type(self.bridge_id, self.cxx_type,
-                const=isinstance(self, ConstBridgeObjectType) or isinstance(other, ConstBridgeObjectType),
-                force_const=True)
+        if (
+            type(self) in (BridgeObjectType, ConstBridgeObjectType)
+            and type(other) in (BridgeObjectType, ConstBridgeObjectType)
+            and self.key == other.key
+        ):
+            return bridge_object_type(
+                self.bridge_id,
+                self.cxx_type,
+                const=isinstance(self, ConstBridgeObjectType)
+                or isinstance(other, ConstBridgeObjectType),
+                force_const=True,
+            )
 
 
 class ConstBridgeObjectType(BridgeObjectType):
@@ -85,7 +94,9 @@ def _box_const(typ, value, c):
 
 @lower_cast(BridgeObjectType, ConstBridgeObjectType)
 def _lower_borrowed_to_const(context, builder, fromty, toty, value):
-    if fromty.key != toty.key or isinstance(fromty, (OwnedBridgeObjectType, BorrowedReturnBridgeObjectType)):
+    if fromty.key != toty.key or isinstance(
+        fromty, (OwnedBridgeObjectType, BorrowedReturnBridgeObjectType)
+    ):
         raise TypingError("const conversion requires matching borrowed object types")
     return value
 
@@ -118,7 +129,9 @@ class BorrowedReturnBridgeObjectType(BridgeObjectType):
 def _lower_owned_to_borrowed_return(context, builder, fromty, toty, value):
     """Give a state assignment a retained handle to a constructed object."""
     if fromty.key != toty.key:
-        raise TypingError(f"cannot assign {fromty.cxx_type} to state field {toty.cxx_type}")
+        raise TypingError(
+            f"cannot assign {fromty.cxx_type} to state field {toty.cxx_type}"
+        )
     source = cgutils.create_struct_proxy(fromty)(context, builder, value=value)
     storage = context.nrt.meminfo_data(builder, source.meminfo)
     pointer = builder.load(
@@ -141,25 +154,35 @@ class BorrowedPointerModel(models.PrimitiveModel):
 @register_model(OwnedBridgeObjectType)
 class OwnedPointerModel(models.StructModel):
     def __init__(self, dmm, fe_type):
-        super().__init__(dmm, fe_type, [("meminfo", types.MemInfoPointer(types.voidptr))])
+        super().__init__(
+            dmm, fe_type, [("meminfo", types.MemInfoPointer(types.voidptr))]
+        )
 
 
 @register_model(OwnedReturnBridgeObjectType)
 class OwnedReturnPointerModel(models.StructModel):
     def __init__(self, dmm, fe_type):
-        super().__init__(dmm, fe_type, [
-            ("meminfo", types.MemInfoPointer(types.voidptr)),
-            ("pointer", types.voidptr),
-        ])
+        super().__init__(
+            dmm,
+            fe_type,
+            [
+                ("meminfo", types.MemInfoPointer(types.voidptr)),
+                ("pointer", types.voidptr),
+            ],
+        )
 
 
 @register_model(BorrowedReturnBridgeObjectType)
 class BorrowedReturnPointerModel(models.StructModel):
     def __init__(self, dmm, fe_type):
-        super().__init__(dmm, fe_type, [
-            ("meminfo", types.MemInfoPointer(types.voidptr)),
-            ("pointer", types.voidptr),
-        ])
+        super().__init__(
+            dmm,
+            fe_type,
+            [
+                ("meminfo", types.MemInfoPointer(types.voidptr)),
+                ("pointer", types.voidptr),
+            ],
+        )
 
 
 def _unbox_borrowed_pointer(typ, obj, c):
@@ -175,7 +198,9 @@ def _unbox_borrowed_pointer(typ, obj, c):
             c.pyapi.decref(pointer_object)
         c.pyapi.decref(method)
     is_error = cgutils.is_not_null(c.builder, c.pyapi.err_occurred())
-    native_pointer = c.builder.inttoptr(c.builder.load(address_slot), c.context.get_value_type(typ))
+    native_pointer = c.builder.inttoptr(
+        c.builder.load(address_slot), c.context.get_value_type(typ)
+    )
     return NativeValue(native_pointer, is_error=is_error)
 
 
@@ -188,7 +213,9 @@ def unbox_bridge_object(typ, obj, c):
 def unbox_owned_bridge_object(typ, obj, c):
     # Dispatchers create Python wrappers even for helpers called only from
     # compiled code. A Python proxy cannot supply an NRT-owned argument.
-    c.pyapi.err_set_string("PyExc_TypeError", "frame-owned bridge arguments require a compiled caller")
+    c.pyapi.err_set_string(
+        "PyExc_TypeError", "frame-owned bridge arguments require a compiled caller"
+    )
     return NativeValue(c.context.get_constant_null(typ), is_error=cgutils.true_bit)
 
 
@@ -197,7 +224,9 @@ def unbox_retained_borrow_bridge_object(typ, obj, c):
     # This specialization carries a native owner handle as well as a pointer.
     # A Python proxy uses the ordinary pointer specialization instead; it cannot
     # supply this value. Compiled callers pass the native structure directly.
-    c.pyapi.err_set_string("PyExc_TypeError", "retained-borrow bridge arguments require a compiled caller")
+    c.pyapi.err_set_string(
+        "PyExc_TypeError", "retained-borrow bridge arguments require a compiled caller"
+    )
     return NativeValue(c.context.get_constant_null(typ), is_error=cgutils.true_bit)
 
 
@@ -259,8 +288,9 @@ def _attach_keepalive(proxy: object, owner: object) -> None:
     _KEEPALIVE_BY_ID[key] = (reference, owner)
 
 
-def _proxy_from_address(key: tuple[str, str], address: int, owning: bool,
-                        keepalive: object | None = None) -> object:
+def _proxy_from_address(
+    key: tuple[str, str], address: int, owning: bool, keepalive: object | None = None
+) -> object:
     """Create the normal SWIG proxy for a native address at a Python boundary."""
     if address == 0:
         raise ReferenceError(f"cannot box a null {key[1]} bridge object")
@@ -280,14 +310,13 @@ def _proxy_from_address(key: tuple[str, str], address: int, owning: bool,
     return proxy
 
 
-def _box_object_proxy(c, key: tuple[str, str], pointer, *, owning: bool,
-                      keepalive=None):
+def _box_object_proxy(
+    c, key: tuple[str, str], pointer, *, owning: bool, keepalive=None
+):
     """Emit Python boxing for one native C++ object address."""
     function = c.pyapi.unserialize(c.pyapi.serialize_object(_proxy_from_address))
     key_object = c.pyapi.unserialize(c.pyapi.serialize_object(key))
-    address = c.pyapi.long_from_ulonglong(
-        c.builder.ptrtoint(pointer, ir.IntType(64))
-    )
+    address = c.pyapi.long_from_ulonglong(c.builder.ptrtoint(pointer, ir.IntType(64)))
     ownership = c.pyapi.bool_from_bool(ir.Constant(ir.IntType(1), owning))
     arguments = (key_object, address, ownership)
     if keepalive is not None:
@@ -316,7 +345,9 @@ def _reject_unmarked_owned_return() -> None:
 @box(OwnedBridgeObjectType)
 def box_owned_bridge_object(typ, value, c):
     """Reject accidental Python escape of an NRT-owned C++ object."""
-    function = c.pyapi.unserialize(c.pyapi.serialize_object(_reject_unmarked_owned_return))
+    function = c.pyapi.unserialize(
+        c.pyapi.serialize_object(_reject_unmarked_owned_return)
+    )
     result = c.pyapi.call_function_objargs(function, ())
     c.pyapi.decref(function)
     return result
@@ -343,7 +374,9 @@ def box_borrowed_return_bridge_object(typ, value, c):
     """Box a child while retaining the NRT ``MemInfo`` of its declared owner."""
     result = cgutils.create_struct_proxy(typ)(c.context, c.builder, value=value)
     keepalive = c.box(types.MemInfoPointer(types.voidptr), result.meminfo)
-    boxed = _box_object_proxy(c, typ.key, result.pointer, owning=False, keepalive=keepalive)
+    boxed = _box_object_proxy(
+        c, typ.key, result.pointer, owning=False, keepalive=keepalive
+    )
     c.pyapi.decref(keepalive)
     return boxed
 
@@ -369,8 +402,10 @@ def _automatic_path(bridge_id, source, target):
 
 def _cast_pointer(builder, record, value, kind):
     function = cgutils.get_or_insert_function(
-        builder.module, ir.FunctionType(ir.IntType(8).as_pointer(),
-                                        [ir.IntType(8).as_pointer()]), name=record[kind])
+        builder.module,
+        ir.FunctionType(ir.IntType(8).as_pointer(), [ir.IntType(8).as_pointer()]),
+        name=record[kind],
+    )
     return builder.call(function, [value])
 
 
@@ -382,9 +417,15 @@ def _convert_pointer(context, builder, typ, target, value):
         owner = cgutils.create_struct_proxy(typ)(context, builder, value=value)
         data = owner.meminfo
         # The NRT payload holds one C++ pointer written by the generated factory.
-        function = cgutils.get_or_insert_function(builder.module, ir.FunctionType(ir.IntType(8).as_pointer(), [data.type]), name="NRT_MemInfo_data_fast")
+        function = cgutils.get_or_insert_function(
+            builder.module,
+            ir.FunctionType(ir.IntType(8).as_pointer(), [data.type]),
+            name="NRT_MemInfo_data_fast",
+        )
         storage = builder.call(function, [data])
-        value = builder.load(builder.bitcast(storage, ir.IntType(8).as_pointer().as_pointer()))
+        value = builder.load(
+            builder.bitcast(storage, ir.IntType(8).as_pointer().as_pointer())
+        )
     path = _automatic_path(typ.bridge_id, typ.cxx_type, target)
     if path is None:
         raise TypingError(f"no automatic conversion from {typ.cxx_type} to {target}")
@@ -440,15 +481,21 @@ def own_this(value):
 
 @intrinsic
 def _own_this(typingctx, value):
-    if not isinstance(value, OwnedBridgeObjectType) or isinstance(value, OwnedReturnBridgeObjectType):
-        raise TypingError("nsb.own_this() requires an NSB frame-owned constructed object")
+    if not isinstance(value, OwnedBridgeObjectType) or isinstance(
+        value, OwnedReturnBridgeObjectType
+    ):
+        raise TypingError(
+            "nsb.own_this() requires an NSB frame-owned constructed object"
+        )
     target = _OWNED_RETURN_TYPES.setdefault(
         value.key, OwnedReturnBridgeObjectType(value.bridge_id, value.cxx_type)
     )
     result_signature = signature(target, value)
 
     def codegen(context, builder, sig, args):
-        source = cgutils.create_struct_proxy(sig.args[0])(context, builder, value=args[0])
+        source = cgutils.create_struct_proxy(sig.args[0])(
+            context, builder, value=args[0]
+        )
         storage = context.nrt.meminfo_data(builder, source.meminfo)
         pointer = builder.load(
             builder.bitcast(storage, ir.IntType(8).as_pointer().as_pointer())
@@ -466,7 +513,9 @@ def _own_this(typingctx, value):
 
 @overload(own_this)
 def _overload_own_this(value):
-    if not isinstance(value, OwnedBridgeObjectType) or isinstance(value, OwnedReturnBridgeObjectType):
+    if not isinstance(value, OwnedBridgeObjectType) or isinstance(
+        value, OwnedReturnBridgeObjectType
+    ):
         return None
 
     def implementation(value):
@@ -492,7 +541,9 @@ def borrowed_from(obj=_MISSING, owner=_MISSING, *, owner_arg=_MISSING):
             "use nsb.borrowed_from(owner_arg=...) as a decorator"
         )
     if obj is not _MISSING or owner is not _MISSING:
-        raise TypeError("nsb.borrowed_from(owner_arg=...) accepts no positional arguments")
+        raise TypeError(
+            "nsb.borrowed_from(owner_arg=...) accepts no positional arguments"
+        )
     if not isinstance(owner_arg, (int, str)):
         raise TypeError("owner_arg must be an argument index or name")
 
@@ -504,8 +555,11 @@ def borrowed_from(obj=_MISSING, owner=_MISSING, *, owner_arg=_MISSING):
             bound = signature_object.bind(*args, **kwargs)
             bound.apply_defaults()
             try:
-                retained_owner = (args[owner_arg] if isinstance(owner_arg, int)
-                                  else bound.arguments[owner_arg])
+                retained_owner = (
+                    args[owner_arg]
+                    if isinstance(owner_arg, int)
+                    else bound.arguments[owner_arg]
+                )
             except (IndexError, KeyError) as error:
                 raise TypeError(
                     f"nsb.borrowed_from could not resolve owner argument {owner_arg!r}"
@@ -523,12 +577,18 @@ def borrowed_from(obj=_MISSING, owner=_MISSING, *, owner_arg=_MISSING):
 @intrinsic
 def _borrowed_from_owned(typingctx, value, owner):
     if isinstance(value, ConstBridgeObjectType):
-        raise TypingError("const bridge views cannot be converted to mutable borrowed results")
-    if not isinstance(value, BridgeObjectType) or isinstance(value, OwnedBridgeObjectType):
+        raise TypingError(
+            "const bridge views cannot be converted to mutable borrowed results"
+        )
+    if not isinstance(value, BridgeObjectType) or isinstance(
+        value, OwnedBridgeObjectType
+    ):
         raise TypingError("nsb.borrowed_from() requires a borrowed bridge result")
     if isinstance(owner, BorrowedReturnBridgeObjectType):
         owner_meminfo_type = owner
-    elif isinstance(owner, OwnedBridgeObjectType) and not isinstance(owner, OwnedReturnBridgeObjectType):
+    elif isinstance(owner, OwnedBridgeObjectType) and not isinstance(
+        owner, OwnedReturnBridgeObjectType
+    ):
         owner_meminfo_type = owner
     else:
         raise TypingError(
@@ -536,7 +596,9 @@ def _borrowed_from_owned(typingctx, value, owner):
             "use @nsb.borrowed_from(owner_arg=...) for a Python/SWIG owner"
         )
     if value.bridge_id != owner.bridge_id:
-        raise TypingError("nsb.borrowed_from() requires child and owner from the same bridge")
+        raise TypingError(
+            "nsb.borrowed_from() requires child and owner from the same bridge"
+        )
     target = _BORROWED_RETURN_TYPES.setdefault(
         value.key, BorrowedReturnBridgeObjectType(value.bridge_id, value.cxx_type)
     )
@@ -588,19 +650,29 @@ def _cast_implementation(value, destination, kind):
         record = _CASTS.get((value.bridge_id, value.cxx_type, target.cxx_type, kind))
         required = 1 if kind == "upcast" else 4
         if record is None or not record["flags_value"] & required:
-            raise TypingError(f"unsupported {kind} from {value.cxx_type} to {target.cxx_type}")
+            raise TypingError(
+                f"unsupported {kind} from {value.cxx_type} to {target.cxx_type}"
+            )
 
     @intrinsic
     def caller(typingctx, obj):
         def codegen(context, builder, sig, args):
-            result = args[0] if record is None else _cast_pointer(builder, record, args[0], kind)
+            result = (
+                args[0]
+                if record is None
+                else _cast_pointer(builder, record, args[0], kind)
+            )
             with builder.if_then(cgutils.is_null(builder, result), likely=False):
-                context.call_conv.return_user_exc(builder, TypeError, ("C++ bridge cast failed",))
+                context.call_conv.return_user_exc(
+                    builder, TypeError, ("C++ bridge cast failed",)
+                )
             return result
+
         return target(obj), codegen
 
     def implementation(value, destination):
         return caller(value)
+
     return implementation
 
 
@@ -614,7 +686,9 @@ def _overload_dynamic_cast(value, destination):
     return _cast_implementation(value, destination, "dynamic_cast")
 
 
-def bridge_object_type(bridge_id: str, cxx_type: str, *, const=False, force_const=False) -> BridgeObjectType:
+def bridge_object_type(
+    bridge_id: str, cxx_type: str, *, const=False, force_const=False
+) -> BridgeObjectType:
     """Return a registered borrowed-object Numba type.
 
     Native-director callbacks use this public runtime hook to turn one C++
@@ -623,10 +697,14 @@ def bridge_object_type(bridge_id: str, cxx_type: str, *, const=False, force_cons
 
     try:
         if const and (force_const or _MEMBERS.get((bridge_id, cxx_type))):
-            return _CONST_TYPES.setdefault((bridge_id, cxx_type), ConstBridgeObjectType(bridge_id, cxx_type))
+            return _CONST_TYPES.setdefault(
+                (bridge_id, cxx_type), ConstBridgeObjectType(bridge_id, cxx_type)
+            )
         return _OBJECT_TYPES[(bridge_id, cxx_type)]
     except KeyError as error:
-        raise RuntimeError(f"no installed bridge type for {bridge_id}:{cxx_type}") from error
+        raise RuntimeError(
+            f"no installed bridge type for {bridge_id}:{cxx_type}"
+        ) from error
 
 
 def object_from_address(object_type: BridgeObjectType):
@@ -673,10 +751,16 @@ def director_result_address(bridge_id: str, specification: dict[str, Any]):
                 "a director object result must be borrowed; store a constructed object "
                 "in director state before returning a pointer or reference to it"
             )
-        if isinstance(source, ConstBridgeObjectType) and not specification.get("const", False):
-            raise TypingError("cannot return a const bridge view as a mutable director result")
+        if isinstance(source, ConstBridgeObjectType) and not specification.get(
+            "const", False
+        ):
+            raise TypingError(
+                "cannot return a const bridge view as a mutable director result"
+            )
         if not isinstance(source, BridgeObjectType) or source.bridge_id != bridge_id:
-            raise TypingError("director object result must be a selected borrowed bridge object")
+            raise TypingError(
+                "director object result must be a selected borrowed bridge object"
+            )
         if optional and not nullable:
             raise TypingError("a C++ reference director result cannot be Optional")
         if _automatic_path(bridge_id, source.cxx_type, target.cxx_type) is None:
@@ -688,11 +772,19 @@ def director_result_address(bridge_id: str, specification: dict[str, Any]):
 
         def codegen(context, builder, sig, args):
             if not optional:
-                return _convert_pointer(context, builder, source, target.cxx_type, args[0])
+                return _convert_pointer(
+                    context, builder, source, target.cxx_type, args[0]
+                )
             source_value = context.make_helper(builder, value_type, args[0])
-            result = cgutils.alloca_once_value(builder, cgutils.get_null_value(ir.IntType(8).as_pointer()))
-            with builder.if_then(cgutils.as_bool_bit(builder, source_value.valid), likely=True):
-                pointer = _convert_pointer(context, builder, source, target.cxx_type, source_value.data)
+            result = cgutils.alloca_once_value(
+                builder, cgutils.get_null_value(ir.IntType(8).as_pointer())
+            )
+            with builder.if_then(
+                cgutils.as_bool_bit(builder, source_value.valid), likely=True
+            ):
+                pointer = _convert_pointer(
+                    context, builder, source, target.cxx_type, source_value.data
+                )
                 builder.store(pointer, result)
             return builder.load(result)
 
@@ -705,6 +797,7 @@ def _numba_scalar_type(specification: dict[str, Any]):
     kind = specification["kind"]
     if kind == "mpi_comm":
         from .mpi import comm_type
+
         return comm_type
     if kind == "void":
         return types.none
@@ -723,7 +816,12 @@ def _numba_scalar_type(specification: dict[str, Any]):
 
 def _numba_result_type(bridge_id: str, specification: dict[str, Any]):
     if specification["kind"] == "object":
-        object_type = bridge_object_type(bridge_id, specification["cxx_type"], const=specification.get("const", False), force_const=specification.get("preserve_const", False))
+        object_type = bridge_object_type(
+            bridge_id,
+            specification["cxx_type"],
+            const=specification.get("const", False),
+            force_const=specification.get("preserve_const", False),
+        )
         if specification.get("nullable"):
             return types.Optional(object_type)
         return object_type
@@ -792,24 +890,35 @@ def _array_view_llvm_dtype(name: str):
     try:
         return mapping[name]
     except KeyError as error:
-        raise RuntimeError(f"unsupported generated array-view dtype {name!r}") from error
+        raise RuntimeError(
+            f"unsupported generated array-view dtype {name!r}"
+        ) from error
 
 
 def _array_view_itemsize(name: str) -> int:
     return {"float32": 4, "float64": 8, "int32": 4, "bool": 1}[name]
 
 
-def _matches(specification: dict[str, Any], value_type: types.Type, bridge_id=None) -> bool:
+def _matches(
+    specification: dict[str, Any], value_type: types.Type, bridge_id=None
+) -> bool:
     kind = specification["kind"]
     if kind == "object":
         return (
             isinstance(value_type, BridgeObjectType)
             and value_type.bridge_id == bridge_id
-            and (not isinstance(value_type, ConstBridgeObjectType) or specification.get("const", False))
-            and _automatic_path(bridge_id, value_type.cxx_type, specification["cxx_type"]) is not None
+            and (
+                not isinstance(value_type, ConstBridgeObjectType)
+                or specification.get("const", False)
+            )
+            and _automatic_path(
+                bridge_id, value_type.cxx_type, specification["cxx_type"]
+            )
+            is not None
         )
     if kind == "mpi_comm":
         from .mpi import CommunicatorType
+
         return isinstance(value_type, CommunicatorType)
     if kind == "array":
         return (
@@ -819,7 +928,9 @@ def _matches(specification: dict[str, Any], value_type: types.Type, bridge_id=No
             and value_type.layout == specification["layout"]
         )
     if kind == "scalar_pointer":
-        return isinstance(value_type, types.CPointer) and value_type.dtype == _array_dtype(specification["numpy_dtype"])
+        return isinstance(
+            value_type, types.CPointer
+        ) and value_type.dtype == _array_dtype(specification["numpy_dtype"])
     if kind in {"float", "double"}:
         return isinstance(value_type, types.Float)
     if kind in {"int", "int64"}:
@@ -829,8 +940,11 @@ def _matches(specification: dict[str, Any], value_type: types.Type, bridge_id=No
     return False
 
 
-def _select_constructor(constructors: tuple[dict[str, Any], ...],
-                        arguments: tuple[types.Type | None, ...], bridge_id: str):
+def _select_constructor(
+    constructors: tuple[dict[str, Any], ...],
+    arguments: tuple[types.Type | None, ...],
+    bridge_id: str,
+):
     """Return the unique native constructor matching Numba call arguments.
 
     ``type_callable`` invokes a generated Python typer with only the supplied
@@ -841,11 +955,13 @@ def _select_constructor(constructors: tuple[dict[str, Any], ...],
     """
 
     supplied = tuple(
-        argument for argument in arguments
+        argument
+        for argument in arguments
         if argument is not None and not isinstance(argument, types.Omitted)
     )
     matches = [
-        constructor for constructor in constructors
+        constructor
+        for constructor in constructors
         if len(constructor["parameters"]) == len(supplied)
         and all(
             _matches(parameter, argument, bridge_id)
@@ -909,7 +1025,9 @@ def _adapter_signature(method: BridgeMethod, argument_types: tuple[types.Type, .
             return None
         dtype_name = method.returns["dtype"]
         array_type = types.Array(
-            _array_dtype(dtype_name), 1, "C",
+            _array_dtype(dtype_name),
+            1,
+            "C",
             readonly=method.returns["mutable"] == "false",
         )
         llvm_dtype = _array_view_llvm_dtype(dtype_name)
@@ -919,21 +1037,30 @@ def _adapter_signature(method: BridgeMethod, argument_types: tuple[types.Type, .
         def codegen(context, builder, sig, arguments):
             adapter = cgutils.get_or_insert_function(
                 builder.module,
-                ir.FunctionType(ir.IntType(32), [ir.IntType(8).as_pointer(),
-                                                  llvm_dtype.as_pointer().as_pointer(),
-                                                  ir.IntType(64).as_pointer()]),
+                ir.FunctionType(
+                    ir.IntType(32),
+                    [
+                        ir.IntType(8).as_pointer(),
+                        llvm_dtype.as_pointer().as_pointer(),
+                        ir.IntType(64).as_pointer(),
+                    ],
+                ),
                 name=method.symbol,
             )
             data_slot = cgutils.alloca_once(builder, llvm_dtype.as_pointer())
             size_slot = cgutils.alloca_once(builder, ir.IntType(64))
-            self_pointer = _convert_pointer(context, builder, sig.args[0], method.owner, arguments[0])
+            self_pointer = _convert_pointer(
+                context, builder, sig.args[0], method.owner, arguments[0]
+            )
             status = builder.call(adapter, [self_pointer, data_slot, size_slot])
             _raise_on_failure(context, builder, status)
             size = builder.load(size_slot)
             result = context.make_array(array_type)(context, builder)
             result.data = builder.load(data_slot)
             result.shape = cgutils.pack_array(builder, [size])
-            result.strides = cgutils.pack_array(builder, [ir.Constant(ir.IntType(64), itemsize)])
+            result.strides = cgutils.pack_array(
+                builder, [ir.Constant(ir.IntType(64), itemsize)]
+            )
             result.itemsize = ir.Constant(ir.IntType(64), itemsize)
             result.meminfo = cgutils.get_null_value(result.meminfo.type)
             result.parent = cgutils.get_null_value(result.parent.type)
@@ -942,38 +1069,112 @@ def _adapter_signature(method: BridgeMethod, argument_types: tuple[types.Type, .
 
         return call_signature.replace(pysig=None), codegen
     if method.returns["kind"] == "array_view_2d":
-        array_type = types.Array(types.float64, 2, "F", readonly=method.returns["mutable"] == "false")
+        array_type = types.Array(
+            types.float64, 2, "F", readonly=method.returns["mutable"] == "false"
+        )
         call_signature = signature(array_type, *argument_types)
+
         def codegen(context, builder, sig, arguments):
-            adapter = cgutils.get_or_insert_function(builder.module, ir.FunctionType(
-                ir.IntType(32), [ir.IntType(8).as_pointer(), ir.DoubleType().as_pointer().as_pointer(),
-                                 ir.IntType(64).as_pointer(), ir.IntType(64).as_pointer()]), name=method.symbol)
+            adapter = cgutils.get_or_insert_function(
+                builder.module,
+                ir.FunctionType(
+                    ir.IntType(32),
+                    [
+                        ir.IntType(8).as_pointer(),
+                        ir.DoubleType().as_pointer().as_pointer(),
+                        ir.IntType(64).as_pointer(),
+                        ir.IntType(64).as_pointer(),
+                    ],
+                ),
+                name=method.symbol,
+            )
             data_slot = cgutils.alloca_once(builder, ir.DoubleType().as_pointer())
-            rows_slot, cols_slot = cgutils.alloca_once(builder, ir.IntType(64)), cgutils.alloca_once(builder, ir.IntType(64))
-            status = builder.call(adapter, [_convert_pointer(context, builder, sig.args[0], method.owner, arguments[0]), data_slot, rows_slot, cols_slot])
+            rows_slot, cols_slot = cgutils.alloca_once(
+                builder, ir.IntType(64)
+            ), cgutils.alloca_once(builder, ir.IntType(64))
+            status = builder.call(
+                adapter,
+                [
+                    _convert_pointer(
+                        context, builder, sig.args[0], method.owner, arguments[0]
+                    ),
+                    data_slot,
+                    rows_slot,
+                    cols_slot,
+                ],
+            )
             _raise_on_failure(context, builder, status)
             rows, cols = builder.load(rows_slot), builder.load(cols_slot)
             result = context.make_array(array_type)(context, builder)
             result.data = builder.load(data_slot)
             result.shape = cgutils.pack_array(builder, [rows, cols])
-            result.strides = cgutils.pack_array(builder, [ir.Constant(ir.IntType(64), 8), builder.mul(rows, ir.Constant(ir.IntType(64), 8))])
+            result.strides = cgutils.pack_array(
+                builder,
+                [
+                    ir.Constant(ir.IntType(64), 8),
+                    builder.mul(rows, ir.Constant(ir.IntType(64), 8)),
+                ],
+            )
             result.itemsize = ir.Constant(ir.IntType(64), 8)
             result.meminfo = cgutils.get_null_value(result.meminfo.type)
             result.parent = cgutils.get_null_value(result.parent.type)
             result.nitems = builder.mul(rows, cols)
             return result._getvalue()
+
         return call_signature.replace(pysig=None), codegen
     if method.returns["kind"] == "array_view_3d":
-        array_type = types.Array(types.float64, 3, "A", readonly=method.returns["mutable"] == "false")
+        array_type = types.Array(
+            types.float64, 3, "A", readonly=method.returns["mutable"] == "false"
+        )
         call_signature = signature(array_type, *argument_types)
+
         def codegen(context, builder, sig, arguments):
-            adapter = cgutils.get_or_insert_function(builder.module, ir.FunctionType(ir.IntType(32), [ir.IntType(8).as_pointer(), ir.DoubleType().as_pointer().as_pointer(), ir.IntType(64).as_pointer(), ir.IntType(64).as_pointer(), ir.IntType(64).as_pointer()]), name=method.symbol)
-            data = cgutils.alloca_once(builder, ir.DoubleType().as_pointer()); depth = cgutils.alloca_once(builder, ir.IntType(64)); rows = cgutils.alloca_once(builder, ir.IntType(64)); cols = cgutils.alloca_once(builder, ir.IntType(64))
-            status = builder.call(adapter, [_convert_pointer(context, builder, sig.args[0], method.owner, arguments[0]), data, depth, rows, cols]); _raise_on_failure(context, builder, status)
-            k, i, j = builder.load(depth), builder.load(rows), builder.load(cols); eight = ir.Constant(ir.IntType(64), 8)
-            result = context.make_array(array_type)(context, builder); result.data = builder.load(data)
-            result.shape = cgutils.pack_array(builder, [k, i, j]); result.strides = cgutils.pack_array(builder, [builder.mul(builder.mul(i, j), eight), eight, builder.mul(i, eight)])
-            result.itemsize = eight; result.meminfo = cgutils.get_null_value(result.meminfo.type); result.parent = cgutils.get_null_value(result.parent.type); result.nitems = builder.mul(k, builder.mul(i, j)); return result._getvalue()
+            adapter = cgutils.get_or_insert_function(
+                builder.module,
+                ir.FunctionType(
+                    ir.IntType(32),
+                    [
+                        ir.IntType(8).as_pointer(),
+                        ir.DoubleType().as_pointer().as_pointer(),
+                        ir.IntType(64).as_pointer(),
+                        ir.IntType(64).as_pointer(),
+                        ir.IntType(64).as_pointer(),
+                    ],
+                ),
+                name=method.symbol,
+            )
+            data = cgutils.alloca_once(builder, ir.DoubleType().as_pointer())
+            depth = cgutils.alloca_once(builder, ir.IntType(64))
+            rows = cgutils.alloca_once(builder, ir.IntType(64))
+            cols = cgutils.alloca_once(builder, ir.IntType(64))
+            status = builder.call(
+                adapter,
+                [
+                    _convert_pointer(
+                        context, builder, sig.args[0], method.owner, arguments[0]
+                    ),
+                    data,
+                    depth,
+                    rows,
+                    cols,
+                ],
+            )
+            _raise_on_failure(context, builder, status)
+            k, i, j = builder.load(depth), builder.load(rows), builder.load(cols)
+            eight = ir.Constant(ir.IntType(64), 8)
+            result = context.make_array(array_type)(context, builder)
+            result.data = builder.load(data)
+            result.shape = cgutils.pack_array(builder, [k, i, j])
+            result.strides = cgutils.pack_array(
+                builder,
+                [builder.mul(builder.mul(i, j), eight), eight, builder.mul(i, eight)],
+            )
+            result.itemsize = eight
+            result.meminfo = cgutils.get_null_value(result.meminfo.type)
+            result.parent = cgutils.get_null_value(result.parent.type)
+            result.nitems = builder.mul(k, builder.mul(i, j))
+            return result._getvalue()
+
         return call_signature.replace(pysig=None), codegen
     return_type = _numba_result_type(method.bridge_id, result_specification)
     call_signature = signature(return_type, *argument_types)
@@ -992,7 +1193,9 @@ def _adapter_signature(method: BridgeMethod, argument_types: tuple[types.Type, .
         )
 
         array_values: dict[int, tuple[Any, Any]] = {}
-        lowered = [_convert_pointer(context, builder, sig.args[0], method.owner, arguments[0])]
+        lowered = [
+            _convert_pointer(context, builder, sig.args[0], method.owner, arguments[0])
+        ]
         for parameter in method.abi_parameters:
             kind = parameter["kind"]
             if kind in {"array_data", "array_count"}:
@@ -1010,19 +1213,37 @@ def _adapter_signature(method: BridgeMethod, argument_types: tuple[types.Type, .
                 continue
             argument_index = parameter["argument_index"] + 1
             if kind == "object":
-                lowered.append(_convert_pointer(context, builder, sig.args[argument_index],
-                                                parameter["cxx_type"], arguments[argument_index]))
+                lowered.append(
+                    _convert_pointer(
+                        context,
+                        builder,
+                        sig.args[argument_index],
+                        parameter["cxx_type"],
+                        arguments[argument_index],
+                    )
+                )
                 continue
             if kind == "mpi_comm":
-                holder = cgutils.create_struct_proxy(sig.args[argument_index])(context, builder, value=arguments[argument_index])
+                holder = cgutils.create_struct_proxy(sig.args[argument_index])(
+                    context, builder, value=arguments[argument_index]
+                )
                 lowered.append(holder.pointer)
                 continue
             if kind == "scalar_pointer":
-                lowered.append(builder.bitcast(arguments[argument_index], ir.IntType(8).as_pointer()))
+                lowered.append(
+                    builder.bitcast(
+                        arguments[argument_index], ir.IntType(8).as_pointer()
+                    )
+                )
                 continue
             expected = _numba_scalar_type(parameter)
             lowered.append(
-                context.cast(builder, arguments[argument_index], sig.args[argument_index], expected)
+                context.cast(
+                    builder,
+                    arguments[argument_index],
+                    sig.args[argument_index],
+                    expected,
+                )
             )
 
         if has_result:
@@ -1037,18 +1258,23 @@ def _adapter_signature(method: BridgeMethod, argument_types: tuple[types.Type, .
             )
             if method.returns["kind"] == "mpi_comm":
                 from .mpi import allocate_native_holder
+
                 result, native_slot = allocate_native_holder(context, builder)
                 status = builder.call(adapter, [*lowered, native_slot])
-                with builder.if_then(builder.icmp_unsigned("!=", status, ir.Constant(status.type, 0))):
+                with builder.if_then(
+                    builder.icmp_unsigned("!=", status, ir.Constant(status.type, 0))
+                ):
                     context.nrt.decref(builder, result_type, result._getvalue())
                 _raise_on_failure(context, builder, status)
                 result.pointer = builder.load(native_slot)
                 return result._getvalue()
             slot = cgutils.alloca_once(
                 builder,
-                context.get_value_type(slot_type)
-                if method.returns["kind"] != "bool"
-                else ir.IntType(32),
+                (
+                    context.get_value_type(slot_type)
+                    if method.returns["kind"] != "bool"
+                    else ir.IntType(32)
+                ),
             )
             status = builder.call(adapter, [*lowered, slot])
             _raise_on_failure(context, builder, status)
@@ -1074,7 +1300,9 @@ def _make_adapter_caller(method: BridgeMethod):
     arguments = [f"arg{index}" for index in range(len(method.parameters))]
     parameter_text = ", ".join(["typingctx", "value", *arguments])
     argument_tuple = ", ".join(["value", *arguments])
-    tuple_text = f"({argument_tuple},)" if len(arguments) == 0 else f"({argument_tuple})"
+    tuple_text = (
+        f"({argument_tuple},)" if len(arguments) == 0 else f"({argument_tuple})"
+    )
     source = "\n".join(
         [
             "@_intrinsic",
@@ -1101,7 +1329,9 @@ def _make_implementation(caller, arity: int, returns_void: bool):
     if returns_void:
         source = f"def implementation({parameter_text}):\n    _caller({call_text})\n    return None\n"
     else:
-        source = f"def implementation({parameter_text}):\n    return _caller({call_text})\n"
+        source = (
+            f"def implementation({parameter_text}):\n    return _caller({call_text})\n"
+        )
     namespace: dict[str, Any] = {"_caller": caller}
     exec(source, namespace)
     return namespace["implementation"]
@@ -1130,11 +1360,17 @@ def _resolve_method(
             if python_name in info.get("declared_method_names", []):
                 break
             bases = info.get("public_bases", [])
-            if len(bases) != 1 or _automatic_path(receiver.bridge_id, current, bases[0]) is None:
+            if (
+                len(bases) != 1
+                or _automatic_path(receiver.bridge_id, current, bases[0]) is None
+            ):
                 break
             current = bases[0]
-            on_receiver = [method for method in available
-                           if method.bridge_id == receiver.bridge_id and method.owner == current]
+            on_receiver = [
+                method
+                for method in available
+                if method.bridge_id == receiver.bridge_id and method.owner == current
+            ]
             if on_receiver:
                 break
     if not on_receiver:
@@ -1152,10 +1388,14 @@ def _resolve_method(
     if len(candidates) > 1:
         # Prefer exact floating precision when float/double overloads coexist.
         # Keep equal-cost candidates ambiguous rather than selecting by order.
-        costs = [sum(parameter["kind"] in {"float", "double"}
-                     and argument != _numba_scalar_type(parameter)
-                     for parameter, argument in zip(method.parameters, argument_types))
-                 for method in candidates]
+        costs = [
+            sum(
+                parameter["kind"] in {"float", "double"}
+                and argument != _numba_scalar_type(parameter)
+                for parameter, argument in zip(method.parameters, argument_types)
+            )
+            for method in candidates
+        ]
         best = min(costs)
         candidates = [method for method, cost in zip(candidates, costs) if cost == best]
     if len(candidates) > 1:
@@ -1188,17 +1428,23 @@ def _install_method_template(python_name: str, arity: int) -> None:
 
     @overload_method(BridgeObjectType, python_name)
     def lower_generated_method(value, *args):
-        if len(args) == 1 and isinstance(args[0], (types.StarArgTuple, types.StarArgUniTuple)):
+        if len(args) == 1 and isinstance(
+            args[0], (types.StarArgTuple, types.StarArgUniTuple)
+        ):
             args = tuple(args[0])
         method = _resolve_method(python_name, value, args)
         if method is None:
             return None
         caller = _make_adapter_caller(method)
         call = ", ".join(["value", *[f"args[{index}]" for index in range(len(args))]])
-        statement = f"_caller({call})\n    return None" if method.returns['kind'] == 'void' else f"return _caller({call})"
+        statement = (
+            f"_caller({call})\n    return None"
+            if method.returns["kind"] == "void"
+            else f"return _caller({call})"
+        )
         namespace = {"_caller": caller}
         exec(f"def implementation(value, *args):\n    {statement}\n", namespace)
-        return namespace['implementation']
+        return namespace["implementation"]
 
     _INSTALLED_METHOD_NAMES.add(python_name)
 
@@ -1262,15 +1508,21 @@ def _install_symbols(target_module: object, methods: list[BridgeMethod]) -> None
     for method in methods:
         resolver = getattr(target_module, method.function_address_helper, None)
         if not callable(resolver):
-            raise RuntimeError(f"owning module {method.owner_module} has no generated "
-                               f"{method.function_address_helper} helper")
+            raise RuntimeError(
+                f"owning module {method.owner_module} has no generated "
+                f"{method.function_address_helper} helper"
+            )
         address = resolver(method.symbol)
         if not isinstance(address, int) or address == 0:
-            raise RuntimeError(f"target SWIG module has no adapter symbol {method.symbol!r}")
+            raise RuntimeError(
+                f"target SWIG module has no adapter symbol {method.symbol!r}"
+            )
         binding.add_symbol(method.symbol, address)
 
 
-def _register_proxy_type(proxy_type: type, bridge_type: BridgeObjectType, *, constructible: bool = False) -> None:
+def _register_proxy_type(
+    proxy_type: type, bridge_type: BridgeObjectType, *, constructible: bool = False
+) -> None:
     def typeof_proxy(value, context):
         del value, context
         return bridge_type
@@ -1280,20 +1532,28 @@ def _register_proxy_type(proxy_type: type, bridge_type: BridgeObjectType, *, con
         infer_global(proxy_type, types.TypeRef(bridge_type))
 
 
-def _register_owned_constructors(proxy_type: type, bridge_id: str, cxx_type: str) -> None:
+def _register_owned_constructors(
+    proxy_type: type, bridge_id: str, cxx_type: str
+) -> None:
     key = (bridge_id, cxx_type)
     constructors = _CONSTRUCTORS[key]
-    owned_type = _OWNED_TYPES.setdefault(key, OwnedBridgeObjectType(bridge_id, cxx_type))
+    owned_type = _OWNED_TYPES.setdefault(
+        key, OwnedBridgeObjectType(bridge_id, cxx_type)
+    )
 
     @type_callable(proxy_type)
     def type_constructor(context):
-        maximum_arity = max(len(constructor["parameters"]) for constructor in constructors)
+        maximum_arity = max(
+            len(constructor["parameters"]) for constructor in constructors
+        )
 
         def choose(arguments):
             try:
                 constructor = _select_constructor(constructors, arguments, bridge_id)
             except TypingError as error:
-                raise TypingError(f"constructors for {cxx_type} are ambiguous") from error
+                raise TypingError(
+                    f"constructors for {cxx_type} are ambiguous"
+                ) from error
             if constructor is None:
                 return None
             return owned_type
@@ -1310,37 +1570,69 @@ def _register_owned_constructors(proxy_type: type, bridge_id: str, cxx_type: str
         def lower_constructor(context, builder, sig, arguments):
             constructor = _select_constructor(constructors, sig.args, bridge_id)
             if constructor is None:
-                raise TypingError(f"constructors for {cxx_type} have no unique native lowering")
+                raise TypingError(
+                    f"constructors for {cxx_type} have no unique native lowering"
+                )
             destroy = cgutils.get_or_insert_function(
-            builder.module,
-            ir.FunctionType(ir.VoidType(), [ir.IntType(8).as_pointer(), ir.IntType(types.intp.bitwidth), ir.IntType(8).as_pointer()]),
-            name=_DESTROY_SYMBOLS[key],
-        )
+                builder.module,
+                ir.FunctionType(
+                    ir.VoidType(),
+                    [
+                        ir.IntType(8).as_pointer(),
+                        ir.IntType(types.intp.bitwidth),
+                        ir.IntType(8).as_pointer(),
+                    ],
+                ),
+                name=_DESTROY_SYMBOLS[key],
+            )
             meminfo = context.nrt.meminfo_alloc_dtor(
-            builder, context.get_constant(types.uintp, 8), destroy
-        )
+                builder, context.get_constant(types.uintp, 8), destroy
+            )
             storage = context.nrt.meminfo_data(builder, meminfo)
             abi_types = []
             lowered = []
-            for parameter, argument_type, argument in zip(constructor["parameters"], sig.args, arguments):
+            for parameter, argument_type, argument in zip(
+                constructor["parameters"], sig.args, arguments
+            ):
                 abi_types.append(_llvm_abi_type(parameter))
                 if parameter["kind"] == "mpi_comm":
-                    holder = cgutils.create_struct_proxy(argument_type)(context, builder, value=argument)
+                    holder = cgutils.create_struct_proxy(argument_type)(
+                        context, builder, value=argument
+                    )
                     lowered.append(holder.pointer)
                 elif parameter["kind"] == "scalar_pointer":
-                    lowered.append(builder.bitcast(argument, ir.IntType(8).as_pointer()))
+                    lowered.append(
+                        builder.bitcast(argument, ir.IntType(8).as_pointer())
+                    )
                 else:
-                    lowered.append(context.cast(builder, argument, argument_type, _numba_scalar_type(parameter)))
+                    lowered.append(
+                        context.cast(
+                            builder,
+                            argument,
+                            argument_type,
+                            _numba_scalar_type(parameter),
+                        )
+                    )
             adapter = cgutils.get_or_insert_function(
-            builder.module,
-            ir.FunctionType(ir.IntType(32), [*abi_types, ir.IntType(8).as_pointer().as_pointer()]),
-            name=constructor["symbol"],
-        )
-            status = builder.call(adapter, [*lowered, builder.bitcast(storage, ir.IntType(8).as_pointer().as_pointer())])
+                builder.module,
+                ir.FunctionType(
+                    ir.IntType(32),
+                    [*abi_types, ir.IntType(8).as_pointer().as_pointer()],
+                ),
+                name=constructor["symbol"],
+            )
+            status = builder.call(
+                adapter,
+                [
+                    *lowered,
+                    builder.bitcast(storage, ir.IntType(8).as_pointer().as_pointer()),
+                ],
+            )
             _raise_on_failure(context, builder, status)
             result = cgutils.create_struct_proxy(owned_type)(context, builder)
             result.meminfo = meminfo
             return result._getvalue()
+
         return lower_constructor
 
     for arity in {len(constructor["parameters"]) for constructor in constructors}:
@@ -1353,8 +1645,11 @@ def install_bridge(modules: Mapping[str, Any], descriptor_path: str | Path) -> N
     descriptor = _load_descriptor(descriptor_path)
     module_map = resolve_modules(modules, descriptor["classes"])
     bridge_id = descriptor["bridge_id"]
-    descriptor_key = (bridge_id, str(Path(descriptor_path).resolve()),
-                      tuple((name, id(module)) for name, module in module_map.items()))
+    descriptor_key = (
+        bridge_id,
+        str(Path(descriptor_path).resolve()),
+        tuple((name, id(module)) for name, module in module_map.items()),
+    )
     if descriptor_key in _INSTALLED_DESCRIPTORS:
         return
 
@@ -1366,18 +1661,30 @@ def install_bridge(modules: Mapping[str, Any], descriptor_path: str | Path) -> N
         cxx_type = class_entry.get("cxx_type")
         proxy_name = class_entry.get("python_proxy")
         methods = class_entry.get("methods")
-        if not isinstance(cxx_type, str) or not isinstance(proxy_name, str) or not isinstance(methods, list):
-            raise RuntimeError("ordinary bridge descriptor has incomplete class metadata")
+        if (
+            not isinstance(cxx_type, str)
+            or not isinstance(proxy_name, str)
+            or not isinstance(methods, list)
+        ):
+            raise RuntimeError(
+                "ordinary bridge descriptor has incomplete class metadata"
+            )
         owner_name = class_entry["owner_module"]
         proxy_type = getattr(module_map[owner_name], proxy_name, None)
         if not isinstance(proxy_type, type):
-            raise RuntimeError(f"owning module {owner_name} has no proxy {proxy_name!r}")
+            raise RuntimeError(
+                f"owning module {owner_name} has no proxy {proxy_name!r}"
+            )
         object_key = (bridge_id, cxx_type)
         previous_owner = _OBJECT_OWNERS.get(object_key)
         if previous_owner is not None and previous_owner != (owner_name, proxy_type):
-            raise RuntimeError(f"bridge class {bridge_id}:{cxx_type} already has another owner")
+            raise RuntimeError(
+                f"bridge class {bridge_id}:{cxx_type} already has another owner"
+            )
         existing = _OBJECT_TYPES.get(object_key)
-        bridge_type = existing if existing is not None else BridgeObjectType(bridge_id, cxx_type)
+        bridge_type = (
+            existing if existing is not None else BridgeObjectType(bridge_id, cxx_type)
+        )
         pending_types[cxx_type] = bridge_type
         pending_classes.append(class_entry)
 
@@ -1386,7 +1693,9 @@ def install_bridge(modules: Mapping[str, Any], descriptor_path: str | Path) -> N
         owner = class_entry["cxx_type"]
         for record in class_entry["methods"]:
             if not isinstance(record, dict):
-                raise RuntimeError(f"ordinary bridge class {owner} has an invalid method")
+                raise RuntimeError(
+                    f"ordinary bridge class {owner} has an invalid method"
+                )
             try:
                 method = BridgeMethod(
                     bridge_id=bridge_id,
@@ -1399,15 +1708,21 @@ def install_bridge(modules: Mapping[str, Any], descriptor_path: str | Path) -> N
                     const=record.get("const") is True,
                     returns=dict(record["return"]),
                     parameters=tuple(dict(item) for item in record["parameters"]),
-                    abi_parameters=tuple(dict(item) for item in record["abi_parameters"]),
+                    abi_parameters=tuple(
+                        dict(item) for item in record["abi_parameters"]
+                    ),
                 )
             except (KeyError, TypeError, ValueError) as error:
-                raise RuntimeError(f"ordinary bridge class {owner} has incomplete method metadata") from error
+                raise RuntimeError(
+                    f"ordinary bridge class {owner} has incomplete method metadata"
+                ) from error
             all_methods.append(method)
 
     for module_name, target_module in module_map.items():
-        _install_symbols(target_module, [method for method in all_methods
-                                        if method.owner_module == module_name])
+        _install_symbols(
+            target_module,
+            [method for method in all_methods if method.owner_module == module_name],
+        )
         for class_entry in pending_classes:
             if class_entry["owner_module"] != module_name:
                 continue
@@ -1419,15 +1734,19 @@ def install_bridge(modules: Mapping[str, Any], descriptor_path: str | Path) -> N
                 continue
             _DESTROY_SYMBOLS[key] = destroy_symbol
             for constructor in _CONSTRUCTORS[key]:
-                binding.add_symbol(constructor["symbol"], resolver(constructor["symbol"]))
+                binding.add_symbol(
+                    constructor["symbol"], resolver(constructor["symbol"])
+                )
             binding.add_symbol(destroy_symbol, resolver(destroy_symbol))
     for record in descriptor.get("conversions", []):
         module = module_map[record["owner_module"]]
         flags = getattr(module, record["flags"])()
         installed = {**record, "flags_value": flags}
         resolver = getattr(module, record["function_address_helper"])
-        for kind, source, target in [("upcast", record["derived"], record["base"]),
-                                     ("dynamic_cast", record["base"], record["derived"])]:
+        for kind, source, target in [
+            ("upcast", record["derived"], record["base"]),
+            ("dynamic_cast", record["base"], record["derived"]),
+        ]:
             address = resolver(record[kind])
             if not address:
                 raise RuntimeError(f"missing C++ cast helper {record[kind]}")
@@ -1447,7 +1766,11 @@ def install_bridge(modules: Mapping[str, Any], descriptor_path: str | Path) -> N
             ) from error
         object_key = (bridge_id, cxx_type)
         if object_key not in _OBJECT_TYPES:
-            _register_proxy_type(proxy_type, pending_types[cxx_type], constructible=bool(_CONSTRUCTORS.get(object_key)))
+            _register_proxy_type(
+                proxy_type,
+                pending_types[cxx_type],
+                constructible=bool(_CONSTRUCTORS.get(object_key)),
+            )
             _OBJECT_TYPES[object_key] = pending_types[cxx_type]
             _OBJECT_OWNERS[object_key] = (module_name, proxy_type)
             _PROXY_TYPES[proxy_type] = pending_types[cxx_type]
@@ -1457,7 +1780,8 @@ def install_bridge(modules: Mapping[str, Any], descriptor_path: str | Path) -> N
             owned_helper_name = class_entry.get("owned_proxy_helper")
             _OWNED_PROXY_HELPERS[object_key] = (
                 getattr(target_module, owned_helper_name, None)
-                if isinstance(owned_helper_name, str) else None
+                if isinstance(owned_helper_name, str)
+                else None
             )
             if _CONSTRUCTORS.get(object_key):
                 _register_owned_constructors(proxy_type, bridge_id, cxx_type)
