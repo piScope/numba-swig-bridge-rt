@@ -107,7 +107,9 @@ def infer_object_fields(binding, overrides, scalar_fields, object_fields, array_
         fields.update(array_fields)
         for name, bridge in object_fields.items():
             mode, const = policies.get(name, (None, False))
-            if mode == "borrowed":
+            if hasattr(bridge, "numba_state_type"):
+                fields[name] = bridge.numba_state_type
+            elif mode == "borrowed":
                 fields[name] = ordinary.bridge_object_type(
                     binding.bridge_id, bridge.cxx_type, const=const, force_const=True,
                 )
@@ -157,6 +159,12 @@ def infer_object_fields(binding, overrides, scalar_fields, object_fields, array_
                     if result.typemap[node.target.name] != state:
                         continue
                     value = result.typemap[node.value.name]
+                    bridge = object_fields[node.attr]
+                    if hasattr(bridge, "numba_state_type"):
+                        if value != bridge.numba_state_type:
+                            raise TypingError(f"communicator state field {node.attr!r} requires a communicator")
+                        # The wrapper is NRT-owned; the MPI handle stays borrowed.
+                        continue
                     if isinstance(value, ordinary.OwnedReturnBridgeObjectType):
                         raise TypingError(f"state field {node.attr!r}: own_this is a Python-bound transfer")
                     if isinstance(value, ordinary.OwnedBridgeObjectType):

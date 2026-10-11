@@ -145,6 +145,10 @@ def state_object_meminfo_at(backend: StateBackend):
 
 def state_object_at(backend: StateBackend, object_type, *, borrowed=False):
     """Return a borrowed object view which retains a native state token, if any."""
+    import sys
+    mpi = sys.modules.get("nsb_rt.runtime.mpi")
+    if mpi is not None and object_type == mpi.comm_type:
+        return mpi.communicator_state_at(backend)
 
     @intrinsic
     def reader(typingctx, state, slot):
@@ -367,6 +371,9 @@ class DirectorStateProperty:
 
     @classmethod
     def object(cls, slot: int, bridge: DeclaredObjectBridge):
+        if hasattr(bridge, "numba_state_type"):
+            from .mpi import communicator_state_property
+            return communicator_state_property(slot)
         return cls(slot=slot, bridge=bridge)
 
     def __set_name__(self, owner: type, name: str) -> None:

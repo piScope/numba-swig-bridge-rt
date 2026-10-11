@@ -11,6 +11,10 @@ repository root, install them before running examples:
 python -m pip install ./sample_libraries/*/
 ```
 
+Sample 11 additionally requires MPI and mpi4py, with an MPI compiler for its
+build. To use serial samples only, install the corresponding numbered sample
+directories individually. See [example11](example11/README.md) for MPI setup.
+
 Run the examples after installing the runtime and the corresponding sample
 package. The runtime release check uses
 `scripts/validate_runtime_consumer.py` to execute sample-1 examples in a clean
@@ -37,3 +41,5 @@ consumer environment.
 - [`example9/`](example9/object_returns.py) uses `nsb_sample9`: ordinary and
   native-director borrowed C++ object returns, retained parents, `own_this`
   transfer, and lazy native-owned director state.
+- [`example11/`](example11/README.md) uses `nsb_sample11`: MPI communicator
+  arguments, rank/size attributes, native constructors and communicator state.

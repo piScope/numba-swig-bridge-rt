@@ -14,6 +14,7 @@ import ctypes
 import dis
 import json
 import inspect
+import sys
 from pathlib import Path
 from typing import Any, Callable, Mapping
 import warnings
@@ -525,6 +526,13 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
                     builder.ptrtoint(args[1], ir.IntType(types.uintp.bitwidth))])
                 ordinary_runtime._raise_on_failure(context, builder, status)
                 return context.get_dummy_value()
+            mpi_type = getattr(sys.modules.get("nsb_rt.runtime.mpi"), "comm_type", None)
+            if object_type == mpi_type:
+                if sig.args[1] != mpi_type:
+                    from numba.core.errors import TypingError
+                    raise TypingError("communicator state requires a communicator value")
+                # StateBlock consumes a reference; the RHS retains its own.
+                context.nrt.incref(builder, sig.args[1], args[1])
             value = cgutils.create_struct_proxy(sig.args[1])(context, builder, value=args[1])
             # Constructed bridge objects transfer their result ownership to
             # StateBlock directly; the setter must not add another reference.
@@ -540,6 +548,9 @@ def _install_state_attributes(state_type: _StateViewType) -> None:
                 builder.ptrtoint(value.pointer, ir.IntType(types.uintp.bitwidth)),
                 builder.bitcast(value.meminfo, ir.IntType(8).as_pointer()),
             ])
+            if object_type == mpi_type:
+                with builder.if_then(builder.icmp_unsigned("!=", status, ir.Constant(status.type, 0))):
+                    context.nrt.decref(builder, sig.args[1], args[1])
             ordinary_runtime._raise_on_failure(context, builder, status)
             return context.get_dummy_value()
 
@@ -877,6 +888,8 @@ def _validate_state(
             scalar_fields[name] = scalar_kind
         elif isinstance(annotation, types.Array):
             array_fields[name] = annotation
+        elif (mpi_runtime := sys.modules.get("nsb_rt.runtime.mpi")) is not None and mpi_runtime.is_communicator_annotation(annotation):
+            object_fields[name] = mpi_runtime.communicator_state_bridge()
         elif isinstance(annotation, state_runtime.DeclaredObjectBridge):
             if annotation.cxx_type not in binding.object_bridges:
                 raise TypeError(f"state field {name!r} uses an object outside this bridge descriptor")
@@ -1000,7 +1013,7 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
         )
         scalar_slots = dict(state_facade._scalar_slots)
         object_slots = {
-            name: (state_facade._object_slots[name], ordinary_runtime.bridge_object_type(
+            name: (state_facade._object_slots[name], bridge.numba_state_type if hasattr(bridge, "numba_state_type") else ordinary_runtime.bridge_object_type(
                 binding.bridge_id, bridge.cxx_type, const=policies.get(name, (None, False))[1], force_const=True))
             for name, bridge in object_fields.items()
         }
@@ -1047,7 +1060,7 @@ def director(*, binding: DirectorBinding | None = None, state: Mapping[str, Any]
                         cached_slots[name] = state_runtime.scalar_numba_type(restricted_scalars[name][0])
                     elif name in restricted_objects:
                         object_type = restricted_objects[name][1]
-                        cached_slots[name] = (object_type if name in borrowed_fields else
+                        cached_slots[name] = (object_type if name in borrowed_fields or object_type == getattr(sys.modules.get("nsb_rt.runtime.mpi"), "comm_type", None) else
                             ordinary_runtime.BorrowedReturnBridgeObjectType(object_type.bridge_id, object_type.cxx_type))
                     else:
                         cached_slots[name] = restricted_arrays[name][1]

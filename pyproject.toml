@@ -30,6 +30,7 @@ nsb_rt = ["include/*.i", "cpp/*.hpp", "cpp/*.cpp"]
 "share/numba-swig-bridge-rt/usercode_examples/example8" = ["usercode_examples/example8/*"]
 "share/numba-swig-bridge-rt/usercode_examples/example9" = ["usercode_examples/example9/*"]
 "share/numba-swig-bridge-rt/usercode_examples/example10" = ["usercode_examples/example10/*"]
+"share/numba-swig-bridge-rt/usercode_examples/example11" = ["usercode_examples/example11/*"]
 
 [tool.setuptools.dynamic]
 version = {attr = "nsb_rt._version.__version__"}

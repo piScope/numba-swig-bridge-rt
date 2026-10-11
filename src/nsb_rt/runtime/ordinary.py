@@ -703,6 +703,9 @@ def director_result_address(bridge_id: str, specification: dict[str, Any]):
 
 def _numba_scalar_type(specification: dict[str, Any]):
     kind = specification["kind"]
+    if kind == "mpi_comm":
+        from .mpi import comm_type
+        return comm_type
     if kind == "void":
         return types.none
     if kind == "float":
@@ -748,7 +751,7 @@ def _llvm_scalar_value_type(specification: dict[str, Any]):
 
 def _llvm_abi_type(specification: dict[str, Any]):
     kind = specification["kind"]
-    if kind in {"object", "array_data", "scalar_pointer"}:
+    if kind in {"object", "array_data", "scalar_pointer", "mpi_comm"}:
         return ir.IntType(8).as_pointer()
     if kind == "array_count":
         return ir.IntType(64)
@@ -756,7 +759,7 @@ def _llvm_abi_type(specification: dict[str, Any]):
 
 
 def _llvm_result_type(specification: dict[str, Any]):
-    if specification["kind"] == "object":
+    if specification["kind"] in {"object", "mpi_comm"}:
         return ir.IntType(8).as_pointer()
     if specification["kind"] == "scalar_pointer":
         return _array_view_llvm_dtype(specification["numpy_dtype"]).as_pointer()
@@ -805,6 +808,9 @@ def _matches(specification: dict[str, Any], value_type: types.Type, bridge_id=No
             and (not isinstance(value_type, ConstBridgeObjectType) or specification.get("const", False))
             and _automatic_path(bridge_id, value_type.cxx_type, specification["cxx_type"]) is not None
         )
+    if kind == "mpi_comm":
+        from .mpi import CommunicatorType
+        return isinstance(value_type, CommunicatorType)
     if kind == "array":
         return (
             isinstance(value_type, types.Array)
@@ -1007,6 +1013,10 @@ def _adapter_signature(method: BridgeMethod, argument_types: tuple[types.Type, .
                 lowered.append(_convert_pointer(context, builder, sig.args[argument_index],
                                                 parameter["cxx_type"], arguments[argument_index]))
                 continue
+            if kind == "mpi_comm":
+                holder = cgutils.create_struct_proxy(sig.args[argument_index])(context, builder, value=arguments[argument_index])
+                lowered.append(holder.pointer)
+                continue
             if kind == "scalar_pointer":
                 lowered.append(builder.bitcast(arguments[argument_index], ir.IntType(8).as_pointer()))
                 continue
@@ -1025,6 +1035,15 @@ def _adapter_signature(method: BridgeMethod, argument_types: tuple[types.Type, .
                 if method.returns["kind"] == "object"
                 else result_type
             )
+            if method.returns["kind"] == "mpi_comm":
+                from .mpi import allocate_native_holder
+                result, native_slot = allocate_native_holder(context, builder)
+                status = builder.call(adapter, [*lowered, native_slot])
+                with builder.if_then(builder.icmp_unsigned("!=", status, ir.Constant(status.type, 0))):
+                    context.nrt.decref(builder, result_type, result._getvalue())
+                _raise_on_failure(context, builder, status)
+                result.pointer = builder.load(native_slot)
+                return result._getvalue()
             slot = cgutils.alloca_once(
                 builder,
                 context.get_value_type(slot_type)
@@ -1305,7 +1324,10 @@ def _register_owned_constructors(proxy_type: type, bridge_id: str, cxx_type: str
             lowered = []
             for parameter, argument_type, argument in zip(constructor["parameters"], sig.args, arguments):
                 abi_types.append(_llvm_abi_type(parameter))
-                if parameter["kind"] == "scalar_pointer":
+                if parameter["kind"] == "mpi_comm":
+                    holder = cgutils.create_struct_proxy(argument_type)(context, builder, value=argument)
+                    lowered.append(holder.pointer)
+                elif parameter["kind"] == "scalar_pointer":
                     lowered.append(builder.bitcast(argument, ir.IntType(8).as_pointer()))
                 else:
                     lowered.append(context.cast(builder, argument, argument_type, _numba_scalar_type(parameter)))
