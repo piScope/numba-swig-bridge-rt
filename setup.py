@@ -11,7 +11,7 @@ EXCLUDED = {"build", "dist", "__pycache__", ".pytest_cache", ".git"}
 SUFFIXES = {".py", ".md", ".sh", ".toml", ".json", ".i", ".cpp", ".hpp", ".txt", ".in"}
 data_files = [
     ("share/numba-swig-bridge-rt", ["README.md", "LICENSE"]),
-    ("share/numba-swig-bridge-rt/.github", [".github/README.md"]),
+    ("share/numba-swig-bridge-rt/.github", [".github/CI.md"]),
 ]
 for tree in ("sample_libraries", "usercode_examples"):
     directories = {}

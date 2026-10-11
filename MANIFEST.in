@@ -4,4 +4,4 @@ recursive-include usercode_examples *.py *.md *.sh
 recursive-include sample_libraries *.py *.md *.toml *.json *.i *.cpp *.hpp *.txt *.in
 global-exclude *.py[cod] *.so *.a *.o
 include LICENSE
-include .github/README.md
+include .github/CI.md
