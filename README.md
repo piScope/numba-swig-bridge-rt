@@ -62,6 +62,19 @@ to a downstream API that does not retain the pointer.  Use `nsb.own_this`,
 `nsb.borrowed_from`, and `nsb.is_slot_occupied` where supported by the
 downstream generated bridge.
 
+Override functions must accept every parameter of the C++ virtual method and
+must not declare Python default arguments. For example, a C++ method with
+`a = 1.0` requires `def AddMult(self, x, y, a)` in the override. Native calls
+supply the C++ default explicitly to the callback; ordinary bridged calls can
+still omit that argument. Therefore, a user can call `obj.AddMult(x, y)` through
+the ordinary bridge, and the callback receives `a = 1.0`. Python defaults are
+rejected at decoration time.
+
+Director generation includes inherited public virtual methods, including pure
+virtual methods that the selected base does not redeclare. A derived
+declaration replaces a matching inherited signature. SWIG's shortened
+default-argument call adapters are not separate virtual overrides.
+
 ### Python subclasses of a compiled director
 
 An ordinary Python subclass can customize initialization and add Python methods

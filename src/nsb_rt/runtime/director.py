@@ -258,12 +258,23 @@ def _normalize_stateaccess(value: object) -> tuple[str, ...] | str | None:
 
 
 def override(*arguments, stateaccess=None):
-    """Select one descriptor-defined C++ virtual method for an override."""
+    """Select a C++ virtual override; callback arguments cannot have defaults."""
 
     access = _normalize_stateaccess(stateaccess)
 
+    def validate(function):
+        defaults = [name for name, parameter in inspect.signature(function).parameters.items()
+                    if parameter.default is not inspect.Parameter.empty]
+        if defaults:
+            raise TypeError(
+                "@nsb.override does not accept default arguments "
+                f"({', '.join(defaults)}). Native calls use the C++ defaults "
+                "and supply every callback argument explicitly."
+            )
+
     if len(arguments) == 1 and callable(arguments[0]):
         function = arguments[0]
+        validate(function)
         function.__numba_swig_override_selector__ = None
         function.__numba_swig_override_stateaccess__ = access
         return function
@@ -281,6 +292,7 @@ def override(*arguments, stateaccess=None):
     def decorate(function):
         if not callable(function):
             raise TypeError("@override can decorate only a callable")
+        validate(function)
         function.__numba_swig_override_selector__ = selector
         function.__numba_swig_override_stateaccess__ = access
         return function
