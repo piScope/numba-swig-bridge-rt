@@ -1,9 +1,14 @@
-# numba-swig-bridge runtime manual
+# numba-swig-bridge runtime
 
-Compile Python code that calls C++ methods on SWIG objects, and implement
-selected C++ virtual methods as Numba callbacks. Your C++ library must ship
-NSB bridge registration and native adapters; installing the runtime alone
-does not add bridges to an arbitrary SWIG library.
+Numba-Swig-Bridge (NSB) uses Numba to compile Python code that calls C++ methods
+on SWIG objects. It also provides bridged director classes that implement C++
+virtual methods as Numba callbacks. This guide describes how end users can
+annotate their Python code to use NSB's bridge features.
+
+The runtime is a support library intended to be installed as a dependency of
+libraries that provide NSB bindings. Your C++ library must ship NSB bridge
+registration and native adapters; installing the runtime alone does not add
+bridges to an arbitrary SWIG library.
 
 ## Installation
 
@@ -599,10 +604,3 @@ non-Windows GCC/Clang toolchains so internal state reads can bind locally and
 inline. Windows, unsupported compilers and SWIG parsing use ordinary
 declarations. No downstream compiler flag is required.
 
-## Continuous integration
-
-Runtime CI checks all serial samples on Python 3.11–3.14 and all eleven samples
-in separate Open MPI and MPICH jobs on Python 3.13. MPI example execution uses
-two ranks with mpi4py built against the selected implementation. Release jobs
-also validate the source distribution and require both MPI jobs before upload.
-See [runtime CI instructions](.github/CI.md) for coverage and local commands.
