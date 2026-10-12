@@ -73,9 +73,14 @@ jobs:
           fi
       - name: Compare MPICH startup environments
         if: matrix.mpi == 'mpich'
+        env:
+          MPICH_PMI: pmi1
         run: bash .github/diagnose_mpich.sh
       - name: Validate all samples with matched MPI and mpi4py
         run: |
+          if [ "${{ matrix.mpi }}" = mpich ]; then
+            export MPICH_PMI=pmi1
+          fi
           python scripts/validate_runtime_consumer.py \
             --runtime-wheel dist/numba_swig_bridge_rt-*.whl \
             --work-dir "$RUNNER_TEMP/runtime-${{ matrix.mpi }}" \
