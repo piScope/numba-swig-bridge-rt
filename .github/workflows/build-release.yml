@@ -87,6 +87,9 @@ jobs:
           else
             sudo apt-get install -y --no-install-recommends mpich libmpich-dev openssh-client
           fi
+      - name: Compare MPICH startup environments
+        if: matrix.mpi == 'mpich'
+        run: bash .github/diagnose_mpich.sh
       - name: Validate all samples with matched MPI and mpi4py
         run: |
           python scripts/validate_runtime_consumer.py \
