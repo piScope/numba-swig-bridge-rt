@@ -79,24 +79,23 @@ jobs:
         with:
           name: runtime-release
           path: dist
-      - name: Install selected MPI implementation
+      - name: Set up MPICH with Ubuntu package hotfix
+        if: matrix.mpi == 'mpich'
+        uses: mpi4py/setup-mpi@v1
+        with:
+          mpi: mpich
+      - name: Install MPI runtime tools
         run: |
           sudo apt-get update
+          sudo apt-get install -y --no-install-recommends openssh-client
           if [ "${{ matrix.mpi }}" = openmpi ]; then
-            sudo apt-get install -y --no-install-recommends openmpi-bin libopenmpi-dev openssh-client
-          else
-            sudo apt-get install -y --no-install-recommends mpich libmpich-dev openssh-client
+            sudo apt-get install -y --no-install-recommends openmpi-bin libopenmpi-dev
           fi
       - name: Compare MPICH startup environments
         if: matrix.mpi == 'mpich'
-        env:
-          MPICH_PMI: pmi1
         run: bash .github/diagnose_mpich.sh
       - name: Validate all samples with matched MPI and mpi4py
         run: |
-          if [ "${{ matrix.mpi }}" = mpich ]; then
-            export MPICH_PMI=pmi1
-          fi
           python scripts/validate_runtime_consumer.py \
             --runtime-wheel dist/numba_swig_bridge_rt-*.whl \
             --work-dir "$RUNNER_TEMP/runtime-${{ matrix.mpi }}" \
