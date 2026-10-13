@@ -2,7 +2,7 @@
   "schema_version": 2,
   "artifact_schema_version": 1,
   "bridge_id": "nsb_sample11",
-  "generator_version": "0.15.2",
+  "generator_version": "0.15.3",
   "required_runtime_version": "0.15.1",
   "state_backend": "nsb_sample11",
   "state_module": "nsb_sample11_state",
